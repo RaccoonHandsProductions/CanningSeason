@@ -1,0 +1,45 @@
+[gd_scene format=2]
+
+[node name="Welcome" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -225.0
+margin_top = 142.0
+margin_right = 225.0
+margin_bottom = 190.0
+text = "Welcome to Canning Season"
+align = 1
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -137.0
+margin_top = 248.0
+margin_right = 137.0
+margin_bottom = 262.0
+text = "You must connect to other devices to play."
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -54.0
+margin_top = 348.0
+margin_right = 54.0
+margin_bottom = 368.0
+text = "Create a server"
+
+[node name="Button2" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -46.0
+margin_top = 388.0
+margin_right = 46.0
+margin_bottom = 408.0
+text = "Join A Server"
