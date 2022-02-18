@@ -34,10 +34,12 @@ func _enter_state(new_state)->void:
 			# Activate the top carrot (or spawn one in for now, or something)
 			print('Entering the DRAGGING state')
 			$Carrot._enableDragging()
+			$Carrot.position = $Basket.position
 
 		GameState.CHOPPING:
 			# Here we would move the knife into position
 			print('Entering the CHOPPING state')
+			$Carrot.position = $CuttingBoard.position
 
 
 func _on_CuttingBoard_body_entered(body):
