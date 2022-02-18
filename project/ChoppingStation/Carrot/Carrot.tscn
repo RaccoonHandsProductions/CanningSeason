@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://ChoppingStation/Carrot/headlessCarrot.png" type="Texture" id=1]
+[ext_resource path="res://ChoppingStation/Carrot/wholeCarrot.png" type="Texture" id=2]
+[ext_resource path="res://ChoppingStation/Carrot/carrotMiddle.png" type="Texture" id=3]
+[ext_resource path="res://ChoppingStation/Carrot/ChopPoint/ChopPoint.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ChoppingStation/Carrot/Carrot.gd" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "carrot_Top_Bottom_Cut",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "carrot_Top_Cut",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "carrot_Full",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 242.0
+height = 888.019
+
+[node name="Carrot" type="KinematicBody2D"]
+input_pickable = true
+script = ExtResource( 5 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "carrot_Full"
+
+[node name="ChopPoint0" parent="." instance=ExtResource( 4 )]
+position = Vector2( -236.732, -1.49827 )
+scale = Vector2( 3, 3 )
+
+[node name="ChopPoint1" parent="." instance=ExtResource( 4 )]
+position = Vector2( 322.136, 184.292 )
+scale = Vector2( 3, 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -14, 69 )
+rotation = -1.20253
+shape = SubResource( 2 )
+
+[connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
