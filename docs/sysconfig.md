@@ -13,7 +13,7 @@ These instructions are based on [the Godot documentation for Android exporting](
    `JAVA_HOME` variable; these options show up during the installation process.
 
 1. Download and install [Android Studio](https://developer.android.com/studio).
-   This will install the latest Android SDK as a silent part of the process. 
+ Run it at least once so it prompts you to accept the Android SDK licenses and then downloads them.
 
 ## Tablet configuration
 
