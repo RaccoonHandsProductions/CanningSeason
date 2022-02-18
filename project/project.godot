@@ -10,8 +10,8 @@ config_version=4
 
 [application]
 
-config/name="MultiplayerConnectionUx"
-run/main_scene="res://Welcome/Welcome.tscn"
+config/name="CanningSeason"
+run/main_scene="res://ChoppingStation/ChoppingStation.tscn"
 config/icon="res://icon.png"
 
 [display]

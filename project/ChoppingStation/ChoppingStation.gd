@@ -8,10 +8,14 @@ enum GameState{
 
 # Initialized in _ready
 var _state
-
+var entered = false
 
 func _ready():
 	_enter_state(GameState.DRAGGING)
+	
+func _physics_process(delta):
+	if entered == true && $Carrot._dragging == false && _state == GameState.DRAGGING:
+		_enter_state(GameState.CHOPPING)
 
 
 func _enter_state(new_state)->void:
@@ -20,7 +24,6 @@ func _enter_state(new_state)->void:
 		GameState.DRAGGING:
 			print('Leaving the dragging state')
 			$Carrot._disableDragging()
-			$Carrot._set_dragging()
 	
 	# Assign the state to the new state
 	_state = new_state
@@ -31,16 +34,15 @@ func _enter_state(new_state)->void:
 			# Activate the top carrot (or spawn one in for now, or something)
 			print('Entering the DRAGGING state')
 			$Carrot._enableDragging()
-			$Timer.start()
 
 		GameState.CHOPPING:
 			# Here we would move the knife into position
 			print('Entering the CHOPPING state')
 
 
-func _on_Timer_timeout():
-	match _state:
-		GameState.DRAGGING:
-			_enter_state(GameState.CHOPPING)
-	
-			
+func _on_CuttingBoard_body_entered(body):
+	entered = true
+
+
+func _on_CuttingBoard_body_exited(body):
+	 entered = false

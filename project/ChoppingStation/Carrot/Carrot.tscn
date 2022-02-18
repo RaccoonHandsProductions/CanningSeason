@@ -13,14 +13,14 @@ animations = [ {
 "name": "carrot_Top_Bottom_Cut",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "carrot_Top_Cut",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "carrot_Full",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "carrot_Top_Cut",
 "speed": 5.0
 } ]
 
@@ -37,10 +37,12 @@ frames = SubResource( 1 )
 animation = "carrot_Full"
 
 [node name="ChopPoint0" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( -236.732, -1.49827 )
 scale = Vector2( 3, 3 )
 
 [node name="ChopPoint1" parent="." instance=ExtResource( 4 )]
+visible = false
 position = Vector2( 322.136, 184.292 )
 scale = Vector2( 3, 3 )
 
