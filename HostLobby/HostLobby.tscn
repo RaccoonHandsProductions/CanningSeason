@@ -1,0 +1,88 @@
+[gd_scene format=2]
+
+[node name="HostLobby" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IpAddressLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -76.5
+margin_top = 100.0
+margin_right = 76.5
+margin_bottom = 114.0
+text = "Here is your IP address:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IpAddress" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 130.0
+margin_right = 100.0
+margin_bottom = 162.0
+align = 1
+placeholder_text = "Ip address"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InstructionParagraph" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -170.0
+margin_top = 200.0
+margin_right = 170.0
+margin_bottom = 300.0
+text = "To play you must connect other devices to this one. Input the IP address above wehn connecting other device to this one. Connected devices will appear below."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartGame" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -50.0
+margin_top = -150.0
+margin_right = 50.0
+margin_bottom = -120.0
+text = "Start Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Disconnect" type="Button" parent="."]
+margin_left = 50.0
+margin_top = 30.0
+margin_right = 150.0
+margin_bottom = 60.0
+text = "Disconnect"
+
+[node name="Help" type="Button" parent="."]
+margin_left = 30.0
+margin_top = 730.0
+margin_right = 60.0
+margin_bottom = 760.0
+text = "?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 70.0
+margin_top = 730.0
+margin_right = 142.0
+margin_bottom = 760.0
+text = "Need help?"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

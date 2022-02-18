@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="MultiplayerConnectionUx"
+run/main_scene="res://Welcome/Welcome.tscn"
 config/icon="res://icon.png"
 
 [display]
