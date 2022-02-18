@@ -35,3 +35,8 @@ In the Godot Project, under Editor&rightarrow;Export&rightarrow;Android:
         You can find it by opening or making a new project with Android Studio
         and accessing the SDK Manager in the upper-right of the IDE.
 
+## Exporting from Godot to Android APK
+
+The first time you try to export any project from Godot, it will show an error at the bottom of the export window, prompting you to download the export templates. This is normal and only needs to be done once.
+
+The export configuration is designed to export to `build/android/CanningSeason.apk` off of the root project directory. The first time you export, you will have to make these empty directories. They should of course not be in version control (and are ignored in the `.gitignore`) because they are purely generated files.
