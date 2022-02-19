@@ -10,21 +10,21 @@
 animations = [ {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
-"name": "carrot_Top_Bottom_Cut",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": true,
-"name": "carrot_Full",
+"name": "CarrotMiddle",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "carrot_Top_Cut",
+"name": "HeadlessCarrot",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "WholeCarrot",
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=3]
 radius = 242.0
 height = 888.019
 
@@ -32,18 +32,18 @@ height = 888.019
 input_pickable = true
 script = ExtResource( 5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="CarrotPieces" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "carrot_Full"
+animation = "WholeCarrot"
+
+[node name="ChopPoint1" parent="." instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 273, 111 )
+scale = Vector2( 3, 3 )
 
 [node name="ChopPoint0" parent="." instance=ExtResource( 4 )]
 visible = false
 position = Vector2( -236.732, -1.49827 )
-scale = Vector2( 3, 3 )
-
-[node name="ChopPoint1" parent="." instance=ExtResource( 4 )]
-visible = false
-position = Vector2( 322.136, 184.292 )
 scale = Vector2( 3, 3 )
 
 [node name="Timer" type="Timer" parent="."]
@@ -53,6 +53,8 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -14, 69 )
 rotation = -1.20253
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
+[connection signal="input_event" from="ChopPoint1" to="." method="_on_ChopPoint1_input_event"]
+[connection signal="input_event" from="ChopPoint0" to="." method="_on_ChopPoint0_input_event"]

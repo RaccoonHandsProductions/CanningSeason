@@ -23,15 +23,14 @@ position = Vector2( 652, 131 )
 scale = Vector2( 1.7, 1.042 )
 
 [node name="Bowl" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1189, 506 )
-scale = Vector2( 2, 2 )
+position = Vector2( 1121, 494 )
 
 [node name="TrashCan" parent="." instance=ExtResource( 2 )]
 position = Vector2( 147, 496 )
 
 [node name="CuttingBoard" type="Area2D" parent="."]
 position = Vector2( 610, 513 )
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.7, 0.7 )
 __meta__ = {
 "_edit_group_": true
 }

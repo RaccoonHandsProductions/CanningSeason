@@ -6,6 +6,9 @@ enum GameState{
 	SORTING
 }
 
+onready var _carrotHead = load("res://ChoppingStation/Carrot/carrotChunks/CarrotHead.tscn")
+onready var _CarrotTip = load("res://ChoppingStation/Carrot/carrotChunks/CarrotTip.tscn")
+
 # Initialized in _ready
 var _state
 var entered = false
@@ -13,7 +16,11 @@ var entered = false
 func _ready():
 	_enter_state(GameState.DRAGGING)
 	
-func _physics_process(delta):
+	var _Carrot = get_tree().get_root().find_node("Carrot",true,false)
+	_Carrot.connect("_CarrotHeadChopped", self, "_CarrotHeadChopped")
+	_Carrot.connect("_CarrotTipChopped", self, "_CarrotTipChopped")
+	
+func _physics_process(_delta):
 	if entered == true && $Carrot._dragging == false && _state == GameState.DRAGGING:
 		_enter_state(GameState.CHOPPING)
 
@@ -40,11 +47,26 @@ func _enter_state(new_state)->void:
 			# Here we would move the knife into position
 			print('Entering the CHOPPING state')
 			$Carrot.position = $CuttingBoard.position
+			$Carrot._startChopping()
 
 
-func _on_CuttingBoard_body_entered(body):
+func _on_CuttingBoard_body_entered(_body):
 	entered = true
 
 
-func _on_CuttingBoard_body_exited(body):
+func _on_CuttingBoard_body_exited(_body):
 	 entered = false
+
+func _CarrotHeadChopped():
+	#Spawns in Carrot Head Scene
+	var _carrotHeadInstance = _carrotHead.instance()
+	_carrotHeadInstance.set_position(Vector2(470,550))
+	add_child(_carrotHeadInstance)
+	_carrotHeadInstance._enableDragging()
+
+func	_CarrotTipChopped():
+	#Spawns in Carrot Tip Scene
+	var _carrotTipInstance = _CarrotTip.instance()
+	_carrotTipInstance.set_position(Vector2(775,535))
+	add_child(_carrotTipInstance)
+	_carrotTipInstance._enableDragging()

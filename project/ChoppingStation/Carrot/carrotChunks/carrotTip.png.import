@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/carrotTip.png-c7559cd3878e2348244615bfb46749f8.stex"
+path="res://.import/carrotTip.png-316f74e050194fad376a22a6a9e5ff6a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ChoppingStation/Carrot/carrotTip.png"
-dest_files=[ "res://.import/carrotTip.png-c7559cd3878e2348244615bfb46749f8.stex" ]
+source_file="res://ChoppingStation/Carrot/carrotChunks/carrotTip.png"
+dest_files=[ "res://.import/carrotTip.png-316f74e050194fad376a22a6a9e5ff6a.stex" ]
 
 [params]
 
