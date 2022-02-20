@@ -1,13 +1,16 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://HostLobby/HostLobby.gd" type="Script" id=1]
 
 [node name="HostLobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IpAddressLabel" type="Label" parent="."]
+[node name="HereIsLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -76.5
@@ -19,15 +22,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="IpAddress" type="LineEdit" parent="."]
+[node name="IpAddressLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -100.0
-margin_top = 130.0
-margin_right = 100.0
-margin_bottom = 162.0
-align = 1
-placeholder_text = "Ip address"
+margin_left = -76.5
+margin_top = 120.0
+margin_right = 76.5
+margin_bottom = 134.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,8 +65,11 @@ margin_top = 30.0
 margin_right = 150.0
 margin_bottom = 60.0
 text = "Disconnect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Help" type="Button" parent="."]
+[node name="HelpButton" type="Button" parent="."]
 margin_left = 30.0
 margin_top = 730.0
 margin_right = 60.0
@@ -75,14 +79,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
-margin_left = 70.0
-margin_top = 730.0
-margin_right = 142.0
-margin_bottom = 760.0
-text = "Need help?"
-align = 1
-valign = 1
+[node name="HelpButtonLabel" type="Label" parent="HelpButton"]
+margin_left = 37.0
+margin_top = 8.0
+margin_right = 77.0
+margin_bottom = 22.0
+text = "Need Help?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HelpPopup" type="WindowDialog" parent="."]
+margin_left = 468.0
+margin_top = 164.0
+margin_right = 878.0
+margin_bottom = 432.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpText" type="RichTextLabel" parent="HelpPopup"]
+margin_right = 409.0
+margin_bottom = 153.0
+text = "Please use the given IP address to connect other devices to the server. To join on other devices, click \"join a server\", then enter the IP address on this screen, and finally click \"join\"."
+
+[node name="HideHelpButton" type="Button" parent="HelpPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.5
+margin_top = -10.0
+margin_right = 20.5
+margin_bottom = 10.0
+text = "okay"
+
+[connection signal="pressed" from="Disconnect" to="." method="_on_Disconnect_pressed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton2_pressed"]
+[connection signal="pressed" from="HelpPopup/HideHelpButton" to="." method="_on_HideHelpButton_pressed"]

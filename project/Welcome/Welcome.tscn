@@ -1,8 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Welcome/Welcome.gd" type="Script" id=1]
 
 [node name="Welcome" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -17,7 +20,7 @@ margin_bottom = 190.0
 text = "Welcome to Canning Season"
 align = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Instructions" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -137.0
@@ -26,7 +29,7 @@ margin_right = 137.0
 margin_bottom = 262.0
 text = "You must connect to other devices to play."
 
-[node name="Button" type="Button" parent="."]
+[node name="CreateServerButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -54.0
@@ -35,7 +38,7 @@ margin_right = 54.0
 margin_bottom = 368.0
 text = "Create a server"
 
-[node name="Button2" type="Button" parent="."]
+[node name="JoinServerButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -46.0
@@ -43,3 +46,9 @@ margin_top = 388.0
 margin_right = 46.0
 margin_bottom = 408.0
 text = "Join A Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="CreateServerButton" to="." method="_on_CreateServer_pressed"]
+[connection signal="pressed" from="JoinServerButton" to="." method="_on_JoinServer_pressed"]

@@ -40,7 +40,6 @@ __meta__ = {
 texture = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CuttingBoard"]
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Carrot" parent="." instance=ExtResource( 3 )]
