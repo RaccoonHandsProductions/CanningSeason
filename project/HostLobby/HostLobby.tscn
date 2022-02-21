@@ -45,25 +45,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartGame" type="Button" parent="."]
+[node name="AllPlayersConnectedButton" type="Button" parent="."]
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -50.0
-margin_top = -150.0
-margin_right = 50.0
-margin_bottom = -120.0
-text = "Start Game"
+anchor_bottom = 0.5
+margin_left = -75.5
+margin_top = 45.0
+margin_right = 75.5
+margin_bottom = 75.0
+text = "All Players Connected"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Disconnect" type="Button" parent="."]
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 150.0
-margin_bottom = 60.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = 115.0
+margin_right = 50.0
+margin_bottom = 145.0
 text = "Disconnect"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -90,10 +94,14 @@ __meta__ = {
 }
 
 [node name="HelpPopup" type="WindowDialog" parent="."]
-margin_left = 468.0
-margin_top = 164.0
-margin_right = 878.0
-margin_bottom = 432.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -205.0
+margin_top = -134.0
+margin_right = 205.0
+margin_bottom = 134.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -114,6 +122,76 @@ margin_right = 20.5
 margin_bottom = 10.0
 text = "okay"
 
+[node name="DevicesConnectedAlert" type="WindowDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -205.0
+margin_top = -134.0
+margin_right = 205.0
+margin_bottom = 134.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayersConnected" type="Label" parent="DevicesConnectedAlert"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -146.0
+margin_top = 20.0
+margin_right = 146.0
+margin_bottom = 34.0
+text = "You currently have 0 other devices connected"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Explanation" type="Label" parent="DevicesConnectedAlert"]
+margin_top = 50.0
+margin_right = 412.0
+margin_bottom = 98.0
+text = "Disconnecting as the host will also disconnect the other devices
+and will restart the connection process.
+Continue?"
+align = 1
+
+[node name="GoBackButton" type="Button" parent="DevicesConnectedAlert"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -115.0
+margin_top = -10.0
+margin_right = -25.0
+margin_bottom = 10.0
+text = "No, Go Back"
+
+[node name="ContinueButton" type="Button" parent="DevicesConnectedAlert"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 25.0
+margin_top = -10.0
+margin_right = 123.0
+margin_bottom = 10.0
+text = "Yes, continue"
+
+[node name="OtherDevicesLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -84.5
+margin_top = -7.0
+margin_right = 84.5
+margin_bottom = 7.0
+text = " "
+
+[connection signal="pressed" from="AllPlayersConnectedButton" to="." method="_on_AllPlayersConnectedButton_pressed"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_Disconnect_pressed"]
-[connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton2_pressed"]
+[connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="HelpPopup/HideHelpButton" to="." method="_on_HideHelpButton_pressed"]
+[connection signal="pressed" from="DevicesConnectedAlert/GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="pressed" from="DevicesConnectedAlert/ContinueButton" to="." method="_on_ContinueButton_pressed"]

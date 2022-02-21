@@ -85,7 +85,48 @@ margin_right = 20.5
 margin_bottom = 10.0
 text = "okay"
 
+[node name="CannnotConnectPopup" type="WindowDialog" parent="."]
+margin_left = 468.0
+margin_top = 164.0
+margin_right = 878.0
+margin_bottom = 432.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ErrorText" type="RichTextLabel" parent="CannnotConnectPopup"]
+margin_right = 409.0
+margin_bottom = 153.0
+text = "Could connect to given IP address. Please check if the IP address is correct and the host is still running, and please try again,"
+
+[node name="HideErrorButton" type="Button" parent="CannnotConnectPopup"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.5
+margin_top = -10.0
+margin_right = 20.5
+margin_bottom = 10.0
+text = "okay"
+
+[node name="GoBackButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.0
+margin_top = -70.0
+margin_right = 30.0
+margin_bottom = -50.0
+text = "Go Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="text_changed" from="IpAdressEdit" to="." method="_on_IpAdressEdit_text_changed"]
 [connection signal="pressed" from="JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="HelpPopup/HideHelpButton" to="." method="_on_HideHelpButton_pressed"]
+[connection signal="pressed" from="CannnotConnectPopup/HideErrorButton" to="." method="_on_HideErrorButton_pressed"]
+[connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
