@@ -14,4 +14,4 @@ func _on_HideHelpButton_pressed():
 
 func _on_Disconnect_pressed():
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://Welcome/Welcome.tscn")
+	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
