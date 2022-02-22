@@ -12,7 +12,8 @@ func _on_SettingsLink_pressed():
 
 
 func _on_StartButton_pressed():
-	pass
+	# warning-ignore:return_value_discarded
+	Server._start_message_sender()
 
 
 func _on_GoBackButton_pressed():

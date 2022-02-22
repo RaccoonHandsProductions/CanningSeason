@@ -23,7 +23,7 @@ func _on_HideErrorButton_pressed():
 
 func _on_JoinButton_pressed():
 	var client = NetworkedMultiplayerENet.new()
-	var clientCreated = client.create_client(ipAddress.text, ServerData.DEFAULT_PORT)
+	var clientCreated = client.create_client(ipAddress.text, Server.DEFAULT_PORT)
 	get_tree().network_peer = client
 	ipAddress.text = ""
 	if clientCreated != OK:
