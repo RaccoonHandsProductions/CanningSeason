@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://HostGameStart/HostGameStart.gd" type="Script" id=1]
+[ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
 
 [node name="HostGameStart" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -15,10 +17,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -110.0
-margin_top = -150.0
-margin_right = 110.0
-margin_bottom = -120.0
+margin_left = -209.0
+margin_top = -200.0
+margin_right = 209.0
+margin_bottom = -161.0
 text = "Welcome to Canning Season"
 align = 1
 
@@ -27,10 +29,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -26.5
-margin_right = 128.0
-margin_bottom = 26.5
+margin_left = -235.0
+margin_top = -80.0
+margin_right = 235.0
+margin_bottom = 80.0
 text = "Server connection established. To play the game press start"
 
 [node name="StartButton" type="Button" parent="."]
@@ -38,40 +40,44 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -25.0
-margin_top = 50.0
-margin_right = 25.0
-margin_bottom = 70.0
-text = "Start"
+margin_left = -90.5
+margin_top = 25.0
+margin_right = 90.5
+margin_bottom = 80.0
+text = "Start Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="SettingsLink" type="LinkButton" parent="."]
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -73.0
-margin_top = -250.0
-margin_right = 73.0
-margin_bottom = -236.0
+anchor_bottom = 0.5
+margin_left = -167.5
+margin_top = 150.0
+margin_right = 167.5
+margin_bottom = 189.0
 text = "Back to server settings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayerDisconnectedPopup" type="WindowDialog" parent="."]
-margin_left = 468.0
-margin_top = 277.0
-margin_right = 828.0
-margin_bottom = 567.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -232.5
+margin_right = 320.0
+margin_bottom = 232.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayerDisconnectedText" type="RichTextLabel" parent="PlayerDisconnectedPopup"]
-margin_right = 358.0
+margin_right = 640.0
 margin_bottom = 168.0
 text = "A player has disconnected from the server. Go back to the server settings to confirm you have the correct number of other devices connected."
 __meta__ = {
@@ -83,10 +89,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -10.0
-margin_right = 32.0
-margin_bottom = 10.0
+margin_left = -70.0
+margin_top = -27.5
+margin_right = 70.0
+margin_bottom = 27.5
 text = "Go Back"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

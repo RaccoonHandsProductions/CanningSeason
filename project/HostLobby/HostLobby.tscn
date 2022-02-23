@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://HostLobby/HostLobby.gd" type="Script" id=1]
+[ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
 
 [node name="HostLobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -12,11 +14,13 @@ __meta__ = {
 
 [node name="HereIsLabel" type="Label" parent="."]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -76.5
-margin_top = 100.0
-margin_right = 76.5
-margin_bottom = 114.0
+anchor_bottom = 0.5
+margin_left = -173.5
+margin_top = -250.0
+margin_right = 173.5
+margin_bottom = -211.0
 text = "Here is your IP address:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -25,22 +29,25 @@ __meta__ = {
 [node name="IpAddressLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -76.5
-margin_top = 120.0
-margin_right = 76.5
-margin_bottom = 134.0
+margin_left = -90.0
+margin_top = 200.0
+margin_right = 90.0
+margin_bottom = 239.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="InstructionParagraph" type="RichTextLabel" parent="."]
+visible = false
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-margin_left = -170.0
-margin_top = 200.0
-margin_right = 170.0
-margin_bottom = 300.0
-text = "To play you must connect other devices to this one. Input the IP address above wehn connecting other device to this one. Connected devices will appear below."
+anchor_bottom = 0.5
+margin_left = -265.0
+margin_top = -125.0
+margin_right = 265.0
+margin_bottom = 125.0
+text = "	To play you must connect other devices to this one. Input the IP address above wehn connecting other device to this one. Connected devices will appear below."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -50,10 +57,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -75.5
-margin_top = 45.0
-margin_right = 75.5
-margin_bottom = 75.0
+margin_left = -167.0
+margin_top = 150.0
+margin_right = 167.0
+margin_bottom = 205.0
 text = "All Players Connected"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -64,10 +71,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -50.0
-margin_top = 115.0
-margin_right = 50.0
-margin_bottom = 145.0
+margin_left = -89.5
+margin_top = 250.0
+margin_right = 89.5
+margin_bottom = 305.0
 text = "Disconnect"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -98,17 +105,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -205.0
-margin_top = -134.0
-margin_right = 205.0
-margin_bottom = 134.0
+margin_left = -320.0
+margin_top = -232.5
+margin_right = 320.0
+margin_bottom = 232.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HelpText" type="RichTextLabel" parent="HelpPopup"]
-margin_right = 409.0
-margin_bottom = 153.0
+margin_right = 640.0
+margin_bottom = 200.0
 text = "Please use the given IP address to connect other devices to the server. To join on other devices, click \"join a server\", then enter the IP address on this screen, and finally click \"join\"."
 
 [node name="HideHelpButton" type="Button" parent="HelpPopup"]
@@ -116,10 +123,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.5
-margin_top = -10.0
-margin_right = 20.5
-margin_bottom = 10.0
+margin_left = -41.0
+margin_top = -27.5
+margin_right = 41.0
+margin_bottom = 27.5
 text = "okay"
 
 [node name="DevicesConnectedAlert" type="WindowDialog" parent="."]
@@ -127,10 +134,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -205.0
-margin_top = -134.0
-margin_right = 205.0
-margin_bottom = 134.0
+margin_left = -320.0
+margin_top = -232.5
+margin_right = 320.0
+margin_bottom = 232.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -138,33 +145,41 @@ __meta__ = {
 [node name="PlayersConnected" type="Label" parent="DevicesConnectedAlert"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -146.0
+margin_left = -320.0
 margin_top = 20.0
-margin_right = 146.0
-margin_bottom = 34.0
-text = "You currently have 0 other devices connected"
+margin_right = 320.0
+margin_bottom = 69.0
+text = "You have 0 other devices connected"
+align = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Explanation" type="Label" parent="DevicesConnectedAlert"]
-margin_top = 50.0
-margin_right = 412.0
-margin_bottom = 98.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -132.5
+margin_right = 320.0
+margin_bottom = 32.5
 text = "Disconnecting as the host will also disconnect the other devices
 and will restart the connection process.
 Continue?"
 align = 1
+autowrap = true
 
 [node name="GoBackButton" type="Button" parent="DevicesConnectedAlert"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -115.0
-margin_top = -10.0
-margin_right = -25.0
-margin_bottom = 10.0
+margin_left = -98.5
+margin_top = -7.5
+margin_right = 98.5
+margin_bottom = 47.5
 text = "No, Go Back"
 
 [node name="ContinueButton" type="Button" parent="DevicesConnectedAlert"]
@@ -172,10 +187,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 25.0
-margin_top = -10.0
-margin_right = 123.0
-margin_bottom = 10.0
+margin_left = -105.0
+margin_top = 82.5
+margin_right = 105.0
+margin_bottom = 137.5
 text = "Yes, continue"
 
 [node name="OtherDevicesLabel" type="Label" parent="."]
@@ -183,10 +198,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -84.5
-margin_top = -7.0
-margin_right = 84.5
-margin_bottom = 7.0
+margin_left = -215.0
+margin_top = -19.5
+margin_right = 215.0
+margin_bottom = 19.5
 text = " "
 
 [connection signal="pressed" from="AllPlayersConnectedButton" to="." method="_on_AllPlayersConnectedButton_pressed"]

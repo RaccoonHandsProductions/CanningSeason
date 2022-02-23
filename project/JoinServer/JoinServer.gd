@@ -27,6 +27,7 @@ func _on_JoinButton_pressed():
 	get_tree().network_peer = client
 	ipAddress.text = ""
 	if clientCreated != OK:
+		$JoinButton.disabled = true
 		$CannnotConnectPopup.visible = true
 	else:
 		# warning-ignore:return_value_discarded
