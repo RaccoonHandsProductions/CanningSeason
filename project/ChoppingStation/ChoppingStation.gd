@@ -8,6 +8,9 @@ enum GameState{
 
 onready var _carrotHead = load("res://ChoppingStation/Carrot/carrotChunks/CarrotHead.tscn")
 onready var _CarrotTip = load("res://ChoppingStation/Carrot/carrotChunks/CarrotTip.tscn")
+onready var _CarrotChunkLeft = load("res://ChoppingStation/Carrot/carrotChunks/CarrotChunkLeft.tscn")
+onready var _CarrotChunkMiddle = load("res://ChoppingStation/Carrot/carrotChunks/CarrotChunkMiddle.tscn")
+onready var _CarrotChunkRight = load("res://ChoppingStation/Carrot/carrotChunks/CarrotChunkRight.tscn")
 
 # Initialized in _ready
 var _state
@@ -18,7 +21,9 @@ func _ready():
 	
 	var _Carrot = get_tree().get_root().find_node("Carrot",true,false)
 	_Carrot.connect("_CarrotHeadChopped", self, "_CarrotHeadChopped")
-	_Carrot.connect("_CarrotTipChopped", self, "_CarrotTipChopped")
+	_Carrot.connect("_Carrot4_5Chopped", self, "_Carrot4_5Chopped")
+	_Carrot.connect("_Carrot3_5Chopped", self, "_Carrot3_5Chopped")
+	_Carrot.connect("_Carrot2_5Chopped", self, "_Carrot2_5Chopped")
 	
 func _physics_process(_delta):
 	if entered == true && $Carrot._dragging == false && _state == GameState.DRAGGING:
@@ -60,13 +65,34 @@ func _on_CuttingBoard_body_exited(_body):
 func _CarrotHeadChopped():
 	#Spawns in Carrot Head Scene
 	var _carrotHeadInstance = _carrotHead.instance()
-	_carrotHeadInstance.set_position(Vector2(470,550))
+	_carrotHeadInstance.set_position(Vector2(450,540))
+	$Carrot.position.x += 5
 	add_child(_carrotHeadInstance)
 	_carrotHeadInstance._enableDragging()
 
-func	_CarrotTipChopped():
+func _Carrot4_5Chopped():
 	#Spawns in Carrot Tip Scene
-	var _carrotTipInstance = _CarrotTip.instance()
-	_carrotTipInstance.set_position(Vector2(775,535))
-	add_child(_carrotTipInstance)
-	_carrotTipInstance._enableDragging()
+	var _carrotChunkLeft_Instance = _CarrotChunkLeft.instance()
+	_carrotChunkLeft_Instance.set_position(Vector2(550,550))
+	$Carrot.position.x += 5
+	add_child(_carrotChunkLeft_Instance)
+	_carrotChunkLeft_Instance._enableDragging()
+	
+func _Carrot3_5Chopped():
+	#Spawns in Carrot Tip Scene
+	var _carrotChunkMiddle_Instance = _CarrotChunkMiddle.instance()
+	_carrotChunkMiddle_Instance.set_position(Vector2(655,555))
+	$Carrot.position.x += 5
+	add_child(_carrotChunkMiddle_Instance)
+	_carrotChunkMiddle_Instance._enableDragging()
+
+func _Carrot2_5Chopped():
+	#Spawns in Carrot Tip Scene
+	var _carrotChunkRight_Instance = _CarrotChunkRight.instance()
+	var _carrotTip_Instance = _CarrotTip.instance()
+	_carrotChunkRight_Instance.set_position(Vector2(750,560))
+	_carrotTip_Instance.set_position(Vector2(845, 560))
+	add_child(_carrotChunkRight_Instance)
+	add_child(_carrotTip_Instance)
+	_carrotChunkRight_Instance._enableDragging()
+	_carrotTip_Instance._enableDragging()

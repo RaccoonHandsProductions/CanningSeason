@@ -1,7 +1,9 @@
 extends KinematicBody2D
 
 signal _CarrotHeadChopped
-signal _CarrotTipChopped
+signal _Carrot4_5Chopped
+signal _Carrot3_5Chopped
+signal _Carrot2_5Chopped
 
 
 
@@ -44,7 +46,7 @@ func _set_dragging():
 func _on_ChopPoint0_input_event(_viewport, _event, _shape_idx):
 	if _event is InputEventMouseButton:
 		if _event.button_index == BUTTON_LEFT:
-			$CarrotPieces.play("HeadlessCarrot")
+			$CarrotPieces.play("4_5Carrot")
 			$ChopPoint0.visible = false
 			$ChopPoint1.visible = true
 			
@@ -55,7 +57,28 @@ func _on_ChopPoint0_input_event(_viewport, _event, _shape_idx):
 func _on_ChopPoint1_input_event(_viewport, _event, _shape_idx):
 	if _event is InputEventMouseButton:
 		if _event.button_index == BUTTON_LEFT:
-			$CarrotPieces.play("CarrotMiddle")
+			$CarrotPieces.play("3_5Carrot")
 			$ChopPoint1.visible = false
+			$ChopPoint2.visible = true
 			
-			emit_signal("_CarrotTipChopped")
+			emit_signal("_Carrot4_5Chopped")
+
+
+func _on_ChopPoint2_input_event(_viewport, _event, _shape_idx):
+	if _event is InputEventMouseButton:
+		if _event.button_index == BUTTON_LEFT:
+			$CarrotPieces.play("2_5Carrot")
+			$ChopPoint2.visible = false
+			$ChopPoint3.visible = true
+			
+			emit_signal("_Carrot3_5Chopped")
+
+
+func _on_ChopPoint3_input_event(_viewport, _event, _shape_idx):
+	if _event is InputEventMouseButton:
+		if _event.button_index == BUTTON_LEFT:
+			$CarrotPieces.play("1_5Carrot")
+			$ChopPoint3.visible = false
+			$CarrotPieces.visible = false
+			
+			emit_signal("_Carrot2_5Chopped")
