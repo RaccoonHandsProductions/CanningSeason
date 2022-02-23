@@ -21,6 +21,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 10, 0 ), Vector2( 0, 0 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_hit_table"
+} ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -54,3 +68,4 @@ anims/Chop = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 
 [connection signal="input_event" from="TouchableArea" to="." method="_on_TouchableArea_input_event"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
