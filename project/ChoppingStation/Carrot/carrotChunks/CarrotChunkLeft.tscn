@@ -7,7 +7,7 @@
 radius = 94.0
 height = 12.0
 
-[node name="CarrotLeftChunk" type="KinematicBody2D"]
+[node name="CarrotChunkLeft" type="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 input_pickable = true
 script = ExtResource( 2 )
@@ -22,5 +22,4 @@ position = Vector2( 0.211304, -3.2301 )
 rotation = 1.5708
 shape = SubResource( 1 )
 disabled = true
-
-[connection signal="input_event" from="." to="." method="_on_CarrotLeftChunk_input_event"]
+[connection signal="input_event" from="." to="." method="_on_CarrotChunkLeft_input_event"]

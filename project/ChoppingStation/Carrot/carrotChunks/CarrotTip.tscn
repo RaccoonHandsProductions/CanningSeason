@@ -22,5 +22,4 @@ position = Vector2( -1.7887, 2.7699 )
 rotation = 1.5708
 shape = SubResource( 1 )
 disabled = true
-
 [connection signal="input_event" from="." to="." method="_on_CarrotTip_input_event"]

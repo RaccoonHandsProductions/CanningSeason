@@ -46,6 +46,5 @@ shape = SubResource( 1 )
 
 [node name="Carrot" parent="." instance=ExtResource( 3 )]
 position = Vector2( 596, 182 )
-
 [connection signal="body_entered" from="CuttingBoard" to="." method="_on_CuttingBoard_body_entered"]
 [connection signal="body_exited" from="CuttingBoard" to="." method="_on_CuttingBoard_body_exited"]
