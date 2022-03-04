@@ -15,7 +15,7 @@ func _ready():
 func _draw():
 	draw_rect(
 		Rect2( -(_rect_size), 2*(_rect_size) ), 
-		Color.magenta)
+		Color.maroon)
 	
 
 
