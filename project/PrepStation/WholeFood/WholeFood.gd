@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var _rect_size;
+var _rect_size
 
 var _is_draggable
 var _is_being_dragged
@@ -38,10 +38,17 @@ func _on_WholeFood_input_event(_viewport, _event, _shape_idx)->void:
 				#enables dragging when carrot is touched
 				_set_is_being_dragged()
 				
+			
 			elif _event.button_index == BUTTON_LEFT and !(_event.pressed):
 				#disables dragging when carrot is released
 				_set_is_being_dragged()
 				
+			
 		elif _event is InputEventScreenTouch:
 			if _event.pressed and _event.get_index() == 0:
 				self.position = _event.get_position()
+				
+			
+		
+	
+
