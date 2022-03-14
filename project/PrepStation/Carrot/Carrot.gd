@@ -9,6 +9,7 @@ var _is_being_dragged
 
 var _mouse_pos
 
+var _count = 0
 
 func _ready():
 	_is_draggable = true
@@ -47,7 +48,20 @@ func _input(_event):
 
 
 func _split() -> void:
-	print("hello 2")
-	$CarrotPiece.position.x -= 30
-	$CarrotPiece._split()
+	_count += 1
+
+	if _count == 1:
+		$CarrotPiece.position.x -= 30
+		$CarrotPiece._split()
+		$CarrotPiece._is_frond = true
+	if _count == 2:
+		$CarrotPiece2.position.x -= 25
+		$CarrotPiece2._split()
+	if _count == 3:
+		$CarrotPiece3.position.x -= 20
+		$CarrotPiece3._split()
+	if _count == 4:
+		$CarrotPiece4.position.x -= 15
+		$CarrotPiece4._split()
+		$CarrotPiece5._split()
 

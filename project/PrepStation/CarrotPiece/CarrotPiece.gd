@@ -36,6 +36,8 @@ func _on_FoodChunk_input_event(_viewport, _event, _shape_idx)->void:
 				_is_being_dragged = _event.pressed
 				if _event.pressed == false:
 					emit_signal("dropped")
+					if _is_frond:
+						print("dropped the frond")
 
 		elif _event is InputEventScreenTouch:
 			if _event.pressed and _event.get_index() == 0:
