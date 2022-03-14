@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://PrepStation/WholeFood/WholeFood.gd" type="Script" id=1]
+[ext_resource path="res://PrepStation/Carrot/Carrot.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 180, 36 )
 
-[node name="WholeFood" type="KinematicBody2D"]
+[node name="Carrot" type="KinematicBody2D"]
 input_pickable = true
 script = ExtResource( 1 )
 
