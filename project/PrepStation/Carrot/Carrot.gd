@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal dropped
+signal piece_made
 
 var _rect_size
 
@@ -54,14 +55,17 @@ func _split() -> void:
 		$CarrotPiece.position.x -= 30
 		$CarrotPiece._split()
 		$CarrotPiece._is_frond = true
+		emit_signal("piece_made")
 	if _count == 2:
 		$CarrotPiece2.position.x -= 25
 		$CarrotPiece2._split()
+		emit_signal("piece_made")
 	if _count == 3:
 		$CarrotPiece3.position.x -= 20
 		$CarrotPiece3._split()
+		emit_signal("piece_made")
 	if _count == 4:
 		$CarrotPiece4.position.x -= 15
 		$CarrotPiece4._split()
 		$CarrotPiece5._split()
-
+		emit_signal("piece_made")
