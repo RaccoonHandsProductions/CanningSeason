@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://PrepStation/Carrot/Carrot.gd" type="Script" id=1]
+[ext_resource path="res://PrepStation/CarrotPiece/CarrotPiece.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 180, 36 )
@@ -23,5 +24,19 @@ position = Vector2( 36, 0 )
 
 [node name="ChopPoint3" type="Position2D" parent="."]
 position = Vector2( 108, 0 )
+
+[node name="CarrotPiece" parent="." instance=ExtResource( 2 )]
+position = Vector2( -144, 0 )
+
+[node name="CarrotPiece2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -72, 0 )
+
+[node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
+
+[node name="CarrotPiece4" parent="." instance=ExtResource( 2 )]
+position = Vector2( 72, 0 )
+
+[node name="CarrotPiece5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 144, 0 )
 
 [connection signal="input_event" from="." to="." method="_on_WholeFood_input_event"]

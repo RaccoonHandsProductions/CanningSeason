@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal dropped
+
 var _rect_size
 
 var _is_draggable
@@ -42,13 +44,15 @@ func _on_WholeFood_input_event(_viewport, _event, _shape_idx)->void:
 			elif _event.button_index == BUTTON_LEFT and !(_event.pressed):
 				#disables dragging when carrot is released
 				_set_is_being_dragged()
+				emit_signal("dropped")
 				
 			
 		elif _event is InputEventScreenTouch:
 			if _event.pressed and _event.get_index() == 0:
 				self.position = _event.get_position()
-				
-			
-		
-	
+
+func _split() -> void:
+	print("hello 2")
+	$CarrotPiece.position.x -= 30
+	$CarrotPiece._split()
 
