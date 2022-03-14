@@ -9,7 +9,9 @@ func _ready():
 		$IpAddressLabel.text = IP.resolve_hostname( str(OS.get_environment("COMPUTERNAME")), 1)
 	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices conencted."
 	# warning-ignore:return_value_discarded
-	get_tree().connect("network_peer_connected", self, "_update_devices_connected")
+	get_tree().connect("network_peer_connected", self, "_add_device_connected")
+	# warning-ignore:return_value_discarded
+	get_tree().connect("network_peer_disconnected", self, "_remove_device")
 	
 func _on_HelpButton_pressed():
 	$HelpPopup.visible = true
@@ -26,8 +28,12 @@ func _on_Disconnect_pressed():
 		$DevicesConnectedAlert/PlayersConnected.text = "You currently have "+str(devicesConnected)+" other devices connected."
 		$DevicesConnectedAlert.visible = true
 	
-func _update_devices_connected(_id):
+func _add_device_connected(_id):
 	devicesConnected += 1
+	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices connected."
+	
+func _remove_device(_id):
+	devicesConnected -= 1
 	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices connected."
 
 
