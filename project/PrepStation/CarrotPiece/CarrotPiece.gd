@@ -23,33 +23,31 @@ func _draw():
 		Color.magenta)
 
 
-func _process(_delta):
+func _physics_process(_delta):
 	if _is_being_dragged:
-		_mouse_pos = get_viewport().get_mouse_position()
-		self.position = Vector2(_mouse_pos.x, _mouse_pos.y)
+		_mouse_pos = get_global_mouse_position()
+		self.global_position = Vector2(_mouse_pos.x, _mouse_pos.y)
 
-
-func _set_is_being_dragged()->void:
-	_is_being_dragged = !(_is_being_dragged)
-	
 
 func _on_FoodChunk_input_event(_viewport, _event, _shape_idx)->void:
 	if _is_draggable:
 		if _event is InputEventMouseButton:
-			if _event.button_index == BUTTON_LEFT and _event.pressed:
-				#enables dragging when carrot is touched
-				_set_is_being_dragged()
-				
-			
-			elif _event.button_index == BUTTON_LEFT and !(_event.pressed):
-				#disables dragging when carrot is released
-				_set_is_being_dragged()
-				emit_signal("dropped")
-
+			if _event.button_index == BUTTON_LEFT:
+				_is_being_dragged = _event.pressed
+				if _event.pressed == false:
+					emit_signal("dropped")
+					if _is_frond:
+						print("dropped the frond")
 
 		elif _event is InputEventScreenTouch:
 			if _event.pressed and _event.get_index() == 0:
 				self.position = _event.get_position()
+
+
+func _input(_event):
+	if _event is InputEventMouseButton:
+		if _event.button_index == BUTTON_LEFT and not _event.pressed:
+			_is_being_dragged = false
 
 
 func _split() ->void:
