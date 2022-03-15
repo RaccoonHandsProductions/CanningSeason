@@ -48,7 +48,7 @@ func _input(_event):
 			_is_being_dragged = false
 
 
-func _split() -> void:
+func split() -> void:
 	_count += 1
 
 	if _count == 1:
@@ -56,16 +56,18 @@ func _split() -> void:
 		$CarrotPiece._split()
 		$CarrotPiece._is_frond = true
 		emit_signal("piece_made")
-	if _count == 2:
+	elif _count == 2:
 		$CarrotPiece2.position.x -= 25
 		$CarrotPiece2._split()
 		emit_signal("piece_made")
-	if _count == 3:
+	elif _count == 3:
 		$CarrotPiece3.position.x -= 20
 		$CarrotPiece3._split()
 		emit_signal("piece_made")
-	if _count == 4:
+	elif _count == 4:
 		$CarrotPiece4.position.x -= 15
 		$CarrotPiece4._split()
 		$CarrotPiece5._split()
 		emit_signal("piece_made")
+	else:
+		assert(false, "Split was invoked more times than possible")
