@@ -11,10 +11,6 @@ func _on_SplitButton_pressed():
 
 
 func _on_Carrot_piece_made(next_chop_point_pos):
-	#convert local Carrot's ChopPoint pos into 
-	#(global) CarrotSplitTest pos above carrot?
-	
-	
 	var tween = Tween.new()
 	add_child(tween)
 	tween.interpolate_property(

@@ -4,6 +4,7 @@ extends Node2D
 # This is not the end of the animation, but it is the point at which
 # it has "cut through" whatever is under it.
 signal chopped
+signal chop_animation_complete
 
 export var debug_color := Color.whitesmoke
 
@@ -26,6 +27,15 @@ func _emit_chopped_signal():
 
 
 func _on_Knife_input_event(_viewport, event, _shape_idx):
-	if tappable and not _animation_player.is_playing():
+	if tappable and not _is_playing_chop_animation():
 		if event is InputEventMouseButton and event.is_pressed():
 			_animation_player.play("Chop")
+
+
+func _is_playing_chop_animation()->bool:
+	return _animation_player.current_animation == "Chop"
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Chop":
+		emit_signal("chop_animation_complete")

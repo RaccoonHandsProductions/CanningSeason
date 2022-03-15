@@ -14,7 +14,7 @@ var _split_count = 0
 onready var current_chop_point_pos = $ChopPoint0.position
 
 func _ready():
-	_is_draggable = true
+	_is_draggable = false
 	_rect_size = $CollisionShape2D.shape.extents
 
 func _draw():

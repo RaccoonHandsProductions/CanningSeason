@@ -4,7 +4,7 @@
 [ext_resource path="res://PrepStation/knife.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 12, 105 )
+extents = Vector2( 32, 215 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Chop"
@@ -23,6 +23,18 @@ tracks/0/keys = {
 "args": [  ],
 "method": "_emit_chopped_signal"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10, 10 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -55,6 +67,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
 
 [node name="Knife" type="Area2D"]
 script = ExtResource( 1 )
@@ -71,3 +95,4 @@ anims/Glow = SubResource( 4 )
 anims/RESET = SubResource( 3 )
 
 [connection signal="input_event" from="." to="." method="_on_Knife_input_event"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
