@@ -25,5 +25,8 @@ position = Vector2( 659, 537 )
 [node name="Knife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 488, 928 )
 
+[node name="KnifeOffScreenPos" type="Position2D" parent="."]
+position = Vector2( 659, 1051 )
+
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]

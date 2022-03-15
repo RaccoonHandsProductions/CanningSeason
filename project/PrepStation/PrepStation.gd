@@ -36,4 +36,29 @@ func _on_Knife_chopped():
 
 func _on_Knife_chop_animation_complete():
 	$Knife.tappable = false
-	_animate_Knife_to_next_chop_point()
+	var next_pos = $Carrot.current_chop_point_pos
+	if next_pos!=null:
+		_animate_Knife_to_next_chop_point()
+	else:
+		_animate_Knife_to_home()
+
+func _animate_Knife_to_home():	
+	var tween := Tween.new()
+	var next_pos :Vector2= $KnifeOffScreenPos.position
+	add_child(tween)
+# warning-ignore:return_value_discarded
+	tween.connect("tween_completed", self, "_on_Tween_tween_completed")
+# warning-ignore:return_value_discarded
+	tween.interpolate_property(
+		$Knife, "position", 
+		$Knife.position, next_pos, 1,
+		Tween.TRANS_QUAD, Tween.EASE_IN)
+# warning-ignore:return_value_discarded
+	tween.start()
+	
+	
+	
+
+
+
+

@@ -11,6 +11,9 @@ var _is_being_dragged
 var _mouse_pos
 
 var _split_count = 0
+
+# If there is a next chop point, this is its position in my coordinate space.
+# If there is not a next chop point, this is null.
 onready var current_chop_point_pos = $ChopPoint0.position
 
 func _ready():
@@ -80,7 +83,9 @@ func get_next_Chop_Point_pos()->Vector2:
 		3:
 			current_chop_point_pos = $ChopPoint3.position
 		4:
-			current_chop_point_pos = $ChopPoint3.position
+			current_chop_point_pos = null
+		_:
+			assert(false, "Should never get here")
 		
 	
 	return(current_chop_point_pos)
