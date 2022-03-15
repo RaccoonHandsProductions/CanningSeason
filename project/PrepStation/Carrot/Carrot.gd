@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal dropped
 signal piece_made(next_chop_point_pos)
+signal touched
 
 var _rect_size
 
@@ -32,25 +33,6 @@ func _physics_process(_delta):
 		_mouse_pos = get_global_mouse_position()
 		self.global_position = Vector2(_mouse_pos.x, _mouse_pos.y)
 	
-
-
-func _on_Carrot_input_event(_viewport, event, _shape_idx):
-	if _is_draggable:
-		if event is InputEventMouseButton:
-			if event.button_index == BUTTON_LEFT:
-				_is_being_dragged = event.pressed
-				if event.pressed == false:
-					emit_signal("dropped")
-
-		elif event is InputEventScreenTouch:
-			if event.pressed and event.get_index() == 0:
-				self.position = event.get_position()
-
-
-func _input(_event):
-	if _event is InputEventMouseButton:
-		if _event.button_index == BUTTON_LEFT and not _event.pressed:
-			_is_being_dragged = false
 
 
 func split() -> void:
@@ -90,13 +72,7 @@ func get_next_Chop_Point_pos()->Vector2:
 	
 	return(current_chop_point_pos)
 	
-	
-	
-	
 
-
-
-
-
-
-
+func _on_Carrot_input_event(_viewport, event, _shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("touched")

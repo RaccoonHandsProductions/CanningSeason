@@ -11,6 +11,7 @@
 script = ExtResource( 4 )
 
 [node name="CuttingBoard" parent="." instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 659, 515 )
 
 [node name="CompostBowl" parent="." instance=ExtResource( 1 )]
@@ -20,7 +21,7 @@ position = Vector2( 145, 517 )
 position = Vector2( 1142, 501 )
 
 [node name="Carrot" parent="." instance=ExtResource( 6 )]
-position = Vector2( 659, 537 )
+position = Vector2( 591, 97 )
 
 [node name="Knife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 488, 928 )
@@ -28,5 +29,10 @@ position = Vector2( 488, 928 )
 [node name="KnifeOffScreenPos" type="Position2D" parent="."]
 position = Vector2( 659, 1051 )
 
+[node name="NewCuttingBoard" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( 307, 232, 899, 227, 869, 586, 304, 588 )
+
+[connection signal="touch_released" from="CuttingBoard" to="." method="_on_CuttingBoard_touch_released"]
+[connection signal="touched" from="Carrot" to="." method="_on_Carrot_touched"]
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]
