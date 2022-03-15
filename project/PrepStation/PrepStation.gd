@@ -14,7 +14,8 @@ enum _State {
 	AWAITING_CARROT_TOUCH,
 	DRAGGING_CARROT,
 	CARROT_FLOATING_HOME,
-	CHOPPING
+	AWAITING_KNIFE_CHOP,
+	
 }
 
 var _state = _State.AWAITING_CARROT_TOUCH
@@ -22,31 +23,35 @@ var _state = _State.AWAITING_CARROT_TOUCH
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
-	
+	pass
+
+
 
 func _input(event):
 	match _state:
 		_State.DRAGGING_CARROT:
 				if event is InputEventMouseMotion:
-					var motion_event := event as InputEventMouseMotion
 					$Carrot.position += event.relative
 				elif event is InputEventMouseButton and not event.is_pressed():
 					var above_board := Geometry.is_point_in_polygon($Carrot.position, $NewCuttingBoard.polygon)
 					if above_board:
-						_set_state(_State.CHOPPING)
+						_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
+						_set_state(_State.AWAITING_KNIFE_CHOP)
 					else:
 						_set_state(_State.CARROT_FLOATING_HOME)
 						var tween := Tween.new()
 						add_child(tween)
+						# warning-ignore:return_value_discarded
 						tween.connect("tween_completed", self, "_set_state_to_awaiting_carrot_touch")
+						# warning-ignore:return_value_discarded
 						tween.interpolate_property(
 							$Carrot, "position", 
 							$Carrot.position, $CarrotSpawnPoint.position, 
 							carrot_float_animation_duration,
 						Tween.TRANS_QUAD, Tween.EASE_IN)
+						# warning-ignore:return_value_discarded
 						tween.start()
-		
+			
 
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
@@ -58,14 +63,14 @@ func _animate_Knife_to_next_chop_point(duration:float):
 	var tween := Tween.new()
 	var next_pos :Vector2= $Carrot.position + $Carrot.current_chop_point_pos
 	add_child(tween)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.connect("tween_completed", self, "_on_Tween_tween_completed")
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.interpolate_property(
 		$Knife, "position", 
 		$Knife.position, next_pos, duration,
 		Tween.TRANS_QUAD, Tween.EASE_IN)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.start()
 
 
