@@ -25,17 +25,18 @@ position = Vector2( 36, 0 )
 [node name="ChopPoint3" type="Position2D" parent="."]
 position = Vector2( 108, 0 )
 
-[node name="CarrotPiece" parent="." instance=ExtResource( 2 )]
+[node name="CarrotPiece0" parent="." instance=ExtResource( 2 )]
 position = Vector2( -144, 0 )
 
-[node name="CarrotPiece2" parent="." instance=ExtResource( 2 )]
+[node name="CarrotPiece1" parent="." instance=ExtResource( 2 )]
 position = Vector2( -72, 0 )
 
-[node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
+[node name="CarrotPiece2" parent="." instance=ExtResource( 2 )]
 
-[node name="CarrotPiece4" parent="." instance=ExtResource( 2 )]
+[node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 72, 0 )
 
-[node name="CarrotPiece5" parent="." instance=ExtResource( 2 )]
+[node name="CarrotPiece4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 144, 0 )
-[connection signal="input_event" from="." to="." method="_on_WholeFood_input_event"]
+
+[connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]

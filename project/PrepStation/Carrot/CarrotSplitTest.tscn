@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PrepStation/Carrot/Carrot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
 [ext_resource path="res://PrepStation/Carrot/CarrotSplitTest.gd" type="Script" id=3]
+[ext_resource path="res://PrepStation/Knife.tscn" type="PackedScene" id=4]
 
 [node name="CarrotSplitTest" type="Control"]
 anchor_right = 1.0
@@ -22,5 +23,10 @@ margin_top = 236.0
 margin_right = 632.0
 margin_bottom = 291.0
 text = "Split!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Knife" parent="." instance=ExtResource( 4 )]
 
 [connection signal="pressed" from="SplitButton" to="." method="_on_SplitButton_pressed"]

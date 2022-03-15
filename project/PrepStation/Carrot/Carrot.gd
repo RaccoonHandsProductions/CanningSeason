@@ -10,7 +10,8 @@ var _is_being_dragged
 
 var _mouse_pos
 
-var _count = 0
+var _split_count = 0
+onready var current_chop_point_pos = $ChopPoint0.position
 
 func _ready():
 	_is_draggable = true
@@ -29,17 +30,18 @@ func _physics_process(delta):
 		self.global_position = Vector2(_mouse_pos.x, _mouse_pos.y)
 	
 
-func _on_WholeFood_input_event(_viewport, _event, _shape_idx)->void:
+
+func _on_Carrot_input_event(_viewport, event, _shape_idx):
 	if _is_draggable:
-		if _event is InputEventMouseButton:
-			if _event.button_index == BUTTON_LEFT:
-				_is_being_dragged = _event.pressed
-				if _event.pressed == false:
+		if event is InputEventMouseButton:
+			if event.button_index == BUTTON_LEFT:
+				_is_being_dragged = event.pressed
+				if event.pressed == false:
 					emit_signal("dropped")
 
-		elif _event is InputEventScreenTouch:
-			if _event.pressed and _event.get_index() == 0:
-				self.position = _event.get_position()
+		elif event is InputEventScreenTouch:
+			if event.pressed and event.get_index() == 0:
+				self.position = event.get_position()
 
 
 func _input(_event):
@@ -49,25 +51,56 @@ func _input(_event):
 
 
 func split() -> void:
-	_count += 1
+	_split_count += 1
 
-	if _count == 1:
-		$CarrotPiece.position.x -= 30
-		$CarrotPiece._split()
-		$CarrotPiece._is_frond = true
+	if _split_count == 1:
+		$CarrotPiece0.position.x -= 30
+		$CarrotPiece0._split()
+		$CarrotPiece0._is_frond = true
+		set_next_Chop_Point_pos()
 		emit_signal("piece_made")
-	elif _count == 2:
-		$CarrotPiece2.position.x -= 25
+	elif _split_count == 2:
+		$CarrotPiece1.position.x -= 25
+		$CarrotPiece1._split()
+		set_next_Chop_Point_pos()
+		emit_signal("piece_made")
+	elif _split_count == 3:
+		$CarrotPiece2.position.x -= 20
 		$CarrotPiece2._split()
+		set_next_Chop_Point_pos()
 		emit_signal("piece_made")
-	elif _count == 3:
-		$CarrotPiece3.position.x -= 20
+	elif _split_count == 4:
+		$CarrotPiece3.position.x -= 15
 		$CarrotPiece3._split()
-		emit_signal("piece_made")
-	elif _count == 4:
-		$CarrotPiece4.position.x -= 15
 		$CarrotPiece4._split()
-		$CarrotPiece5._split()
+		set_next_Chop_Point_pos()
 		emit_signal("piece_made")
 	else:
 		assert(false, "Split was invoked more times than possible")
+
+
+func set_next_Chop_Point_pos():
+	match (_split_count):
+		1:
+			current_chop_point_pos = $ChopPoint1.position
+		2:
+			current_chop_point_pos = $ChopPoint2.position
+		3:
+			current_chop_point_pos = $ChopPoint3.position
+		4:
+			current_chop_point_pos = $ChopPoint3.position
+		# add more for 0 and 4 or 5 to reset the loop
+			#current_chop_point_pos = $ChopPoint0.position
+			#_split_count = 0
+	print(current_chop_point_pos)
+	
+	
+	
+	
+
+
+
+
+
+
+

@@ -12,12 +12,6 @@ export var tappable := false setget _set_tappable
 
 onready var _animation_player := $AnimationPlayer
 
-func _on_Area2D_input_event(_viewport, event, _shape_idx):
-	if tappable and not _animation_player.is_playing():
-		if event is InputEventMouseButton and event.is_pressed():
-			_animation_player.play("Chop")
-
-
 func _set_tappable(value:bool)->void:
 	tappable = value
 	if tappable:
@@ -29,3 +23,9 @@ func _set_tappable(value:bool)->void:
 
 func _emit_chopped_signal():
 	emit_signal("chopped")
+
+
+func _on_Knife_input_event(_viewport, event, _shape_idx):
+	if tappable and not _animation_player.is_playing():
+		if event is InputEventMouseButton and event.is_pressed():
+			_animation_player.play("Chop")
