@@ -29,4 +29,5 @@ __meta__ = {
 
 [node name="Knife" parent="." instance=ExtResource( 4 )]
 
+[connection signal="piece_made" from="Carrot" to="." method="_on_Carrot_piece_made"]
 [connection signal="pressed" from="SplitButton" to="." method="_on_SplitButton_pressed"]

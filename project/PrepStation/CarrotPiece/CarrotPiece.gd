@@ -23,7 +23,7 @@ func _draw():
 		Color.magenta)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _is_being_dragged:
 		_mouse_pos = get_global_mouse_position()
 		self.global_position = Vector2(_mouse_pos.x, _mouse_pos.y)

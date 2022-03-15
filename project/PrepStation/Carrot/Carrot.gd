@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 signal dropped
-signal piece_made
+signal piece_made(next_chop_point_pos)
 
 var _rect_size
 
@@ -24,7 +24,7 @@ func _draw():
 	
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _is_being_dragged:
 		_mouse_pos = get_global_mouse_position()
 		self.global_position = Vector2(_mouse_pos.x, _mouse_pos.y)
@@ -52,34 +52,26 @@ func _input(_event):
 
 func split() -> void:
 	_split_count += 1
+	match (_split_count): 
+		1:
+			$CarrotPiece0.position.x -= 30
+			$CarrotPiece0._split()
+			$CarrotPiece0._is_frond = true
+		2:
+			$CarrotPiece1.position.x -= 25
+			$CarrotPiece1._split()
+		3:
+			$CarrotPiece2.position.x -= 20
+			$CarrotPiece2._split()
+		4:
+			$CarrotPiece3.position.x -= 15
+			$CarrotPiece3._split()
+			$CarrotPiece4._split()
+		5: 
+			assert(false, "Split was invoked more times than possible")
+	emit_signal("piece_made", get_next_Chop_Point_pos())
 
-	if _split_count == 1:
-		$CarrotPiece0.position.x -= 30
-		$CarrotPiece0._split()
-		$CarrotPiece0._is_frond = true
-		set_next_Chop_Point_pos()
-		emit_signal("piece_made")
-	elif _split_count == 2:
-		$CarrotPiece1.position.x -= 25
-		$CarrotPiece1._split()
-		set_next_Chop_Point_pos()
-		emit_signal("piece_made")
-	elif _split_count == 3:
-		$CarrotPiece2.position.x -= 20
-		$CarrotPiece2._split()
-		set_next_Chop_Point_pos()
-		emit_signal("piece_made")
-	elif _split_count == 4:
-		$CarrotPiece3.position.x -= 15
-		$CarrotPiece3._split()
-		$CarrotPiece4._split()
-		set_next_Chop_Point_pos()
-		emit_signal("piece_made")
-	else:
-		assert(false, "Split was invoked more times than possible")
-
-
-func set_next_Chop_Point_pos():
+func get_next_Chop_Point_pos()->Vector2:
 	match (_split_count):
 		1:
 			current_chop_point_pos = $ChopPoint1.position
@@ -89,10 +81,9 @@ func set_next_Chop_Point_pos():
 			current_chop_point_pos = $ChopPoint3.position
 		4:
 			current_chop_point_pos = $ChopPoint3.position
-		# add more for 0 and 4 or 5 to reset the loop
-			#current_chop_point_pos = $ChopPoint0.position
-			#_split_count = 0
-	print(current_chop_point_pos)
+		
+	
+	return(current_chop_point_pos)
 	
 	
 	
