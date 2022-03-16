@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-# warning-ignore:unused_signal
-signal dropped
+
 signal piece_made(piece)
 signal touched
+var done := false
 
 var _rect_size
 
@@ -76,5 +76,6 @@ func get_next_Chop_Point_pos()->Vector2:
 	return(current_chop_point_pos)
 
 func _on_Carrot_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		emit_signal("touched")
+	if not done:
+		if event is InputEventMouseButton and event.pressed:
+			emit_signal("touched")

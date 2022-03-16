@@ -34,6 +34,7 @@ position = Vector2( 601, 88 )
 
 [node name="Knife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 614, 1032 )
+z_index = 5
 
 [node name="KnifeOffScreenPos" type="Position2D" parent="."]
 position = Vector2( 616, 1027 )
@@ -41,7 +42,5 @@ position = Vector2( 616, 1027 )
 [node name="CarrotSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 600, 88 )
 
-[connection signal="piece_made" from="Carrot" to="." method="_on_Carrot_piece_made"]
-[connection signal="touched" from="Carrot" to="." method="_on_Carrot_touched"]
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]
