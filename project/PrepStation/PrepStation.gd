@@ -9,6 +9,8 @@ export var knife_offscreen_animation_duration := .75
 export var carrot_float_animation_duration := 0.5
 export var piece_float_animation_duration := 0.2
 
+var bowl_count = 0
+var bowl_limit = 5
 
 enum _State {
 	AWAITING_CARROT_TOUCH,
@@ -67,11 +69,15 @@ func _input(event):
 					current_cut_piece.position+$Carrot.position,
 					_new_bowl_polygon)
 				if above_bowl:
-					_set_state(_State.ALL_PIECES_PLACED)
+					bowl_count += 1
+					print("Bowl Count: " + str(bowl_count))
+					if (bowl_count%bowl_limit) == 0:
+						_set_state(_State.ALL_PIECES_PLACED)
+					else:
+						_set_state(_State.AWAITING_PIECE_TOUCH)
 				else:
 					_set_state(_State.PIECE_FLOATING_HOME)
 					_animate_CarrotPiece_to_home(piece_float_animation_duration)
-				current_cut_piece = null
 
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
@@ -131,7 +137,6 @@ func _animate_Knife_to_home():
 	
 func _animate_CarrotPiece_to_home(duration:float):
 	var tween := Tween.new()
-	var next_pos :Vector2= piece_home_pos
 	add_child(tween)
 	# warning-ignore:return_value_discarded
 	tween.connect("tween_completed", self, "_on_CarrotPiece_tween_completed")
@@ -170,7 +175,6 @@ func _on_CarrotPiece_touched(piece:Node2D):
 	match _state:
 		_State.AWAITING_PIECE_TOUCH:
 			current_cut_piece = piece
-			
 			_set_state(_State.DRAGGING_PIECE)
 
 
