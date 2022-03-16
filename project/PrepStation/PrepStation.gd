@@ -7,6 +7,7 @@ export var knife_offscreen_animation_duration := .75
 
 
 export var carrot_float_animation_duration := 0.5
+export var piece_float_animation_duration := 0.2
 
 
 
@@ -16,9 +17,14 @@ enum _State {
 	CARROT_FLOATING_HOME,
 	AWAITING_KNIFE_CHOP,
 	
+	AWAITING_PIECE_TOUCH,
+	PIECE_FLOATING_HOME,
+	ALL_PIECES_PLACED
 }
 
 var _state = _State.AWAITING_CARROT_TOUCH
+var current_cut_piece
+var piece_home_pos
 
 
 # Called when the node enters the scene tree for the first time.
@@ -51,7 +57,28 @@ func _input(event):
 						Tween.TRANS_QUAD, Tween.EASE_IN)
 						# warning-ignore:return_value_discarded
 						tween.start()
-			
+		_State.AWAITING_PIECE_TOUCH:
+			if event is InputEventMouseMotion:
+				current_cut_piece.position += event.relative
+			elif event is InputEventMouseButton and not event.is_pressed():
+				#var above_board := Geometry.is_point_in_polygon($Carrot/CarrotPiece0.position, $NewCuttingBoard.polygon)
+				#if above_board:
+					#_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
+					#_set_state(_State.ALL_PIECES_PLACED)
+				#else:
+				_set_state(_State.PIECE_FLOATING_HOME)
+				var tween := Tween.new()
+				add_child(tween)
+				# warning-ignore:return_value_discarded
+				tween.connect("tween_completed", self, "_set_state_to_awaiting_carrot_touch")
+				# warning-ignore:return_value_discarded
+				tween.interpolate_property(
+					current_cut_piece, "position", 
+					current_cut_piece.position, piece_home_pos, 
+					piece_float_animation_duration,
+				Tween.TRANS_QUAD, Tween.EASE_IN)
+				# warning-ignore:return_value_discarded
+				tween.start()
 
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
@@ -91,6 +118,7 @@ func _on_Knife_chop_animation_complete():
 		_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
 	else:
 		_animate_Knife_to_home()
+		_set_state(_State.AWAITING_PIECE_TOUCH)
 
 
 func _animate_Knife_to_home():	
@@ -120,3 +148,6 @@ func _on_Carrot_touched():
 			_set_state(_State.DRAGGING_CARROT)
 
 
+func _on_Carrot_piece_made(piece:Node2D) -> void:
+	current_cut_piece = piece
+	piece_home_pos = current_cut_piece.position

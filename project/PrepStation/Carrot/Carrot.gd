@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
+# warning-ignore:unused_signal
 signal dropped
-signal piece_made(next_chop_point_pos)
+signal piece_made(piece)
 signal touched
 
 var _rect_size
@@ -37,24 +38,32 @@ func _physics_process(_delta):
 
 func split() -> void:
 	_split_count += 1
+	var split_piece
 	match (_split_count): 
 		1:
 			$CarrotPiece0.position.x -= 30
 			$CarrotPiece0._split()
 			$CarrotPiece0._is_frond = true
+			split_piece = $CarrotPiece0
 		2:
 			$CarrotPiece1.position.x -= 25
 			$CarrotPiece1._split()
+			split_piece = $CarrotPiece1
 		3:
 			$CarrotPiece2.position.x -= 20
 			$CarrotPiece2._split()
+			split_piece = $CarrotPiece2
 		4:
 			$CarrotPiece3.position.x -= 15
 			$CarrotPiece3._split()
 			$CarrotPiece4._split()
+			split_piece = $CarrotPiece3
+			split_piece = $CarrotPiece4
 		5: 
 			assert(false, "Split was invoked more times than possible")
-	emit_signal("piece_made", get_next_Chop_Point_pos())
+	# warning-ignore:return_value_discarded
+	get_next_Chop_Point_pos()
+	emit_signal("piece_made", split_piece)
 
 func get_next_Chop_Point_pos()->Vector2:
 	match (_split_count):
@@ -68,10 +77,8 @@ func get_next_Chop_Point_pos()->Vector2:
 			current_chop_point_pos = null
 		_:
 			assert(false, "Should never get here")
-		
-	
+			
 	return(current_chop_point_pos)
-	
 
 func _on_Carrot_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
