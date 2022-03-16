@@ -23,12 +23,6 @@ func _ready():
 	_rect_size = $CollisionShape2D.shape.extents
 	current_chop_point_pos = $ChopPoint0.position
 
-func _draw():
-	draw_rect(
-		Rect2( -(_rect_size), 2*(_rect_size) ), 
-		Color.maroon)
-	
-
 
 func split() -> void:
 	_split_count += 1
