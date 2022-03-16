@@ -1,18 +1,17 @@
 extends KinematicBody2D
 
-signal dropped
+signal touched
 
 var _rect_size
 
-var _is_draggable
-var _is_being_dragged
+var is_draggable
 
 var _is_frond = false
 
 var _mouse_pos
 
 func _ready():
-	_is_draggable = true
+	is_draggable = false
 	_rect_size = $CollisionShape2D.shape.extents
 
 func _draw():
@@ -20,11 +19,6 @@ func _draw():
 	draw_rect(
 		Rect2( -(_rect_size), 2*(_rect_size) ), 
 		Color.magenta)
-
-func _physics_process(_delta):
-	if _is_being_dragged:
-		_mouse_pos = get_global_mouse_position()
-		self.global_position = Vector2(_mouse_pos.x, _mouse_pos.y)
 
 
 func _split() ->void:

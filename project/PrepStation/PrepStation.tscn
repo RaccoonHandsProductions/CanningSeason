@@ -13,14 +13,20 @@ script = ExtResource( 4 )
 [node name="NewCuttingBoard" type="Polygon2D" parent="."]
 polygon = PoolVector2Array( 307, 232, 899, 227, 869, 586, 304, 588 )
 
+[node name="NewBowl" type="Polygon2D" parent="."]
+position = Vector2( -5, 178 )
+polygon = PoolVector2Array( 1143, 151, 1095, 165, 1057, 193, 1037, 230, 1036, 280, 1068, 325, 1104, 346, 1157, 346, 1206, 326, 1241, 281, 1240, 232, 1219, 192, 1185, 172 )
+
 [node name="CuttingBoard" parent="." instance=ExtResource( 3 )]
 visible = false
 position = Vector2( 659, 515 )
 
 [node name="CompostBowl" parent="." instance=ExtResource( 1 )]
+visible = false
 position = Vector2( 145, 517 )
 
 [node name="DoneBowl" parent="." instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 1142, 501 )
 
 [node name="Carrot" parent="." instance=ExtResource( 6 )]
