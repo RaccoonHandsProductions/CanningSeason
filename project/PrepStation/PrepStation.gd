@@ -62,6 +62,7 @@ func _input(event):
 						# warning-ignore:return_value_discarded
 						tween.start()
 		_State.DRAGGING_PIECE:
+			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
 				current_cut_piece.position += event.relative
 			elif event is InputEventMouseButton and not event.is_pressed():
@@ -74,6 +75,7 @@ func _input(event):
 					if (bowl_count%bowl_limit) == 0:
 						_set_state(_State.ALL_PIECES_PLACED)
 					else:
+						current_cut_piece.done = true
 						_set_state(_State.AWAITING_PIECE_TOUCH)
 				else:
 					_set_state(_State.PIECE_FLOATING_HOME)
@@ -137,6 +139,7 @@ func _animate_Knife_to_home():
 	
 func _animate_CarrotPiece_to_home(duration:float):
 	var tween := Tween.new()
+	var next_pos :Vector2= piece_home_pos
 	add_child(tween)
 	# warning-ignore:return_value_discarded
 	tween.connect("tween_completed", self, "_on_CarrotPiece_tween_completed")
@@ -174,8 +177,10 @@ func _on_Carrot_touched():
 func _on_CarrotPiece_touched(piece:Node2D):
 	match _state:
 		_State.AWAITING_PIECE_TOUCH:
-			current_cut_piece = piece
-			_set_state(_State.DRAGGING_PIECE)
+			if piece.is_draggable:
+				current_cut_piece = piece
+				_set_state(_State.DRAGGING_PIECE)
+
 
 
 func _on_Carrot_piece_made(piece:Node2D) -> void:

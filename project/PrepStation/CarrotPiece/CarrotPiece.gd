@@ -4,14 +4,14 @@ signal touched
 
 var _rect_size
 
-var is_draggable := false
+onready var is_draggable := false
+onready var done := false
 
 var _is_frond = false
 
 var _mouse_pos
 
 func _ready():
-	is_draggable = false
 	_rect_size = $CollisionShape2D.shape.extents
 
 func _draw():
@@ -26,5 +26,9 @@ func _split() ->void:
 
 
 func _on_CarrotPiece_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.pressed:
-		emit_signal("touched")
+	if not done:
+		if event is InputEventMouseButton and event.pressed:
+			emit_signal("touched")
+		
+	
+
