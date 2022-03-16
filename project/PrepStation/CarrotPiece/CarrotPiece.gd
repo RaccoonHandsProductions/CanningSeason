@@ -4,7 +4,7 @@ signal touched
 
 var _rect_size
 
-var is_draggable
+var is_draggable := false
 
 var _is_frond = false
 

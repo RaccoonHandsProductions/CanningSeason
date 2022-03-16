@@ -23,8 +23,9 @@ enum _State {
 }
 
 var _state = _State.AWAITING_CARROT_TOUCH
-var current_cut_piece
+var current_cut_piece :Node2D = null
 var piece_home_pos
+var _pieces := {} #key = CarrotPiece node, value = CarrotPiece.pos
 
 var _new_bowl_polygon : PoolVector2Array
 
@@ -62,17 +63,15 @@ func _input(event):
 			if event is InputEventMouseMotion:
 				current_cut_piece.position += event.relative
 			elif event is InputEventMouseButton and not event.is_pressed():
-				print('Piece: ' + str(current_cut_piece.position))
-				print('Summed: ' + str(current_cut_piece.position + $Carrot.position))
 				var above_bowl := Geometry.is_point_in_polygon(
-					current_cut_piece.position+$Carrot.position,_new_bowl_polygon)
-				print(str(above_bowl))
+					current_cut_piece.position+$Carrot.position,
+					_new_bowl_polygon)
 				if above_bowl:
 					_set_state(_State.ALL_PIECES_PLACED)
 				else:
 					_set_state(_State.PIECE_FLOATING_HOME)
 					_animate_CarrotPiece_to_home(piece_float_animation_duration)
-					
+				current_cut_piece = null
 
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
@@ -119,15 +118,16 @@ func _animate_Knife_to_home():
 	var tween := Tween.new()
 	var next_pos :Vector2= $KnifeOffScreenPos.position
 	add_child(tween)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.connect("tween_completed", self, "_on_Knife_tween_completed")
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.interpolate_property(
 		$Knife, "position", 
 		$Knife.position, next_pos, knife_offscreen_animation_duration,
 		Tween.TRANS_QUAD, Tween.EASE_IN)
-# warning-ignore:return_value_discarded
+	# warning-ignore:return_value_discarded
 	tween.start()
+	
 	
 func _animate_CarrotPiece_to_home(duration:float):
 	var tween := Tween.new()
@@ -138,17 +138,26 @@ func _animate_CarrotPiece_to_home(duration:float):
 	# warning-ignore:return_value_discarded
 	tween.interpolate_property(
 		current_cut_piece, "position", 
-		current_cut_piece.position, next_pos, duration,
+		current_cut_piece.position, _pieces[current_cut_piece], duration,
 		Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore:return_value_discarded
 	tween.start()
+	
+
 
 func _on_CarrotPiece_tween_completed(_a, _b):
-	current_cut_piece.is_draggable = true
 	_set_state(_State.AWAITING_PIECE_TOUCH)
+
 
 func _set_state(new_state)->void:
 	_state = new_state
+	match new_state:
+		_State.AWAITING_PIECE_TOUCH:
+			for piece in _pieces:
+				piece.is_draggable = true
+		_State.DRAGGING_PIECE:
+			for piece in _pieces:
+				piece.is_draggable = false
 
 
 func _on_Carrot_touched():
@@ -160,10 +169,13 @@ func _on_Carrot_touched():
 func _on_CarrotPiece_touched(piece:Node2D):
 	match _state:
 		_State.AWAITING_PIECE_TOUCH:
+			current_cut_piece = piece
+			
 			_set_state(_State.DRAGGING_PIECE)
 
 
 func _on_Carrot_piece_made(piece:Node2D) -> void:
-	current_cut_piece = piece
-	piece_home_pos = current_cut_piece.position
-	current_cut_piece.connect("touched", self, "_on_CarrotPiece_touched", [current_cut_piece])
+	piece_home_pos = piece.position
+	var error := piece.connect("touched", self, "_on_CarrotPiece_touched", [piece])
+	assert(error==OK, "Connection failed with error " + str(error))
+	_pieces[piece] = piece.position

@@ -58,6 +58,7 @@ func split() -> void:
 			$CarrotPiece3._split()
 			$CarrotPiece4._split()
 			split_piece = $CarrotPiece3
+			emit_signal("piece_made", split_piece)
 			split_piece = $CarrotPiece4
 		5: 
 			assert(false, "Split was invoked more times than possible")
