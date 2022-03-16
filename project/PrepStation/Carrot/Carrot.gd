@@ -40,18 +40,18 @@ func split() -> void:
 	match (_split_count): 
 		1:
 			$CarrotPiece0.position.x -= 30
-			$CarrotPiece0._split()
-			$CarrotPiece0._is_frond = true
+			$CarrotPiece0.split()
+			$CarrotPiece0.is_frond = true
 		2:
 			$CarrotPiece1.position.x -= 25
-			$CarrotPiece1._split()
+			$CarrotPiece1.split()
 		3:
 			$CarrotPiece2.position.x -= 20
-			$CarrotPiece2._split()
+			$CarrotPiece2.split()
 		4:
 			$CarrotPiece3.position.x -= 15
-			$CarrotPiece3._split()
-			$CarrotPiece4._split()
+			$CarrotPiece3.split()
+			$CarrotPiece4.split()
 		5: 
 			assert(false, "Split was invoked more times than possible")
 	emit_signal("piece_made", get_next_Chop_Point_pos())
