@@ -1,14 +1,57 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PrepStation/CarrotPiece/CarrotPiece.gd" type="Script" id=1]
+[ext_resource path="res://PrepStation/CarrotPiece/chunk.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 36, 36 )
 
+[sub_resource type="Animation" id=2]
+resource_name = "Glow"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="CarrotPiece" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 387.36, -227.065 )
+scale = Vector2( 0.72, 0.721 )
+texture = ExtResource( 2 )
+offset = Vector2( -538, 315 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Glow = SubResource( 2 )
+anims/RESET = SubResource( 3 )
 
 [connection signal="input_event" from="." to="." method="_on_CarrotPiece_input_event"]

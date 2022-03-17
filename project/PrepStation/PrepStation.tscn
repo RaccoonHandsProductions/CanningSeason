@@ -9,6 +9,8 @@
 
 [node name="PrepStation" type="Node2D"]
 script = ExtResource( 4 )
+knife_chop_transition_animation_duration = 0.1
+knife_offscreen_animation_duration = 0.2
 
 [node name="NewCuttingBoard" type="Polygon2D" parent="."]
 polygon = PoolVector2Array( 307, 232, 899, 227, 869, 586, 304, 588 )
