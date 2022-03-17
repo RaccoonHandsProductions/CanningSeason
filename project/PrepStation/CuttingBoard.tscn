@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://PrepStation/StationArea.gd" type="Script" id=1]
-[ext_resource path="res://PrepStation/cutting_board.png" type="Texture" id=2]
+[ext_resource path="res://PrepStation/Cutting_Board (2).png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 300, 200 )
