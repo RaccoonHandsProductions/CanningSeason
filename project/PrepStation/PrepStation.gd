@@ -10,7 +10,15 @@ export var carrot_float_animation_duration := 0.5
 export var piece_float_animation_duration := 0.2
 
 var bowl_count = 0
-var bowl_limit = 5
+var bowl_limit = 4#########################################
+
+##########################################################
+var compost_bowl_count = 0
+var compost_bowl_limit = 1
+
+var bowl_full = false
+var compost_bowl_full = false
+##########################################################
 
 enum _State {
 	AWAITING_CARROT_TOUCH,
@@ -19,7 +27,9 @@ enum _State {
 	AWAITING_KNIFE_CHOP,
 	
 	AWAITING_PIECE_TOUCH,
+	AWAITING_FROND_TOUCH,
 	DRAGGING_PIECE,
+	DRAGGING_FROND,#################
 	PIECE_FLOATING_HOME,
 	ALL_PIECES_PLACED
 }
@@ -30,6 +40,9 @@ var piece_home_pos
 var _pieces := {} #key = CarrotPiece node, value = CarrotPiece.pos
 
 var _new_bowl_polygon : PoolVector2Array
+###########################################################
+var _new_compost_bowl_polygon : PoolVector2Array
+##########################################################
 
 onready var _carrot = $Carrot
 
@@ -37,6 +50,12 @@ onready var _carrot = $Carrot
 func _ready():
 	for point in $NewBowl.polygon:
 		_new_bowl_polygon.append(point + $NewBowl.position)
+		
+		#############################################################
+	for point in $NewCompostBowl.polygon:
+		_new_compost_bowl_polygon.append(point + $NewCompostBowl.position)
+		#############################################################
+		
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
 
@@ -65,6 +84,33 @@ func _input(event):
 						Tween.TRANS_QUAD, Tween.EASE_IN)
 						# warning-ignore:return_value_discarded
 						tween.start()
+		
+		###############################################################
+		_State.DRAGGING_FROND:
+			if event is InputEventMouseMotion:
+				current_cut_piece.position += event.relative
+			elif event is InputEventMouseButton and not event.is_pressed():
+				var above_compost_bowl := Geometry.is_point_in_polygon(
+					current_cut_piece.position + _carrot.position,
+					_new_compost_bowl_polygon)
+			
+				if current_cut_piece._is_frond:
+					if above_compost_bowl:
+						current_cut_piece.done = true
+						compost_bowl_count += 1
+						print("Compost Bowl Count: " + str(compost_bowl_count))
+
+						if (compost_bowl_count%compost_bowl_limit) == 0:
+							_set_state(_State.AWAITING_PIECE_TOUCH)
+						else:
+							_set_state(_State.AWAITING_FROND_TOUCH)
+					else:
+						_set_state(_State.PIECE_FLOATING_HOME)
+						_animate_CarrotPiece_to_home(piece_float_animation_duration)
+						_set_state(_State.AWAITING_FROND_TOUCH)
+						
+		###############################################################
+		
 		_State.DRAGGING_PIECE:
 			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
@@ -73,22 +119,25 @@ func _input(event):
 				var above_bowl := Geometry.is_point_in_polygon(
 					current_cut_piece.position+_carrot.position,
 					_new_bowl_polygon)
-				if above_bowl:
-					bowl_count += 1
-					print("Bowl Count: " + str(bowl_count))
-					if (bowl_count%bowl_limit) == 0:
-						_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
-						add_child(_carrot)
-						#float there
-						_carrot.position = $CarrotSpawnPoint.position
-						_set_state(_State.AWAITING_CARROT_TOUCH)
-						
-					else:
+					
+				if not current_cut_piece._is_frond:##########
+					if above_bowl:
+						bowl_count += 1
+						print("Bowl Count: " + str(bowl_count))
 						current_cut_piece.done = true
-						_set_state(_State.AWAITING_PIECE_TOUCH)
-				else:
-					_set_state(_State.PIECE_FLOATING_HOME)
-					_animate_CarrotPiece_to_home(piece_float_animation_duration)
+						if (bowl_count%bowl_limit) == 0:
+							_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
+							add_child(_carrot)
+							#float there
+							_carrot.position = $CarrotSpawnPoint.position
+							_set_state(_State.AWAITING_CARROT_TOUCH)
+						else:
+							_set_state(_State.AWAITING_PIECE_TOUCH)
+					else:
+						if not current_cut_piece.done:
+							_set_state(_State.PIECE_FLOATING_HOME)
+							_animate_CarrotPiece_to_home(piece_float_animation_duration)
+					
 
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
@@ -128,7 +177,7 @@ func _on_Knife_chop_animation_complete():
 		_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
 	else:
 		_animate_Knife_to_home()
-		_set_state(_State.AWAITING_PIECE_TOUCH)
+		_set_state(_State.AWAITING_FROND_TOUCH)
 
 
 func _animate_Knife_to_home():	
@@ -162,7 +211,10 @@ func _animate_CarrotPiece_to_home(duration:float):
 
 
 func _on_CarrotPiece_tween_completed(_a, _b):
-	_set_state(_State.AWAITING_PIECE_TOUCH)
+	if current_cut_piece._is_frond:
+		_set_state(_State.AWAITING_FROND_TOUCH)
+	else:
+		_set_state(_State.AWAITING_PIECE_TOUCH)
 
 
 func _set_state(new_state)->void:
@@ -172,9 +224,17 @@ func _set_state(new_state)->void:
 			_carrot.connect("touched", self, "_on_Carrot_touched")
 			_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
 		_State.AWAITING_PIECE_TOUCH:
+			print("howdy")
 			for piece in _pieces:
 				piece.is_draggable = true
 		_State.DRAGGING_PIECE:
+			for piece in _pieces:
+				piece.is_draggable = false
+		_State.AWAITING_FROND_TOUCH:
+			for piece in _pieces:
+				if piece._is_frond:
+					piece.is_draggable = true
+		_State.DRAGGING_FROND:
 			for piece in _pieces:
 				piece.is_draggable = false
 
@@ -191,6 +251,10 @@ func _on_CarrotPiece_touched(piece:Node2D):
 			if piece.is_draggable:
 				current_cut_piece = piece
 				_set_state(_State.DRAGGING_PIECE)
+		_State.AWAITING_FROND_TOUCH:
+			if piece.is_draggable:
+				current_cut_piece = piece
+				_set_state(_State.DRAGGING_FROND)
 
 
 
@@ -199,3 +263,15 @@ func _on_Carrot_piece_made(piece:Node2D) -> void:
 	var error := piece.connect("touched", self, "_on_CarrotPiece_touched", [piece])
 	assert(error==OK, "Connection failed with error " + str(error))
 	_pieces[piece] = piece.position
+
+
+
+
+
+
+
+#						_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
+#						add_child(_carrot)
+#						#float there
+#						_carrot.position = $CarrotSpawnPoint.position
+#						_set_state(_State.AWAITING_CARROT_TOUCH)
