@@ -13,8 +13,6 @@ export var piece_float_animation_duration := 0.2
 var bowl_count = 0
 var bowl_limit = 4#########################################
 
-var score = 0
-
 ##########################################################
 var compost_bowl_count = 0
 var compost_bowl_limit = 1
@@ -57,14 +55,13 @@ func _ready():
 	for point in $NewCompostBowl.polygon:
 		_new_compost_bowl_polygon.append(point + $NewCompostBowl.position)
 		#############################################################
-	$HUD.update_score(score)
+		
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
 
 func _input(event):
 	match _state:
 		_State.DRAGGING_CARROT:
-				$HUD.show_message("DRAGGING_CARROT")
 				if event is InputEventMouseMotion:
 					_carrot.position += event.relative
 				elif event is InputEventMouseButton and not event.is_pressed():
@@ -90,7 +87,6 @@ func _input(event):
 		
 		###############################################################
 		_State.DRAGGING_FROND:
-			$HUD.show_message("DRAGGING_FROND")
 			if event is InputEventMouseMotion:
 				current_cut_piece.position += event.relative
 			elif event is InputEventMouseButton and not event.is_pressed():
@@ -117,7 +113,6 @@ func _input(event):
 		###############################################################
 		
 		_State.DRAGGING_PIECE:
-			$HUD.show_message("DRAGGING_PIECE")
 			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
 				current_cut_piece.position += event.relative
@@ -128,12 +123,11 @@ func _input(event):
 					
 				if not current_cut_piece._is_frond:##########
 					if above_bowl:
+						$HUD.update_score(1)
 						bowl_count += 1
 						print("Bowl Count: " + str(bowl_count))
 						current_cut_piece.done = true
 						if (bowl_count%bowl_limit) == 0:
-							score += 1
-							$HUD.update_score(score)
 							_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
 							add_child(_carrot)
 							#float there
@@ -231,14 +225,12 @@ func _set_state(new_state)->void:
 	_state = new_state
 	match new_state:
 		_State.AWAITING_CARROT_TOUCH:
-			$HUD.show_message("AWAITING_CARROT_TOUCH")
 			for piece in _pieces:
 				piece._animation_player.play("RESET")
 			_pieces.clear()
 			_carrot.connect("touched", self, "_on_Carrot_touched")
 			_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
 		_State.AWAITING_PIECE_TOUCH:
-			$HUD.show_message("AWAITING_PIECE_TOUCH")
 			print("howdy")
 			for piece in _pieces:
 				piece._animation_player.play("Glow")
@@ -246,17 +238,14 @@ func _set_state(new_state)->void:
 					piece._animation_player.play("RESET")
 				piece.is_draggable = true
 		_State.DRAGGING_PIECE:
-			$HUD.show_message("DRAGGING_PIECE")
 			for piece in _pieces:
 				piece.is_draggable = false
 		_State.AWAITING_FROND_TOUCH:
-			$HUD.show_message("AWAITING_FROND_TOUCH")
 			for piece in _pieces:
 				if piece._is_frond:
 					piece._animation_player.play("Glow")
 					piece.is_draggable = true
 		_State.DRAGGING_FROND:
-			$HUD.show_message("DRAGGING_FROND")
 			for piece in _pieces:
 				piece._animation_player.play("RESET")
 				piece.is_draggable = false
