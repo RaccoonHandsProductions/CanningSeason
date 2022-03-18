@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+signal Times_Up
+
 # Displays time left on timer as a string from an integer from the timer, in the TimeLabel
 func _process(delta):
 	update_score(0)
@@ -23,3 +25,7 @@ func update_score(carrotPiece):
 # Hides message on MesageTimer timeout
 func _on_MessageTimer_timeout():
 	$Message.hide()
+
+
+func _on_GameTimer_timeout():
+	emit_signal("Times_Up")
