@@ -13,6 +13,8 @@ script = ExtResource( 4 )
 knife_chop_transition_animation_duration = 0.1
 knife_offscreen_animation_duration = 0.2
 
+[node name="CounterBackground" type="Sprite" parent="."]
+
 [node name="NewCuttingBoard" type="Polygon2D" parent="."]
 position = Vector2( 36, 22 )
 polygon = PoolVector2Array( 307, 232, 899, 227, 869, 586, 304, 588 )

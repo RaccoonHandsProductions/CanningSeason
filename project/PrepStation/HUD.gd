@@ -2,7 +2,7 @@ extends CanvasLayer
 
 # Displays time left on timer as a string from an integer from the timer, in the TimeLabel
 func _process(delta):
-	$TimeLabel.set_text( "Time Left: " + str( int( $GameTimer.get_time_left() ) ) )
+	$TimeLabel.set_text( "Time: " + str( int( $GameTimer.get_time_left() ) ) )
 
 # sets the Message label to a text value input for contexual HUD messages / testing states
 func show_message(text):
