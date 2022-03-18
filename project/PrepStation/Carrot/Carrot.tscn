@@ -1,7 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PrepStation/Carrot/Carrot.gd" type="Script" id=1]
 [ext_resource path="res://PrepStation/CarrotPiece/CarrotPiece.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_05.png" type="Texture" id=3]
+[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_02.png" type="Texture" id=4]
+[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_01.png" type="Texture" id=5]
+[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_04.png" type="Texture" id=6]
+[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_03.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 180, 36 )
@@ -28,15 +33,44 @@ position = Vector2( 108, 0 )
 [node name="CarrotPiece0" parent="." instance=ExtResource( 2 )]
 position = Vector2( -144, 0 )
 
+[node name="Sprite" parent="CarrotPiece0" index="0"]
+position = Vector2( 361.36, -227.065 )
+texture = ExtResource( 5 )
+
 [node name="CarrotPiece1" parent="." instance=ExtResource( 2 )]
 position = Vector2( -72, 0 )
 
+[node name="Sprite" parent="CarrotPiece1" index="0"]
+position = Vector2( 385.36, -228.065 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="CarrotPiece1" index="1"]
+position = Vector2( -1, 0 )
+
 [node name="CarrotPiece2" parent="." instance=ExtResource( 2 )]
+
+[node name="Sprite" parent="CarrotPiece2" index="0"]
+position = Vector2( 385.36, -227.065 )
+texture = ExtResource( 7 )
 
 [node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 72, 0 )
 
+[node name="Sprite" parent="CarrotPiece3" index="0"]
+position = Vector2( 397.36, -227.065 )
+texture = ExtResource( 6 )
+
 [node name="CarrotPiece4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 144, 0 )
 
+[node name="Sprite" parent="CarrotPiece4" index="0"]
+position = Vector2( 399.36, -227.065 )
+texture = ExtResource( 3 )
+
 [connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
+
+[editable path="CarrotPiece0"]
+[editable path="CarrotPiece1"]
+[editable path="CarrotPiece2"]
+[editable path="CarrotPiece3"]
+[editable path="CarrotPiece4"]
