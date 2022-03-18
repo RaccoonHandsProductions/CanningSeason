@@ -89,6 +89,8 @@ func _input(event):
 		_State.DRAGGING_FROND:
 			if event is InputEventMouseMotion:
 				current_cut_piece.position += event.relative
+				current_cut_piece._animation_player.play("RESET")
+				$CompostBowl/AnimationPlayer.play("Glow")
 			elif event is InputEventMouseButton and not event.is_pressed():
 				var above_compost_bowl := Geometry.is_point_in_polygon(
 					current_cut_piece.position + _carrot.position,
@@ -116,6 +118,8 @@ func _input(event):
 			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
 				current_cut_piece.position += event.relative
+				current_cut_piece._animation_player.play("RESET")
+				$DoneBowl/AnimationPlayer.play("Glow")
 			elif event is InputEventMouseButton and not event.is_pressed():
 				var above_bowl := Geometry.is_point_in_polygon(
 					current_cut_piece.position+_carrot.position,
@@ -129,6 +133,7 @@ func _input(event):
 						print("Bowl Count: " + str(bowl_count))
 						current_cut_piece.done = true
 						if (bowl_count%bowl_limit) == 0:
+							$DoneBowl/AnimationPlayer.play("RESET")
 							_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
 							add_child(_carrot)
 							#float there
@@ -232,11 +237,12 @@ func _set_state(new_state)->void:
 			_carrot.connect("touched", self, "_on_Carrot_touched")
 			_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
 		_State.AWAITING_PIECE_TOUCH:
-			print("howdy")
+			$CompostBowl/AnimationPlayer.play("RESET")
 			for piece in _pieces:
 				piece._animation_player.play("Glow")
 				if piece._is_frond:
 					piece._animation_player.play("RESET")
+				$DoneBowl/AnimationPlayer.play("RESET")
 				piece.is_draggable = true
 		_State.DRAGGING_PIECE:
 			for piece in _pieces:
@@ -245,10 +251,10 @@ func _set_state(new_state)->void:
 			for piece in _pieces:
 				if piece._is_frond:
 					piece._animation_player.play("Glow")
+					$CompostBowl/AnimationPlayer.play("RESET")
 					piece.is_draggable = true
 		_State.DRAGGING_FROND:
 			for piece in _pieces:
-				piece._animation_player.play("RESET")
 				piece.is_draggable = false
 
 
