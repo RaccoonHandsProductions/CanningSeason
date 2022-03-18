@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://PrepStation/CompostBowl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PrepStation/DoneBowl.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://PrepStation/Knife.tscn" type="PackedScene" id=5]
 [ext_resource path="res://PrepStation/Carrot/Carrot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://PrepStation/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://PrepStation/marble_counter.png" type="Texture" id=8]
+[ext_resource path="res://PrepStation/Basket.png" type="Texture" id=9]
 
 [node name="PrepStation" type="Node2D"]
 script = ExtResource( 4 )
@@ -14,6 +16,13 @@ knife_chop_transition_animation_duration = 0.1
 knife_offscreen_animation_duration = 0.2
 
 [node name="CounterBackground" type="Sprite" parent="."]
+texture = ExtResource( 8 )
+centered = false
+
+[node name="CarrotBasket" type="Sprite" parent="."]
+position = Vector2( 305, -87 )
+texture = ExtResource( 9 )
+centered = false
 
 [node name="NewCuttingBoard" type="Polygon2D" parent="."]
 position = Vector2( 36, 22 )
