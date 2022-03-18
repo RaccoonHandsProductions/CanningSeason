@@ -124,7 +124,7 @@ func _input(event):
 				if not current_cut_piece._is_frond:##########
 					if above_bowl:
 						bowl_count += 1
-						if (bowl_count % 4 and bowl_count != 0):
+						if (bowl_count % 4 == 0 and bowl_count != 0):
 							$HUD.update_score(1)
 						print("Bowl Count: " + str(bowl_count))
 						current_cut_piece.done = true
