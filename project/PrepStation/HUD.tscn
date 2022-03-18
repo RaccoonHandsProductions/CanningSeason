@@ -71,7 +71,7 @@ valign = 2
 wait_time = 2.0
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 10.0
 one_shot = true
 autostart = true
 

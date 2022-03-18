@@ -20,33 +20,32 @@ texture = ExtResource( 8 )
 centered = false
 
 [node name="CarrotBasket" type="Sprite" parent="."]
-position = Vector2( 305, -87 )
+position = Vector2( 640, 143 )
 texture = ExtResource( 9 )
-centered = false
 
 [node name="NewCuttingBoard" type="Polygon2D" parent="."]
-position = Vector2( 36, 22 )
+position = Vector2( 36, 141 )
 polygon = PoolVector2Array( 307, 232, 899, 227, 869, 586, 304, 588 )
 
 [node name="NewBowl" type="Polygon2D" parent="."]
-position = Vector2( -19, 189 )
+position = Vector2( -19, 298 )
 polygon = PoolVector2Array( 1143, 151, 1095, 165, 1057, 193, 1037, 230, 1036, 280, 1068, 325, 1104, 346, 1157, 346, 1206, 326, 1241, 281, 1240, 232, 1219, 192, 1185, 172 )
 
 [node name="NewCompostBowl" type="Polygon2D" parent="."]
-position = Vector2( -11, 93 )
+position = Vector2( -15, 196 )
 polygon = PoolVector2Array( 140, 252, 94, 252, 74, 268, 53, 288, 42, 308, 37, 347, 37, 368, 38, 404, 45, 426, 48, 433, 57, 443, 100, 462, 120, 463, 157, 462, 187, 456, 211, 445, 215, 440, 234, 402, 246, 363, 249, 328, 247, 291, 234, 266, 217, 252, 196, 244, 169, 240, 144, 242 )
 
 [node name="CuttingBoard" parent="." instance=ExtResource( 3 )]
-position = Vector2( 611, 420 )
+position = Vector2( 640, 525 )
 
 [node name="CompostBowl" parent="." instance=ExtResource( 1 )]
-position = Vector2( 133, 444 )
+position = Vector2( 145, 525 )
 
 [node name="DoneBowl" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1119, 462 )
+position = Vector2( 1135, 525 )
 
 [node name="Carrot" parent="." instance=ExtResource( 6 )]
-position = Vector2( 601, 88 )
+position = Vector2( 635, 143 )
 
 [node name="Knife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 614, 1032 )
@@ -56,7 +55,7 @@ z_index = 5
 position = Vector2( 616, 1027 )
 
 [node name="CarrotSpawnPoint" type="Position2D" parent="."]
-position = Vector2( 600, 88 )
+position = Vector2( 635, 143 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
 
