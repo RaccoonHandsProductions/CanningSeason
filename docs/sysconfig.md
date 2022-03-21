@@ -34,6 +34,9 @@ In the Godot Project, under Editor&rightarrow;Export&rightarrow;Android:
         probably be a path like `C:/Users/username/AppData/Local/Android/Sdk`.
         You can find it by opening or making a new project with Android Studio
         and accessing the SDK Manager in the upper-right of the IDE.
+        
+Make sure that, at the top level of the project, you have created a `build` folder and
+an `android` folder within it.
 
 ## Exporting from Godot to Android APK
 
