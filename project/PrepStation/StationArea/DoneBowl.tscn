@@ -49,5 +49,3 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Glow = SubResource( 2 )
 anims/RESET = SubResource( 3 )
-
-[connection signal="input_event" from="." to="." method="_on_CompostBowl_input_event"]

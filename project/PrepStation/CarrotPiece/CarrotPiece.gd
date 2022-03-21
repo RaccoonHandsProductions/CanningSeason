@@ -17,16 +17,13 @@ onready var _animation_player := $AnimationPlayer
 func _ready():
 	_rect_size = $CollisionShape2D.shape.extents
 
-#func _draw():
-#	#Rect2(Vector2(-36, -36), Vector2(72, 72)
-#	draw_rect(
-#		Rect2( -(_rect_size), 2*(_rect_size) ), 
-#		Color.magenta)
-
 
 func _split() ->void:
 	input_pickable = true
 
+
+func play_animation(animation_name:String):
+	$AnimationPlayer.play(animation_name)
 
 func _on_CarrotPiece_input_event(_viewport, event, _shape_idx):
 	if not done:
@@ -34,5 +31,5 @@ func _on_CarrotPiece_input_event(_viewport, event, _shape_idx):
 			emit_signal("touched")
 			
 
-	
+
 

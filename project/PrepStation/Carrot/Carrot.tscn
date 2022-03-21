@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://PrepStation/Carrot/Carrot.gd" type="Script" id=1]
 [ext_resource path="res://PrepStation/CarrotPiece/CarrotPiece.tscn" type="PackedScene" id=2]
 [ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_3.png" type="Texture" id=3]
 [ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_2.png" type="Texture" id=4]
-[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_0.png" type="Texture" id=5]
 [ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_4.png" type="Texture" id=6]
 [ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_5.png" type="Texture" id=7]
 
@@ -35,7 +34,6 @@ position = Vector2( -144, 0 )
 
 [node name="Sprite" parent="CarrotPiece0" index="0"]
 position = Vector2( 361.36, -227.065 )
-texture = ExtResource( 5 )
 
 [node name="CarrotPiece1" parent="." instance=ExtResource( 2 )]
 position = Vector2( -72, 0 )
