@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/knife.png-15fd5725681c5e4bfee78dd99d94a9e0.stex"
+path="res://.import/stopwatch_static.png-8e487f3a6548b025710f3f549d7761d6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/knife.png"
-dest_files=[ "res://.import/knife.png-15fd5725681c5e4bfee78dd99d94a9e0.stex" ]
+source_file="res://PrepStation/HUD/stopwatch_static.png"
+dest_files=[ "res://.import/stopwatch_static.png-8e487f3a6548b025710f3f549d7761d6.stex" ]
 
 [params]
 

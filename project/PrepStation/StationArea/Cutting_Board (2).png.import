@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/compost_bowl.png-5f9881dc83a2ccdef4eaa3ad5f79265b.stex"
+path="res://.import/Cutting_Board (2).png-3b664cbeab4b63cbb61975e60f6510ff.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/compost_bowl.png"
-dest_files=[ "res://.import/compost_bowl.png-5f9881dc83a2ccdef4eaa3ad5f79265b.stex" ]
+source_file="res://PrepStation/StationArea/Cutting_Board (2).png"
+dest_files=[ "res://.import/Cutting_Board (2).png-3b664cbeab4b63cbb61975e60f6510ff.stex" ]
 
 [params]
 

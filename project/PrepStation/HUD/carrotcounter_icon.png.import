@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/done_bowl.png-d879245e10f1db593f3bc151ae569321.stex"
+path="res://.import/carrotcounter_icon.png-13af665d8856cc3ecdf676cbeb9143f1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/done_bowl.png"
-dest_files=[ "res://.import/done_bowl.png-d879245e10f1db593f3bc151ae569321.stex" ]
+source_file="res://PrepStation/HUD/carrotcounter_icon.png"
+dest_files=[ "res://.import/carrotcounter_icon.png-13af665d8856cc3ecdf676cbeb9143f1.stex" ]
 
 [params]
 

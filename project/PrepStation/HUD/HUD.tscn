@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://PrepStation/HUD.gd" type="Script" id=2]
-[ext_resource path="res://PrepStation/stopwatch_static.png" type="Texture" id=3]
-[ext_resource path="res://PrepStation/carrotcounter_icon.png" type="Texture" id=4]
+[ext_resource path="res://PrepStation/HUD/HUD.gd" type="Script" id=2]
+[ext_resource path="res://PrepStation/HUD/carrotcounter_icon.png" type="Texture" id=3]
+[ext_resource path="res://PrepStation/HUD/stopwatch_static.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -36,7 +36,7 @@ valign = 1
 
 [node name="ScoreSprite" type="Sprite" parent="ScoreLabel"]
 position = Vector2( 307, 61 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 [node name="TimeLabel" type="Label" parent="."]
 margin_left = 109.0
@@ -53,7 +53,7 @@ __meta__ = {
 
 [node name="TimerSprite" type="Sprite" parent="TimeLabel"]
 position = Vector2( -50, 72 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Message" type="Label" parent="."]
 visible = false

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bowl_done.png-72e0ddb04ce84dcc4791a84052ec00bc.stex"
+path="res://.import/knife.png-28c00eb8d6a4af2ace0996875d70f4d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/Bowl_done.png"
-dest_files=[ "res://.import/Bowl_done.png-72e0ddb04ce84dcc4791a84052ec00bc.stex" ]
+source_file="res://PrepStation/Knife/knife.png"
+dest_files=[ "res://.import/knife.png-28c00eb8d6a4af2ace0996875d70f4d3.stex" ]
 
 [params]
 

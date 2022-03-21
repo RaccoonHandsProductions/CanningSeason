@@ -1,16 +1,16 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://PrepStation/StationArea.gd" type="Script" id=1]
-[ext_resource path="res://PrepStation/Bowl_compost.png" type="Texture" id=2]
+[ext_resource path="res://PrepStation/StationArea/StationArea.gd" type="Script" id=1]
+[ext_resource path="res://PrepStation/StationArea/Cutting_Board (2).png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 100.0
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 300, 200 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "Glow"
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("CompostBowl:modulate")
+tracks/0/path = NodePath("CuttingBoard:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -25,7 +25,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "RESET"
 tracks/0/type = "value"
-tracks/0/path = NodePath("CompostBowl:modulate")
+tracks/0/path = NodePath("CuttingBoard:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -37,10 +37,10 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="CompostBowl" type="Area2D"]
+[node name="CuttingBoard" type="Area2D"]
 script = ExtResource( 1 )
 
-[node name="CompostBowl" type="Sprite" parent="."]
+[node name="CuttingBoard" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -49,5 +49,3 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Glow = SubResource( 2 )
 anims/RESET = SubResource( 3 )
-
-[connection signal="input_event" from="." to="." method="_on_CompostBowl_input_event"]
