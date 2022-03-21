@@ -3,56 +3,51 @@ extends KinematicBody2D
 
 signal piece_made(piece)
 signal touched
-var done := false
-
-var _rect_size
-
-var _is_draggable
-var _is_being_dragged
-
-var _mouse_pos
-
-var _split_count = 0
 
 # If there is a next chop point, this is its position in my coordinate space.
 # If there is not a next chop point, this is null.
 var current_chop_point_pos
+var done := false
+var is_draggable : bool
+
+var _split_count := 0
+
+onready var tween := $Tween
 
 func _ready():
-	_is_draggable = false
-	_rect_size = $CollisionShape2D.shape.extents
+	is_draggable = false
 	current_chop_point_pos = $ChopPoint0.position
 
+func move_chunk_x(chunk, amount):
+		tween.interpolate_property(chunk, "position:x",
+			chunk.position.x, chunk.position.x+amount, .025,
+			Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.start()
 
 func split() -> void:
 	_split_count += 1
-	var split_piece
 	match (_split_count): 
 		1:
-			$CarrotPiece0.position.x -= 30
-			$CarrotPiece0._split()
-			$CarrotPiece0._is_frond = true
-			split_piece = $CarrotPiece0
+			move_chunk_x($CarrotPiece0, -52)
+			$CarrotPiece0.split()
+			$CarrotPiece0.is_frond = true
 		2:
-			$CarrotPiece1.position.x -= 25
-			$CarrotPiece1._split()
-			split_piece = $CarrotPiece1
+			move_chunk_x($CarrotPiece1, -38)
+			$CarrotPiece1.split()
 		3:
-			$CarrotPiece2.position.x -= 20
-			$CarrotPiece2._split()
-			split_piece = $CarrotPiece2
+			move_chunk_x($CarrotPiece2, -24)
+			$CarrotPiece2.split()
 		4:
-			$CarrotPiece3.position.x -= 15
-			$CarrotPiece3._split()
-			$CarrotPiece4._split()
-			split_piece = $CarrotPiece3
-			emit_signal("piece_made", split_piece)
-			split_piece = $CarrotPiece4
+			move_chunk_x($CarrotPiece3, -10)
+			$CarrotPiece3.split()
+			#CarrotPiece4 does not move, so tween does not complete
+			$CarrotPiece4.split()
+			#_on_Tween_tween_completed is hard coded to emit the last piece to PrepStatio
 		5: 
 			assert(false, "Split was invoked more times than possible")
 	# warning-ignore:return_value_discarded
 	get_next_Chop_Point_pos()
-	emit_signal("piece_made", split_piece)
+
 
 func get_next_Chop_Point_pos()->Vector2:
 	match (_split_count):
@@ -73,3 +68,9 @@ func _on_Carrot_input_event(_viewport, event, _shape_idx):
 	if not done:
 		if event is InputEventMouseButton and event.pressed:
 			emit_signal("touched")
+
+
+func _on_Tween_tween_completed(object, _key):
+	emit_signal("piece_made", object)
+	if object == $CarrotPiece3:
+		emit_signal("piece_made", $CarrotPiece4)

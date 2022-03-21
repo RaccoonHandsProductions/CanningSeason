@@ -2,28 +2,24 @@ extends KinematicBody2D
 
 signal touched
 
-var _rect_size
+var _rect_size : Vector2
 
+var is_frond := false
+
+onready var animation_player := $AnimationPlayer
 onready var is_draggable := false
 onready var done := false
-
-var _is_frond = false
-
-var _mouse_pos
-
-onready var _animation_player := $AnimationPlayer
-
 
 func _ready():
 	_rect_size = $CollisionShape2D.shape.extents
 
 
-func _split() ->void:
+func split() ->void:
 	input_pickable = true
 
 
 func play_animation(animation_name:String):
-	$AnimationPlayer.play(animation_name)
+	animation_player.play(animation_name)
 
 func _on_CarrotPiece_input_event(_viewport, event, _shape_idx):
 	if not done:

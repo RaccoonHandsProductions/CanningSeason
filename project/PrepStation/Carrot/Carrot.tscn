@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://PrepStation/Carrot/Carrot.gd" type="Script" id=1]
 [ext_resource path="res://PrepStation/CarrotPiece/CarrotPiece.tscn" type="PackedScene" id=2]
-[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_3.png" type="Texture" id=3]
-[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_2.png" type="Texture" id=4]
-[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_4.png" type="Texture" id=6]
-[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_5.png" type="Texture" id=7]
+[ext_resource path="res://PrepStation/CarrotPiece/NewCarrotChunk3.png" type="Texture" id=3]
+[ext_resource path="res://PrepStation/CarrotPiece/NewCarrotFrond.png" type="Texture" id=4]
+[ext_resource path="res://PrepStation/CarrotPiece/NewCarrotChunk1.png" type="Texture" id=5]
+[ext_resource path="res://PrepStation/CarrotPiece/NewCarrotChunk2.png" type="Texture" id=6]
+[ext_resource path="res://PrepStation/CarrotPiece/NewCarrotChunk4.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 180, 36 )
@@ -15,60 +16,82 @@ input_pickable = true
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
-
-[node name="ChopPoint0" type="Position2D" parent="."]
-position = Vector2( -108, 0 )
-
-[node name="ChopPoint1" type="Position2D" parent="."]
-position = Vector2( -36, 0 )
-
-[node name="ChopPoint2" type="Position2D" parent="."]
-position = Vector2( 36, 0 )
 
 [node name="ChopPoint3" type="Position2D" parent="."]
 position = Vector2( 108, 0 )
 
-[node name="CarrotPiece0" parent="." instance=ExtResource( 2 )]
-position = Vector2( -144, 0 )
+[node name="ChopPoint2" type="Position2D" parent="."]
+position = Vector2( 36, 0 )
 
-[node name="Sprite" parent="CarrotPiece0" index="0"]
-position = Vector2( 361.36, -227.065 )
+[node name="ChopPoint1" type="Position2D" parent="."]
+position = Vector2( -36, 0 )
 
-[node name="CarrotPiece1" parent="." instance=ExtResource( 2 )]
-position = Vector2( -72, 0 )
-
-[node name="Sprite" parent="CarrotPiece1" index="0"]
-position = Vector2( 385.36, -228.065 )
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" parent="CarrotPiece1" index="1"]
-position = Vector2( -1, 0 )
-
-[node name="CarrotPiece2" parent="." instance=ExtResource( 2 )]
-
-[node name="Sprite" parent="CarrotPiece2" index="0"]
-position = Vector2( 385.36, -227.065 )
-texture = ExtResource( 3 )
-
-[node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 72, 0 )
-
-[node name="Sprite" parent="CarrotPiece3" index="0"]
-position = Vector2( 397.36, -227.065 )
-texture = ExtResource( 6 )
+[node name="ChopPoint0" type="Position2D" parent="."]
+position = Vector2( -80, 0 )
 
 [node name="CarrotPiece4" parent="." instance=ExtResource( 2 )]
 position = Vector2( 144, 0 )
 
 [node name="Sprite" parent="CarrotPiece4" index="0"]
-position = Vector2( 399.36, -227.065 )
+position = Vector2( 380, -226.5 )
 texture = ExtResource( 7 )
 
-[connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
+[node name="CollisionShape2D" parent="CarrotPiece4" index="1"]
+visible = false
+position = Vector2( -10, 0 )
 
-[editable path="CarrotPiece0"]
-[editable path="CarrotPiece1"]
-[editable path="CarrotPiece2"]
-[editable path="CarrotPiece3"]
+[node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 72, 0 )
+
+[node name="Sprite" parent="CarrotPiece3" index="0"]
+position = Vector2( 369.36, -223.065 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="CarrotPiece3" index="1"]
+visible = false
+position = Vector2( -12, 0 )
+
+[node name="CarrotPiece2" parent="." instance=ExtResource( 2 )]
+
+[node name="Sprite" parent="CarrotPiece2" index="0"]
+position = Vector2( 369.36, -224.065 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" parent="CarrotPiece2" index="1"]
+visible = false
+position = Vector2( -14, 0 )
+
+[node name="CarrotPiece1" parent="." instance=ExtResource( 2 )]
+position = Vector2( -72, 0 )
+
+[node name="Sprite" parent="CarrotPiece1" index="0"]
+position = Vector2( 383.36, -224.065 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" parent="CarrotPiece1" index="1"]
+visible = false
+position = Vector2( -5, 0 )
+
+[node name="CarrotPiece0" parent="." instance=ExtResource( 2 )]
+position = Vector2( -144, 0 )
+
+[node name="Sprite" parent="CarrotPiece0" index="0"]
+position = Vector2( 369.36, -226.065 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="CarrotPiece0" index="1"]
+visible = false
+position = Vector2( 1, 0 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+
 [editable path="CarrotPiece4"]
+[editable path="CarrotPiece3"]
+[editable path="CarrotPiece2"]
+[editable path="CarrotPiece1"]
+[editable path="CarrotPiece0"]

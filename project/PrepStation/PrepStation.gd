@@ -101,7 +101,7 @@ func _input(event):
 					current_carrot_piece.position + _carrot.position,
 					_new_compost_bowl_polygon)
 			
-				if current_carrot_piece._is_frond:
+				if current_carrot_piece.is_frond:
 					if above_compost_bowl:
 						current_carrot_piece.done = true
 						compost_bowl_count += 1
@@ -113,7 +113,7 @@ func _input(event):
 							_set_state(_State.AWAITING_FROND_TOUCH)
 							
 					else:
-						_set_state(_State.PIECE_FLOATING_HOME)
+						_set_state(_State.PIECE_FLOATING_HOME) # -------------------------- THIS IS NOT A 'REAL' STATE
 						_animate_CarrotPiece_to_home(piece_float_animation_duration)
 						_set_state(_State.AWAITING_FROND_TOUCH)
 						
@@ -129,7 +129,7 @@ func _input(event):
 					current_carrot_piece.position+_carrot.position,
 					_new_bowl_polygon)
 					
-				if not current_carrot_piece._is_frond:
+				if not current_carrot_piece.is_frond:
 					if above_bowl:
 						done_bowl_count += 1
 						if (done_bowl_count % 4 == 0 and done_bowl_count != 0):
@@ -169,7 +169,7 @@ func _set_state(new_state)->void:
 			$CompostBowl.play_animation("RESET")
 			for piece in _pieces:
 				piece.play_animation("Glow")
-				if piece._is_frond:
+				if piece.is_frond:
 					piece.play_animation("RESET")
 				$DoneBowl.play_animation("RESET")
 				piece.is_draggable = true
@@ -178,7 +178,7 @@ func _set_state(new_state)->void:
 				piece.is_draggable = false
 		_State.AWAITING_FROND_TOUCH:
 			for piece in _pieces:
-				if piece._is_frond:
+				if piece.is_frond:
 					piece.play_animation("Glow")
 					$CompostBowl.play_animation("RESET")
 					piece.is_draggable = true
@@ -196,8 +196,6 @@ func _on_Carrot_touched()->void:
 	match _state:
 		_State.AWAITING_CARROT_TOUCH:
 			_set_state(_State.DRAGGING_CARROT)
-
-
 
 
 func _on_Carrot_piece_made(piece:Node2D)->void:
@@ -234,7 +232,7 @@ func _animate_CarrotPiece_to_home(duration:float)->void:
 
 
 func _on_CarrotPiece_tween_completed(_a, _b)->void:
-	if current_carrot_piece._is_frond:
+	if current_carrot_piece.is_frond:
 		_set_state(_State.AWAITING_FROND_TOUCH)
 	else:
 		_set_state(_State.AWAITING_PIECE_TOUCH)

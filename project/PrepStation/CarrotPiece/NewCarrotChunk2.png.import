@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/carrot_chunk_0.png-0b45fb3154e61cda82ed31b7e555fae6.stex"
+path="res://.import/NewCarrotChunk2.png-20d21fb4d651e6d6ada4adcbf0ba8179.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/CarrotPiece/carrot_chunk_0.png"
-dest_files=[ "res://.import/carrot_chunk_0.png-0b45fb3154e61cda82ed31b7e555fae6.stex" ]
+source_file="res://PrepStation/CarrotPiece/NewCarrotChunk2.png"
+dest_files=[ "res://.import/NewCarrotChunk2.png-20d21fb4d651e6d6ada4adcbf0ba8179.stex" ]
 
 [params]
 

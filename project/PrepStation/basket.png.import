@@ -14,7 +14,7 @@ dest_files=[ "res://.import/basket.png-0c6ff8f5b7bd78ace669f3de0353245f.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
