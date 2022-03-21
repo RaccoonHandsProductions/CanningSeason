@@ -8,6 +8,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
@@ -55,5 +58,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="PrepStationButton" type="Button" parent="."]
+margin_left = 1061.0
+margin_top = 728.0
+margin_right = 1256.0
+margin_bottom = 783.0
+text = "Prep Station"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="pressed" from="CreateServerButton" to="." method="_on_CreateServer_pressed"]
 [connection signal="pressed" from="JoinServerButton" to="." method="_on_JoinServer_pressed"]
+[connection signal="pressed" from="PrepStationButton" to="." method="_on_PrepStationButton_pressed"]
