@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CarrotChunk_03.png-2d206ae717a48d12d3736930775b0745.stex"
+path="res://.import/carrot_counter_icon.png-1ddb82afce4c40d29fa3abc858519dc4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/CarrotPiece/CarrotChunk_03.png"
-dest_files=[ "res://.import/CarrotChunk_03.png-2d206ae717a48d12d3736930775b0745.stex" ]
+source_file="res://PrepStation/HUD/carrot_counter_icon.png"
+dest_files=[ "res://.import/carrot_counter_icon.png-1ddb82afce4c40d29fa3abc858519dc4.stex" ]
 
 [params]
 

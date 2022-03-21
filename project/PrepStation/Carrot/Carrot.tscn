@@ -2,11 +2,11 @@
 
 [ext_resource path="res://PrepStation/Carrot/Carrot.gd" type="Script" id=1]
 [ext_resource path="res://PrepStation/CarrotPiece/CarrotPiece.tscn" type="PackedScene" id=2]
-[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_05.png" type="Texture" id=3]
-[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_02.png" type="Texture" id=4]
-[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_01.png" type="Texture" id=5]
-[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_04.png" type="Texture" id=6]
-[ext_resource path="res://PrepStation/CarrotPiece/CarrotChunk_03.png" type="Texture" id=7]
+[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_3.png" type="Texture" id=3]
+[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_2.png" type="Texture" id=4]
+[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_0.png" type="Texture" id=5]
+[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_4.png" type="Texture" id=6]
+[ext_resource path="res://PrepStation/CarrotPiece/carrot_chunk_5.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 180, 36 )
@@ -51,7 +51,7 @@ position = Vector2( -1, 0 )
 
 [node name="Sprite" parent="CarrotPiece2" index="0"]
 position = Vector2( 385.36, -227.065 )
-texture = ExtResource( 7 )
+texture = ExtResource( 3 )
 
 [node name="CarrotPiece3" parent="." instance=ExtResource( 2 )]
 position = Vector2( 72, 0 )
@@ -65,7 +65,7 @@ position = Vector2( 144, 0 )
 
 [node name="Sprite" parent="CarrotPiece4" index="0"]
 position = Vector2( 399.36, -227.065 )
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 
 [connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
 

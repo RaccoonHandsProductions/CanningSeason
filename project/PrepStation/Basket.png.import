@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Basket.png-5391e9cd159a3db23c656fb27dd074aa.stex"
+path="res://.import/basket.png-0c6ff8f5b7bd78ace669f3de0353245f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/Basket.png"
-dest_files=[ "res://.import/Basket.png-5391e9cd159a3db23c656fb27dd074aa.stex" ]
+source_file="res://PrepStation/basket.png"
+dest_files=[ "res://.import/basket.png-0c6ff8f5b7bd78ace669f3de0353245f.stex" ]
 
 [params]
 

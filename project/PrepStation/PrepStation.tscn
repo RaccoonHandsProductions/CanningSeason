@@ -8,7 +8,7 @@
 [ext_resource path="res://PrepStation/Carrot/Carrot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://PrepStation/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PrepStation/marble_counter.png" type="Texture" id=8]
-[ext_resource path="res://PrepStation/Basket.png" type="Texture" id=9]
+[ext_resource path="res://PrepStation/basket.png" type="Texture" id=9]
 
 [node name="PrepStation" type="Node2D"]
 script = ExtResource( 4 )

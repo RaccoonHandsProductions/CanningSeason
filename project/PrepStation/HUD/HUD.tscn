@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://PrepStation/HUD/HUD.gd" type="Script" id=2]
-[ext_resource path="res://PrepStation/HUD/carrotcounter_icon.png" type="Texture" id=3]
+[ext_resource path="res://PrepStation/HUD/carrot_counter_icon.png" type="Texture" id=3]
 [ext_resource path="res://PrepStation/HUD/stopwatch_static.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
