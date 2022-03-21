@@ -3,7 +3,7 @@ extends CanvasLayer
 signal Times_Up
 
 # Displays time left on timer as a string from an integer from the timer, in the TimeLabel
-func _process(delta):
+func _process(_delta):
 	update_score(0)
 	$TimeLabel.set_text( "Time: " + str( int( $GameTimer.get_time_left() ) ) )
 

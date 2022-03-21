@@ -51,10 +51,10 @@ position = Vector2( 635, 143 )
 position = Vector2( 614, 1032 )
 z_index = 5
 
-[node name="KnifeOffScreenPos" type="Position2D" parent="."]
+[node name="KnifeHomePoint" type="Position2D" parent="."]
 position = Vector2( 616, 1027 )
 
-[node name="CarrotSpawnPoint" type="Position2D" parent="."]
+[node name="CarrotHomePoint" type="Position2D" parent="."]
 position = Vector2( 635, 143 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
