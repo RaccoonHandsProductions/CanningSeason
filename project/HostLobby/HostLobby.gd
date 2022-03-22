@@ -36,17 +36,14 @@ func _remove_device(_id):
 	devicesConnected -= 1
 	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices connected."
 
-
-func _on_AllPlayersConnectedButton_pressed():
-	# warning-ignore:return_value_discarded
-	get_tree().change_scene("res://HostGameStart/HostGameStart.tscn")
-
-
 func _on_GoBackButton_pressed():
 	$DevicesConnectedAlert.visible = false
-
 
 func _on_ContinueButton_pressed():
 	get_tree().network_peer.close_connection()
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
+
+
+func _on_StartGameButton_pressed():
+	Server._load_message_sender()

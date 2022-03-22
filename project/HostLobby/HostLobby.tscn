@@ -52,16 +52,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AllPlayersConnectedButton" type="Button" parent="."]
+[node name="StartGameButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -167.0
+margin_left = -91.0
 margin_top = 150.0
-margin_right = 167.0
+margin_right = 91.0
 margin_bottom = 205.0
-text = "All Players Connected"
+text = "Start Game"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -204,7 +204,7 @@ margin_right = 215.0
 margin_bottom = 19.5
 text = " "
 
-[connection signal="pressed" from="AllPlayersConnectedButton" to="." method="_on_AllPlayersConnectedButton_pressed"]
+[connection signal="pressed" from="StartGameButton" to="." method="_on_StartGameButton_pressed"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_Disconnect_pressed"]
 [connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="HelpPopup/HideHelpButton" to="." method="_on_HideHelpButton_pressed"]
