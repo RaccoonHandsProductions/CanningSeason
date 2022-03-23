@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float pulse_depth = 0.5;
+uniform float pulse_speed = 5.0;
+
+
+void fragment() {
+	float v = mix(1.0-pulse_depth, 1.0+pulse_depth, abs(sin(TIME * pulse_speed)));
+	float d = distance(UV, vec2(0.5,0.5));
+	float strength = 1.0-d*2.0;
+	strength *= v;
+	COLOR = vec4(strength, strength, strength, strength);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/pulse_depth = 0.5
+shader_param/pulse_speed = 5.0
+
+[node name="GlowingArea" type="ColorRect"]
+material = SubResource( 2 )
+margin_left = -75.0
+margin_top = -75.0
+margin_right = 75.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "An area with an inscribed pulsing circle.
+
+Use the shader parameters to adjust the depth and speed of the pulsing. Use modulation to adjust the color."
+}
