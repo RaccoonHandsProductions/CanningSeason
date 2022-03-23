@@ -4,7 +4,7 @@
 code = "shader_type canvas_item;
 
 uniform float pulse_depth = 0.5;
-uniform float pulse_speed = 5.0;
+uniform float pulse_speed = 1.0;
 
 
 void fragment() {
@@ -12,7 +12,7 @@ void fragment() {
 	float d = distance(UV, vec2(0.5,0.5));
 	float strength = 1.0-d*2.0;
 	strength *= v;
-	COLOR = vec4(strength, strength, strength, strength);
+	COLOR = vec4(1.0, 1.0, 1.0, strength);
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
