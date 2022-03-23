@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://PrepStation/Knife/Knife.gd" type="Script" id=1]
 [ext_resource path="res://PrepStation/Knife/knife.png" type="Texture" id=2]
+[ext_resource path="res://PrepStation/Knife/carrot_chop.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 215 )
@@ -93,6 +94,9 @@ shape = SubResource( 1 )
 anims/Chop = SubResource( 2 )
 anims/Glow = SubResource( 4 )
 anims/RESET = SubResource( 3 )
+
+[node name="ChopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="input_event" from="." to="." method="_on_Knife_input_event"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
