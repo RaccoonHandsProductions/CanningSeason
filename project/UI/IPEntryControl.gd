@@ -11,7 +11,7 @@ onready var button_array = get_tree().get_nodes_in_group("number_buttons")
 
 func _ready():
 	for button in button_array:
-		button.connect("pressed", $VBoxContainer/OctetDisplay, "on_Button_pressed", 
+		button.connect("pressed", $VBoxContainer/OctetDisplay, "on_number_Button_pressed", 
 			[ int( button.name.substr(5) ) ])
 
 
