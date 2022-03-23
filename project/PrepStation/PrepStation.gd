@@ -1,13 +1,13 @@
 extends Node2D
 
-onready var _cutting_board := $NewCuttingBoard
+onready var _cutting_board_polygon_2d := $CuttingBoard/Polygon2D
 
-onready var _done_bowl := $NewBowl
+onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
 var done_bowl_count := 0
 var done_bowl_limit := 4
 var bowl_full := false
 
-onready var _compost_bowl = $NewCompostBowl
+onready var _compost_bowl_polygon_2d = $CompostBowl/Polygon2D
 var compost_bowl_count := 0
 var compost_bowl_limit := 1
 var compost_bowl_full := false
@@ -35,7 +35,6 @@ enum _State {
 	DRAGGING_CARROT,
 	CARROT_FLOATING_HOME,
 	AWAITING_KNIFE_CHOP,
-	
 	AWAITING_PIECE_TOUCH,
 	AWAITING_FROND_TOUCH,
 	DRAGGING_PIECE,
@@ -48,14 +47,17 @@ var _game_over := false
 
 var _new_bowl_polygon : PoolVector2Array
 var _new_compost_bowl_polygon : PoolVector2Array
+var _new_cutting_board_polygon : PoolVector2Array
 
 func _ready():
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
-	for point in _done_bowl.polygon:
-		_new_bowl_polygon.append(point + _done_bowl.position)
-	for point in _compost_bowl.polygon:
-		_new_compost_bowl_polygon.append(point + _compost_bowl.position)
-
+	for point in _done_bowl_polygon_2d.polygon:
+		_new_bowl_polygon.append(point + _done_bowl_polygon_2d.global_position)
+	for point in _compost_bowl_polygon_2d.polygon:
+		_new_compost_bowl_polygon.append(point + _compost_bowl_polygon_2d.global_position)
+	for point in _cutting_board_polygon_2d.polygon:
+		_new_cutting_board_polygon.append(point + _cutting_board_polygon_2d.global_position)
+	
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
 
@@ -70,11 +72,13 @@ func _input(event):
 				if event is InputEventMouseMotion:
 					_carrot.position += event.relative
 				elif event is InputEventMouseButton and not event.is_pressed():
-					var above_board := Geometry.is_point_in_polygon(_carrot.position, _cutting_board.polygon)
+					var above_board := Geometry.is_point_in_polygon(
+						_carrot.position, _new_cutting_board_polygon)
 					if above_board:
 						_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
 						_carrot.done = true
 						_set_state(_State.AWAITING_KNIFE_CHOP)
+						
 					else:
 						_set_state(_State.CARROT_FLOATING_HOME)
 						var tween := Tween.new()
@@ -125,12 +129,12 @@ func _input(event):
 				current_carrot_piece.play_animation("RESET")
 				$DoneBowl.play_animation("Glow")
 			elif event is InputEventMouseButton and not event.is_pressed():
-				var above_bowl := Geometry.is_point_in_polygon(
+				var above_done_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position+_carrot.position,
 					_new_bowl_polygon)
 					
 				if not current_carrot_piece.is_frond:
-					if above_bowl:
+					if above_done_bowl:
 						done_bowl_count += 1
 						if (done_bowl_count % 4 == 0 and done_bowl_count != 0):
 							$HUD.update_score(1)
@@ -138,8 +142,16 @@ func _input(event):
 						current_carrot_piece.done = true
 						if (done_bowl_count%done_bowl_limit) == 0:
 							$DoneBowl.play_animation("RESET")
+							
+							#reset carrot
+							_carrot.done = false
+							# warning-ignore:return_value_discarded
+							_carrot.disconnect("touched", self, "_on_Carrot_touched")
+							# warning-ignore:return_value_discarded
+							_carrot.disconnect("piece_made", self, "_on_Carrot_piece_made")
 							_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
 							add_child(_carrot)
+							
 							#float there
 							_carrot.position = $CarrotHomePoint.position
 							_set_state(_State.AWAITING_CARROT_TOUCH)
@@ -158,13 +170,18 @@ func _set_state(new_state)->void:
 	_state = new_state
 	match new_state:
 		_State.AWAITING_CARROT_TOUCH:
+			
 			for piece in _pieces:
 				piece.play_animation("RESET")
 			_pieces.clear()
-			# warning-ignore:return_value_discarded
-			_carrot.connect("touched", self, "_on_Carrot_touched")
-			# warning-ignore:return_value_discarded
-			_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
+			
+			_carrot.done = false
+			if not _carrot.is_connected("touched", self, "_on_Carrot_touched"): # or not _carrot.is_connected("piece_made", self, "_on_Carrot_piece_made"):
+				# warning-ignore:return_value_discarded
+				_carrot.connect("touched", self, "_on_Carrot_touched")
+				# warning-ignore:return_value_discarded
+				_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
+			
 		_State.AWAITING_PIECE_TOUCH:
 			$CompostBowl.play_animation("RESET")
 			for piece in _pieces:
@@ -192,6 +209,7 @@ func _set_state(new_state)->void:
 func _set_state_to_awaiting_carrot_touch(_a, _b)->void:
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 	
+
 func _on_Carrot_touched()->void:
 	match _state:
 		_State.AWAITING_CARROT_TOUCH:
