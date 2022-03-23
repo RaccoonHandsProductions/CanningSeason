@@ -7,7 +7,7 @@ var polygon_color := Color.white
 func _ready():
 	match self.name:
 		"CompostBowl", "DoneBowl":
-			set_circle_polygon(self.position, polygon_circle_radius)
+			set_circle_polygon(Vector2.ZERO, polygon_circle_radius)
 		"CuttingBoard":
 			pass;
 	$Polygon2D.set_color(polygon_color)

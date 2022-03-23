@@ -2,7 +2,7 @@ extends Node2D
 
 onready var _cutting_board := $NewCuttingBoard
 
-onready var _done_bowl := $NewBowl
+onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
 var done_bowl_count := 0
 var done_bowl_limit := 4
 var bowl_full := false
@@ -51,10 +51,10 @@ var _new_compost_bowl_polygon : PoolVector2Array
 
 func _ready():
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
-	for point in _done_bowl.polygon:
-		_new_bowl_polygon.append(point + _done_bowl.position)
+	for point in _done_bowl_polygon_2d.polygon:
+		_new_bowl_polygon.append(point + _done_bowl_polygon_2d.global_position)
 	for point in _compost_bowl.polygon:
-		_new_compost_bowl_polygon.append(point + _compost_bowl.position)
+		_new_compost_bowl_polygon.append(point + _compost_bowl.global_position)
 
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
