@@ -21,26 +21,46 @@ func _on_HelpButton_pressed():
 func _on_HideHelpButton_pressed():
 	$HelpPopup.visible = false
 	
+	
 func _on_HideErrorButton_pressed():
 	$CannnotConnectPopup.visible = false
 
 
 func _on_JoinButton_pressed():
+	_show_connecting_animation()
+	$JoinButton.disabled = true
 	var client = NetworkedMultiplayerENet.new()
-	client.create_client(ipAddress.text, Server.DEFAULT_PORT)
+	var client_connected = client.create_client(ipAddress.text, Server.DEFAULT_PORT)
 	get_tree().network_peer = client
+	if client_connected != OK:
+		_hide_connecting_animation()
+		$JoinButton.disabled = false
+		$CannnotConnectPopup.visible = true
 	ipAddress.text = ""
-	var id = get_tree().get_network_unique_id()
-	print(id)
+
 
 func _on_GoBackButton_pressed():
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
 
+
 func _on_connection_successful():
+	_hide_connecting_animation()
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://ConnectionSuccessful/ConnectionSuccessful.tscn")
 
+
 func _on_connection_failed():
-	$JoinButton.disabled = true
+	_hide_connecting_animation()
+	$JoinButton.disabled = false
 	$CannnotConnectPopup.visible = true
+	
+	
+func _show_connecting_animation():
+	$ConnectingAnimation.visible = true
+	$ConnectingLabel.visible = true
+	
+	
+func _hide_connecting_animation():
+	$ConnectingAnimation.visible = false
+	$ConnectingLabel.visible = false

@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://JoinServer/JoinServer.gd" type="Script" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
+[ext_resource path="res://JoinServer/LoadingJar_03.png" type="Texture" id=3]
+[ext_resource path="res://JoinServer/LoadingJar_02.png" type="Texture" id=4]
+[ext_resource path="res://JoinServer/LoadingJar_01.png" type="Texture" id=5]
+[ext_resource path="res://JoinServer/LoadingJar_04.png" type="Texture" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.5
+} ]
 
 [node name="JoinServer" type="Control"]
 anchor_right = 1.0
@@ -111,7 +123,7 @@ __meta__ = {
 [node name="ErrorText" type="RichTextLabel" parent="CannnotConnectPopup"]
 margin_right = 640.0
 margin_bottom = 153.0
-text = "The IP address entered was not found iincorrect. Please go back and try again with a new IP address."
+text = "The IP address entered was not found or was incorrect. Please go back and try again with a new IP address."
 
 [node name="HideErrorButton" type="Button" parent="CannnotConnectPopup"]
 anchor_left = 0.5
@@ -137,6 +149,25 @@ text = "Go Back"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ConnectingAnimation" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 640, 520 )
+frames = SubResource( 1 )
+frame = 3
+playing = true
+
+[node name="ConnectingLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -92.0
+margin_top = 210.0
+margin_right = 92.0
+margin_bottom = 249.0
+text = "Connecting..."
 
 [connection signal="text_changed" from="IpAdressEdit" to="." method="_on_IpAdressEdit_text_changed"]
 [connection signal="pressed" from="JoinButton" to="." method="_on_JoinButton_pressed"]
