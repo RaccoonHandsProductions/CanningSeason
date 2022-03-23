@@ -1,6 +1,6 @@
 extends Node2D
 
-export var polygon_circle_radius := 100
+export var polygon_circle_radius := 80
 var polygon_points := PoolVector2Array()
 var polygon_color := Color.white
 

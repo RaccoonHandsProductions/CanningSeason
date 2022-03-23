@@ -7,7 +7,7 @@ var done_bowl_count := 0
 var done_bowl_limit := 4
 var bowl_full := false
 
-onready var _compost_bowl = $NewCompostBowl
+onready var _compost_bowl_polygon_2d = $CompostBowl/Polygon2D
 var compost_bowl_count := 0
 var compost_bowl_limit := 1
 var compost_bowl_full := false
@@ -53,8 +53,8 @@ func _ready():
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
 	for point in _done_bowl_polygon_2d.polygon:
 		_new_bowl_polygon.append(point + _done_bowl_polygon_2d.global_position)
-	for point in _compost_bowl.polygon:
-		_new_compost_bowl_polygon.append(point + _compost_bowl.global_position)
+	for point in _compost_bowl_polygon_2d.polygon:
+		_new_compost_bowl_polygon.append(point + _compost_bowl_polygon_2d.global_position)
 
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
@@ -125,12 +125,12 @@ func _input(event):
 				current_carrot_piece.play_animation("RESET")
 				$DoneBowl.play_animation("Glow")
 			elif event is InputEventMouseButton and not event.is_pressed():
-				var above_bowl := Geometry.is_point_in_polygon(
+				var above_done_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position+_carrot.position,
 					_new_bowl_polygon)
 					
 				if not current_carrot_piece.is_frond:
-					if above_bowl:
+					if above_done_bowl:
 						done_bowl_count += 1
 						if (done_bowl_count % 4 == 0 and done_bowl_count != 0):
 							$HUD.update_score(1)
