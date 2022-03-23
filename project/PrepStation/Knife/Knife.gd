@@ -12,6 +12,7 @@ export var debug_color := Color.whitesmoke
 export var tappable := false setget _set_tappable
 
 onready var _animation_player := $AnimationPlayer
+onready var _chop_sound := $ChopSound
 
 func _set_tappable(value:bool)->void:
 	tappable = value
@@ -30,6 +31,7 @@ func _on_Knife_input_event(_viewport, event, _shape_idx):
 	if tappable and not _is_playing_chop_animation():
 		if event is InputEventMouseButton and event.is_pressed():
 			_animation_player.play("Chop")
+			_chop_sound.play()
 
 
 func _is_playing_chop_animation()->bool:
