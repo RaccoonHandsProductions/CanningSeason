@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var _cutting_board := $NewCuttingBoard
+onready var _cutting_board_polygon_2d := $CuttingBoard/Polygon2D
 
 onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
 var done_bowl_count := 0
@@ -48,6 +48,7 @@ var _game_over := false
 
 var _new_bowl_polygon : PoolVector2Array
 var _new_compost_bowl_polygon : PoolVector2Array
+var _new_cutting_board_polygon : PoolVector2Array
 
 func _ready():
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
@@ -55,6 +56,9 @@ func _ready():
 		_new_bowl_polygon.append(point + _done_bowl_polygon_2d.global_position)
 	for point in _compost_bowl_polygon_2d.polygon:
 		_new_compost_bowl_polygon.append(point + _compost_bowl_polygon_2d.global_position)
+	for point in _cutting_board_polygon_2d.polygon:
+		_new_cutting_board_polygon.append(point + _cutting_board_polygon_2d.global_position)
+		
 
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
@@ -70,7 +74,8 @@ func _input(event):
 				if event is InputEventMouseMotion:
 					_carrot.position += event.relative
 				elif event is InputEventMouseButton and not event.is_pressed():
-					var above_board := Geometry.is_point_in_polygon(_carrot.position, _cutting_board.polygon)
+					var above_board := Geometry.is_point_in_polygon(
+						_carrot.position, _new_cutting_board_polygon)
 					if above_board:
 						_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
 						_carrot.done = true

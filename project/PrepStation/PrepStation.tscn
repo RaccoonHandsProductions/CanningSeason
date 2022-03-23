@@ -23,10 +23,6 @@ centered = false
 position = Vector2( 640, 143 )
 texture = ExtResource( 9 )
 
-[node name="NewCuttingBoard" type="Polygon2D" parent="."]
-position = Vector2( 36, 141 )
-polygon = PoolVector2Array( 307, 232, 899, 227, 869, 586, 304, 588 )
-
 [node name="CuttingBoard" parent="." instance=ExtResource( 3 )]
 position = Vector2( 640, 525 )
 
