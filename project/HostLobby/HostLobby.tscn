@@ -18,9 +18,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -173.5
-margin_top = -250.0
+margin_top = -275.0
 margin_right = 173.5
-margin_bottom = -211.0
+margin_bottom = -236.0
 text = "Here is your IP address:"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -30,24 +30,9 @@ __meta__ = {
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -90.0
-margin_top = 200.0
+margin_top = 160.0
 margin_right = 90.0
-margin_bottom = 239.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="InstructionParagraph" type="RichTextLabel" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -265.0
-margin_top = -125.0
-margin_right = 265.0
-margin_bottom = 125.0
-text = "	To play you must connect other devices to this one. Input the IP address above wehn connecting other device to this one. Connected devices will appear below."
+margin_bottom = 199.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,8 +100,8 @@ __meta__ = {
 
 [node name="HelpText" type="RichTextLabel" parent="HelpPopup"]
 margin_right = 640.0
-margin_bottom = 200.0
-text = "Please use the given IP address to connect other devices to the server. To join on other devices, click \"join a server\", then enter the IP address on this screen, and finally click \"join\"."
+margin_bottom = 332.0
+text = "Please use the given IP address to connect other devices to the server. To join on other devices, click \"join a server\", then enter the IP address on this screen, and finally click \"join\". If the original Ip given doesn't work when trying to connect other devices press \"Ip above didn't work?\" and try the other ips listed."
 
 [node name="HideHelpButton" type="Button" parent="HelpPopup"]
 anchor_left = 0.5
@@ -124,10 +109,10 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -41.0
-margin_top = -27.5
+margin_top = 122.5
 margin_right = 41.0
-margin_bottom = 27.5
-text = "okay"
+margin_bottom = 177.5
+text = "Okay"
 
 [node name="DevicesConnectedAlert" type="WindowDialog" parent="."]
 anchor_left = 0.5
@@ -199,10 +184,24 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -215.0
-margin_top = -19.5
+margin_top = 70.0
 margin_right = 215.0
-margin_bottom = 19.5
+margin_bottom = 109.0
 text = " "
+
+[node name="IpDidntWorkButton" type="LinkButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -152.5
+margin_top = -85.0
+margin_right = 152.5
+margin_bottom = -46.0
+text = "Ip above didn't work?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="StartGameButton" to="." method="_on_StartGameButton_pressed"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_Disconnect_pressed"]
@@ -210,3 +209,4 @@ text = " "
 [connection signal="pressed" from="HelpPopup/HideHelpButton" to="." method="_on_HideHelpButton_pressed"]
 [connection signal="pressed" from="DevicesConnectedAlert/GoBackButton" to="." method="_on_GoBackButton_pressed"]
 [connection signal="pressed" from="DevicesConnectedAlert/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="IpDidntWorkButton" to="." method="_on_IpDidntWorkButton_pressed"]

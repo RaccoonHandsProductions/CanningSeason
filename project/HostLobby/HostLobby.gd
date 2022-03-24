@@ -1,12 +1,14 @@
 extends Control
 
-var devicesConnected = 0
+onready var devicesConnected = 0
+onready var filteredIps = []
 
 func _ready():
-	if OS.get_name() == "Android":
-		$IpAddressLabel.text = IP.get_local_addresses()[0]
-	else:	
-		$IpAddressLabel.text = IP.resolve_hostname( str(OS.get_environment("COMPUTERNAME")), 1)
+	var ips = IP.get_local_addresses()
+	for ip in ips:
+		if ip.count(".") > 0:
+			filteredIps.append(ip)
+	$IpAddressLabel.text = filteredIps[0]
 	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices conencted."
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_add_device_connected")
@@ -54,3 +56,11 @@ func _on_ContinueButton_pressed():
 
 func _on_StartGameButton_pressed():
 	Server._load_message_sender()
+
+
+func _on_IpDidntWorkButton_pressed():
+	$IpDidntWorkButton.disabled = true
+	$IpDidntWorkButton.visible = false
+	$IpAddressLabel.text += "\nAdditional Ips:\n"
+	for i in range(1, len(filteredIps)):
+		$IpAddressLabel.text += filteredIps[i] + "\n"

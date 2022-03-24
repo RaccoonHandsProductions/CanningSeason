@@ -94,7 +94,7 @@ __meta__ = {
 [node name="HelpText" type="RichTextLabel" parent="HelpPopup"]
 margin_right = 640.0
 margin_bottom = 307.0
-text = "The host IP address is found on the device where the server was created. If you cannot find an IP address on any device, please create server on another device."
+text = "The host IP address is found on the device where the server was created. If you cannot find an IP address on any device, please create a server on another device."
 
 [node name="HideHelpButton" type="Button" parent="HelpPopup"]
 anchor_left = 0.5
@@ -105,7 +105,7 @@ margin_left = -41.0
 margin_top = -16.0
 margin_right = 41.0
 margin_bottom = 39.0
-text = "okay"
+text = "Okay"
 
 [node name="CannnotConnectPopup" type="WindowDialog" parent="."]
 anchor_left = 0.5
@@ -134,7 +134,7 @@ margin_left = -41.0
 margin_top = -27.5
 margin_right = 41.0
 margin_bottom = 27.5
-text = "okay"
+text = "Okay"
 
 [node name="GoBackButton" type="Button" parent="."]
 anchor_left = 0.5
@@ -154,7 +154,6 @@ __meta__ = {
 visible = false
 position = Vector2( 640, 520 )
 frames = SubResource( 1 )
-frame = 3
 playing = true
 
 [node name="ConnectingLabel" type="Label" parent="."]
