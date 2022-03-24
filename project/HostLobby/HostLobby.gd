@@ -36,6 +36,7 @@ func _on_Disconnect_pressed():
 	
 func _add_device_connected(_id):
 	devicesConnected += 1
+	print(get_tree().get_network_connected_peers())
 	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices connected."
 
 	
@@ -55,7 +56,7 @@ func _on_ContinueButton_pressed():
 
 
 func _on_StartGameButton_pressed():
-	Server._load_message_sender()
+	Server._start_message_sender()
 
 
 func _on_IpDidntWorkButton_pressed():
