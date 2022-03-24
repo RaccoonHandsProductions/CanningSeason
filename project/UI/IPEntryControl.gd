@@ -13,7 +13,7 @@ func _ready():
 	for button in button_array:
 		button.connect("pressed", $VBoxContainer/OctetDisplay, "on_number_Button_pressed", 
 			[ int( button.name.substr(5) ) ])
-
+			
 
 func finialize_address(octet_0:String, octet_1:String, 
 	octet_2:String, octet_3:String):
