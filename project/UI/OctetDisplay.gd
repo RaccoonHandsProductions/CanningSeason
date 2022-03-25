@@ -1,19 +1,21 @@
 extends HBoxContainer
 
+signal nextButtonToggle
+signal backButtonToggle
 
-
-var current_section : Label
+var current_section 
 var ip_octet : String
 var ip_array = []
 var current_text_index := -1
 var current_section_index := 0
 var current_index := 0
 
-onready var octet_array = [$OctetSection0, $OctetSection1, 
-$OctetSection2, $OctetSection3]
+onready var octet_array = [$OctetField, $OctetField2, $OctetField3, $OctetField4]
 
 func _ready():
 	current_section = octet_array[0]
+	octet_array[0].has_focus = true
+	
 	
 func on_ip_complete(ip_array : Array):
 	for octet in ip_array:
