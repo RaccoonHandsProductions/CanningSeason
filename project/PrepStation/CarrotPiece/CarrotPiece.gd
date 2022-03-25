@@ -7,7 +7,6 @@ var _rect_size : Vector2
 var is_frond := false
 var is_glowing := false setget _set_glowing
 
-onready var animation_player := $AnimationPlayer
 onready var is_draggable := false
 onready var done := false
 
@@ -18,9 +17,6 @@ func _ready():
 func split() ->void:
 	input_pickable = true
 
-
-func play_animation(animation_name:String):
-	animation_player.play(animation_name)
 
 func _on_CarrotPiece_input_event(_viewport, event, _shape_idx):
 	if not done:
