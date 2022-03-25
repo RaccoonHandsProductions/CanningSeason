@@ -1,47 +1,21 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://PrepStation/StationArea/StationArea.gd" type="Script" id=1]
 [ext_resource path="res://PrepStation/StationArea/cutting_board.png" type="Texture" id=2]
-
-[sub_resource type="Animation" id=2]
-resource_name = "Glow"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-resource_name = "RESET"
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
+[ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=3]
 
 [node name="CuttingBoard" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="GlowingArea" parent="." instance=ExtResource( 3 )]
+visible = false
+modulate = Color( 0, 1, 0, 1 )
+margin_left = -350.0
+margin_top = -350.0
+margin_right = 350.0
+margin_bottom = 350.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Glow = SubResource( 2 )
-anims/RESET = SubResource( 3 )

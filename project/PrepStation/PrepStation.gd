@@ -1,13 +1,17 @@
 extends Node2D
 
 onready var _cutting_board_polygon_2d := $CuttingBoard/Polygon2D
+onready var _frond = null
+onready var _cutting_board := $CuttingBoard
 
 onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
+onready var _done_bowl := $DoneBowl
 var done_bowl_count := 0
 var done_bowl_limit := 4
 var bowl_full := false
 
 onready var _compost_bowl_polygon_2d = $CompostBowl/Polygon2D
+onready var _compost_bowl := $CompostBowl
 var compost_bowl_count := 0
 var compost_bowl_limit := 1
 var compost_bowl_full := false
@@ -69,37 +73,36 @@ func _process(_delta):
 func _input(event):
 	match _state:
 		_State.DRAGGING_CARROT:
-				if event is InputEventMouseMotion:
-					_carrot.position += event.relative
-				elif event is InputEventMouseButton and not event.is_pressed():
-					var above_board := Geometry.is_point_in_polygon(
-						_carrot.position, _new_cutting_board_polygon)
-					if above_board:
-						_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
-						_carrot.done = true
-						_set_state(_State.AWAITING_KNIFE_CHOP)
-						
-					else:
-						_set_state(_State.CARROT_FLOATING_HOME)
-						var tween := Tween.new()
-						add_child(tween)
-						# warning-ignore:return_value_discarded
-						tween.connect("tween_completed", self, "_set_state_to_awaiting_carrot_touch")
-						# warning-ignore:return_value_discarded
-						tween.interpolate_property(
-							_carrot, "position", 
-							_carrot.position, $CarrotHomePoint.position, 
-							carrot_float_animation_duration,
-						Tween.TRANS_QUAD, Tween.EASE_IN)
-						# warning-ignore:return_value_discarded
-						tween.start()
+			_cutting_board.is_glowing = true
+			if event is InputEventMouseMotion:
+				_carrot.position += event.relative
+			elif event is InputEventMouseButton and not event.is_pressed():
+				var above_board := Geometry.is_point_in_polygon(
+					_carrot.position, _new_cutting_board_polygon)
+				if above_board:
+					_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
+					_carrot.done = true
+					_set_state(_State.AWAITING_KNIFE_CHOP)
+					
+				else:
+					_set_state(_State.CARROT_FLOATING_HOME)
+					var tween := Tween.new()
+					add_child(tween)
+					# warning-ignore:return_value_discarded
+					tween.connect("tween_completed", self, "_set_state_to_awaiting_carrot_touch")
+					# warning-ignore:return_value_discarded
+					tween.interpolate_property(
+						_carrot, "position", 
+						_carrot.position, $CarrotHomePoint.position, 
+						carrot_float_animation_duration,
+					Tween.TRANS_QUAD, Tween.EASE_IN)
+					# warning-ignore:return_value_discarded
+					tween.start()
 		
 
 		_State.DRAGGING_FROND:
 			if event is InputEventMouseMotion:
 				current_carrot_piece.position += event.relative
-				current_carrot_piece.play_animation("RESET")
-				$CompostBowl.play_animation("Glow")
 			elif event is InputEventMouseButton and not event.is_pressed():
 				var above_compost_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position + _carrot.position,
@@ -126,8 +129,6 @@ func _input(event):
 			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
 				current_carrot_piece.position += event.relative
-				current_carrot_piece.play_animation("RESET")
-				$DoneBowl.play_animation("Glow")
 			elif event is InputEventMouseButton and not event.is_pressed():
 				var above_done_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position+_carrot.position,
@@ -141,7 +142,6 @@ func _input(event):
 						print("Bowl Count: " + str(done_bowl_count))
 						current_carrot_piece.done = true
 						if (done_bowl_count%done_bowl_limit) == 0:
-							$DoneBowl.play_animation("RESET")
 							
 							#reset carrot
 							_carrot.done = false
@@ -157,7 +157,6 @@ func _input(event):
 							_set_state(_State.AWAITING_CARROT_TOUCH)
 						else:
 							_set_state(_State.AWAITING_PIECE_TOUCH)
-							current_carrot_piece.play_animation("RESET")
 							# warning-ignore:return_value_discarded
 							_pieces.erase(current_carrot_piece)
 					else:
@@ -167,12 +166,24 @@ func _input(event):
 					
 
 func _set_state(new_state)->void:
+	# Handle logic when leaving state
+	match _state:
+		_State.AWAITING_CARROT_TOUCH:
+			_carrot.is_glowing = false
+		_State.DRAGGING_CARROT:
+			_cutting_board.is_glowing = false
+		_State.DRAGGING_FROND:
+			_compost_bowl.is_glowing = false
+		_State.DRAGGING_PIECE:
+			_done_bowl.is_glowing = false
+			
+	# Update variable
 	_state = new_state
+	
+	#entering state
 	match new_state:
 		_State.AWAITING_CARROT_TOUCH:
-			
-			for piece in _pieces:
-				piece.play_animation("RESET")
+			_carrot.is_glowing = true
 			_pieces.clear()
 			
 			_carrot.done = false
@@ -183,23 +194,23 @@ func _set_state(new_state)->void:
 				_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
 			
 		_State.AWAITING_PIECE_TOUCH:
-			$CompostBowl.play_animation("RESET")
 			for piece in _pieces:
-				piece.play_animation("Glow")
-				if piece.is_frond:
-					piece.play_animation("RESET")
-				$DoneBowl.play_animation("RESET")
+				if not piece.done:
+					piece.is_glowing = true
 				piece.is_draggable = true
 		_State.DRAGGING_PIECE:
+			_done_bowl.is_glowing = true
 			for piece in _pieces:
 				piece.is_draggable = false
+				piece.is_glowing = false
 		_State.AWAITING_FROND_TOUCH:
 			for piece in _pieces:
 				if piece.is_frond:
-					piece.play_animation("Glow")
-					$CompostBowl.play_animation("RESET")
+					piece.is_glowing = true
 					piece.is_draggable = true
 		_State.DRAGGING_FROND:
+			_compost_bowl.is_glowing = true
+			current_carrot_piece.is_glowing = false
 			for piece in _pieces:
 				piece.is_draggable = false
 
@@ -263,6 +274,7 @@ func _on_Knife_chopped()->void:
 
 func _on_Knife_chop_animation_complete()->void:
 	_knife.tappable = false
+	_knife.is_glowing = false
 	var next_pos = _carrot.current_chop_point_pos
 	if next_pos!=null:
 		_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
@@ -304,6 +316,7 @@ func _animate_Knife_to_next_chop_point(duration:float)->void:
 
 func _on_Knife_tween_completed(_a, _b)->void:
 	_knife.tappable = true
+	_knife.is_glowing = true
 
 
 

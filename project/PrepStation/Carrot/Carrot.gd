@@ -9,6 +9,7 @@ signal touched
 var current_chop_point_pos
 var done := false
 var is_draggable : bool
+var is_glowing := false setget _set_glowing
 
 var _split_count := 0
 
@@ -74,3 +75,7 @@ func _on_Tween_tween_completed(object, _key):
 	emit_signal("piece_made", object)
 	if object == $CarrotPiece3:
 		emit_signal("piece_made", $CarrotPiece4)
+
+func _set_glowing(value:bool)->void:
+	is_glowing = value
+	$GlowingArea.visible = is_glowing
