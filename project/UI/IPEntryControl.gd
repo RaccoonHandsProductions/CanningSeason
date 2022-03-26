@@ -36,28 +36,30 @@ func _ready():
 			
 func finialize_address(octet_0:String, octet_1:String, 
 	octet_2:String, octet_3:String):
-		return(octet_0 +"."+ octet_1 +"."+ octet_2 +"."+ octet_3)
-		
-func on_ip_complete(ip : Array):
-	for octet in ip:
-		var octet_num = int(octet)
-		if octet_num < 0 or octet_num > 255:
-			assert(false, "your IP does not exist")
-		else:
-			print(ip)
+
+		var octet_array = [int(octet_0), int(octet_1), int(octet_2), int(octet_3)]
+		for octet in octet_array:
+			if octet < 0 or octet > 255:
+				assert(false, "your IP does not exist")
+			else:
+				print(octet_0 +"."+ octet_1 +"."+ octet_2 +"."+ octet_3)
+				return(octet_0 +"."+ octet_1 +"."+ octet_2 +"."+ octet_3)
 
 func on_number_Button_pressed(num:int):
 		if ip_octet.length() < 3:
 			ip_octet += str(num) #creates octet string
 			current_section_label.text += str(num)
-		elif ip_array.size() == 3 :
-			for buttons in button_array:
-				buttons.disabled = true
 		elif ip_octet.length() == 3:
 			ip_array.append(ip_octet)
 			ip_octet = ""
 			current_field_index += 1
 			_choose_Display_field(current_field_index)
+		
+		if ip_array.size() == 4 :
+			for buttons in button_array:
+				buttons.disabled = true
+				
+		update()
 	
 func _choose_Display_field(field):
 	match field:
@@ -113,7 +115,7 @@ func _on_NextBoxPriority_pressed():
 		
 
 func _on_PreviousBoxPriority_pressed():
-	ip_array.pop_back()
+	ip_array.pop_at(ip_array.length()-1)
 	current_section_label.text = ""
 	if button_array[2].disabled == true:
 		for buttons in button_array:
@@ -140,5 +142,5 @@ func _on_ClearBox_pressed():
 
 
 func _on_enterButton_pressed():
-	finialize_address(ip_array.pop_at(0), ip_array.pop_at(1), ip_array.pop_at(2), ip_array.pop_at(3))
+	finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
 	#close scene and use ip
