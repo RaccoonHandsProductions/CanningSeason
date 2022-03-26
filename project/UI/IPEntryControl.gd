@@ -12,7 +12,6 @@ var current_field_index := 1
 var ip_octet : String
 var ip_array = []
 
-
 onready var field_one = get_node("VBoxContainer/OctetDisplay/OctetField")
 onready var field_two = get_node("VBoxContainer/OctetDisplay/OctetField2")
 onready var field_three = get_node("VBoxContainer/OctetDisplay/OctetField3")
@@ -33,7 +32,7 @@ func _ready():
 		button.connect("pressed", self, "on_number_Button_pressed", 
 			[ int( button.name.substr(5) ) ])
 	_choose_Display_field(current_field_index)
-			
+
 func finialize_address(octet_0:String, octet_1:String, 
 	octet_2:String, octet_3:String):
 
@@ -42,25 +41,20 @@ func finialize_address(octet_0:String, octet_1:String,
 			if octet < 0 or octet > 255:
 				assert(false, "your IP does not exist")
 			else:
-				print(octet_0 +"."+ octet_1 +"."+ octet_2 +"."+ octet_3)
 				return(octet_0 +"."+ octet_1 +"."+ octet_2 +"."+ octet_3)
 
 func on_number_Button_pressed(num:int):
-		if ip_octet.length() < 3:
-			ip_octet += str(num) #creates octet string
-			current_section_label.text += str(num)
-		elif ip_octet.length() == 3:
-			ip_array.append(ip_octet)
-			ip_octet = ""
-			current_field_index += 1
-			_choose_Display_field(current_field_index)
-		
-		if ip_array.size() == 4 :
-			for buttons in button_array:
-				buttons.disabled = true
-				
+	if ip_octet.length() <= 2:
+		ip_octet += str(num) #creates octet string
+		current_section_label.text += str(num)
+	elif ip_octet.length() == 3:
+		ip_array.append(ip_octet)
+		ip_octet = ""
 		update()
-	
+		for buttons in button_array:
+			buttons.disabled = true
+	print(ip_array)
+
 func _choose_Display_field(field):
 	match field:
 		1:
@@ -108,22 +102,23 @@ func _choose_Display_field(field):
 			update()
 
 func _on_NextBoxPriority_pressed():
+	for buttons in button_array:
+		buttons.disabled = false
+	ip_octet = ""
 	current_field_index += 1
 	_choose_Display_field(current_field_index)
-	ip_array.append(ip_octet)
-	ip_octet = ""
-		
+
 func _on_PreviousBoxPriority_pressed():
-	ip_array.pop_at(ip_array.length()-1)
+	ip_array.pop_back()
+	current_section_label.text = ""
+	current_field_index -= 1
+	_choose_Display_field(current_field_index)
+	ip_array.pop_back()
 	current_section_label.text = ""
 	if button_array[2].disabled == true:
 		for buttons in button_array:
 				buttons.disabled = false
-	current_field_index -= 1
-	_choose_Display_field(current_field_index)
-	ip_array.append(ip_octet)
-	ip_octet = ""
-
+	print(ip_array)
 
 func _on_ClearBox_pressed():
 	ip_array.clear()
@@ -139,10 +134,11 @@ func _on_ClearBox_pressed():
 	nextButton.disabled = false
 	_choose_Display_field(current_field_index)
 
-
 func _on_enterButton_pressed():
 	ip_array.append(ip_octet)
 	ip_octet = ""
-	print(ip_array)
-	finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
+	if ip_array.size() == 4:
+		finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
+	else:
+		assert(false, "IP is not complete")
 	#close scene and use ip
