@@ -113,7 +113,6 @@ func _on_NextBoxPriority_pressed():
 	ip_array.append(ip_octet)
 	ip_octet = ""
 		
-
 func _on_PreviousBoxPriority_pressed():
 	ip_array.pop_at(ip_array.length()-1)
 	current_section_label.text = ""
@@ -142,5 +141,8 @@ func _on_ClearBox_pressed():
 
 
 func _on_enterButton_pressed():
+	ip_array.append(ip_octet)
+	ip_octet = ""
+	print(ip_array)
 	finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
 	#close scene and use ip
