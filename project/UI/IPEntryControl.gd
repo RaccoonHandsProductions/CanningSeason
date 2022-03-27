@@ -46,9 +46,11 @@ func finialize_address(octet_0 : String, octet_1 : String,
 
 func on_number_Button_pressed(num:int):
 	if ip_octet.length() <= 2:
-		ip_octet += str(num) #creates octet string
+		ip_octet += str(num)
+		print(ip_octet)
 		current_section_label.text += str(num)
-	elif ip_octet.length() == 3:
+	
+	if ip_octet.length() == 3:
 		if validate_octet(ip_octet) == true:
 			ip_array.append(ip_octet)
 			ip_octet = ""
@@ -60,9 +62,8 @@ func on_number_Button_pressed(num:int):
 		else:
 			ip_octet = ""
 			current_section_label.text = ""
-			
+			update()
 			_choose_display_field(current_field_index)
-	
 	print(ip_array)
 
 func _choose_display_field(field):
@@ -77,7 +78,6 @@ func _choose_display_field(field):
 			field_four.has_focus = false 
 			back_button.disabled = true
 			enter_button.disabled = true
-			update()
 		2:
 			current_section = field_two
 			current_field_index = 2
@@ -88,7 +88,6 @@ func _choose_display_field(field):
 			field_four.has_focus = false
 			back_button.disabled = false
 			next_button.disabled = false
-			update()
 		3:
 			current_section = field_three
 			current_field_index = 3
@@ -99,7 +98,6 @@ func _choose_display_field(field):
 			field_four.has_focus = false
 			back_button.disabled = false
 			next_button.disabled = false
-			update()
 		4:
 			current_section = field_four
 			current_field_index = 4
@@ -110,7 +108,7 @@ func _choose_display_field(field):
 			current_section.has_focus = true
 			back_button.disabled = false
 			next_button.disabled = true
-			update()
+	update()
 
 func _on_NextBoxPriority_pressed():
 	for buttons in number_button_array:
