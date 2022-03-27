@@ -1,7 +1,7 @@
 extends Panel
 
-const _unfocused_background := Color.blue
-const _focused_background := Color.red
+const _unfocused_background := Color.black
+const _focused_background := Color.orange
 
 var _style := StyleBoxFlat.new()
 

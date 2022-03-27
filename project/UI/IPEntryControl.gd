@@ -33,6 +33,12 @@ func _ready():
 			[ int( button.name.substr(5) ) ])
 	_choose_Display_field(current_field_index)
 
+func validate_octet(oct : String):
+	if (int(oct) >= 0 and int(oct) <= 255):
+		return true
+	else:
+		return false
+
 func finialize_address(octet_0:String, octet_1:String, 
 	octet_2:String, octet_3:String):
 
@@ -48,11 +54,18 @@ func on_number_Button_pressed(num:int):
 		ip_octet += str(num) #creates octet string
 		current_section_label.text += str(num)
 	elif ip_octet.length() == 3:
-		ip_array.append(ip_octet)
-		ip_octet = ""
-		update()
-		for buttons in button_array:
-			buttons.disabled = true
+		if validate_octet(ip_octet) == true:
+			ip_array.append(ip_octet)
+			ip_octet = ""
+			update()
+			for buttons in button_array:
+				buttons.disabled = true
+		else:
+			ip_octet = ""
+			current_section_label.text = ""
+			
+			_choose_Display_field(current_field_index)
+	
 	print(ip_array)
 
 func _choose_Display_field(field):
