@@ -12,26 +12,21 @@ var current_field_index := 1
 var ip_octet : String
 var ip_array = []
 
-onready var field_one = get_node("VBoxContainer/OctetDisplay/OctetField")
-onready var field_two = get_node("VBoxContainer/OctetDisplay/OctetField2")
-onready var field_three = get_node("VBoxContainer/OctetDisplay/OctetField3")
-onready var field_four = get_node("VBoxContainer/OctetDisplay/OctetField4")
+onready var field_one = $VBoxContainer/OctetDisplay/OctetField
+onready var field_two = $VBoxContainer/OctetDisplay/OctetField2
+onready var field_three = $VBoxContainer/OctetDisplay/OctetField3
+onready var field_four = $VBoxContainer/OctetDisplay/OctetField4
 
-onready var field_one_label = get_node("VBoxContainer/OctetDisplay/OctetField/Label")
-onready var field_two_label = get_node("VBoxContainer/OctetDisplay/OctetField2/Label")
-onready var field_three_label = get_node("VBoxContainer/OctetDisplay/OctetField3/Label")
-onready var field_four_label = get_node("VBoxContainer/OctetDisplay/OctetField4/Label")
-
-onready var OctetDisplay = get_node("VBoxContainer/OctetDisplay")
-onready var backButton = get_node("VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/PreviousBoxPriority")
-onready var nextButton = get_node("VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/NextBoxPriority")
-onready var button_array = get_tree().get_nodes_in_group("number_buttons")
+onready var OctetDisplay = $VBoxContainer/OctetDisplay
+onready var backButton = $VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/PreviousBoxPriority
+onready var nextButton = $VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/NextBoxPriority
+onready var number_button_array = get_tree().get_nodes_in_group("number_buttons")
 
 func _ready():
-	for button in button_array:
+	for button in number_button_array:
 		button.connect("pressed", self, "on_number_Button_pressed", 
 			[ int( button.name.substr(5) ) ])
-	_choose_Display_field(current_field_index)
+	_choose_display_field(current_field_index)
 
 func validate_octet(oct : String):
 	if (int(oct) >= 0 and int(oct) <= 255):
@@ -39,8 +34,8 @@ func validate_octet(oct : String):
 	else:
 		return false
 
-func finialize_address(octet_0:String, octet_1:String, 
-	octet_2:String, octet_3:String):
+func finialize_address(octet_0 : String, octet_1 : String, 
+	octet_2 : String, octet_3 : String):
 
 		var octet_array = [int(octet_0), int(octet_1), int(octet_2), int(octet_3)]
 		for octet in octet_array:
@@ -58,22 +53,22 @@ func on_number_Button_pressed(num:int):
 			ip_array.append(ip_octet)
 			ip_octet = ""
 			update()
-			for buttons in button_array:
+			for buttons in number_button_array:
 				buttons.disabled = true
 		else:
 			ip_octet = ""
 			current_section_label.text = ""
 			
-			_choose_Display_field(current_field_index)
+			_choose_display_field(current_field_index)
 	
 	print(ip_array)
 
-func _choose_Display_field(field):
+func _choose_display_field(field):
 	match field:
 		1:
 			current_section = field_one
 			current_field_index = 1
-			current_section_label = field_one_label
+			current_section_label = field_one.get_node("Label")
 			current_section.has_focus = true
 			field_two.has_focus = false
 			field_three.has_focus = false
@@ -83,7 +78,7 @@ func _choose_Display_field(field):
 		2:
 			current_section = field_two
 			current_field_index = 2
-			current_section_label = field_two_label
+			current_section_label = field_two.get_node("Label")
 			field_one.has_focus = false
 			current_section.has_focus = true
 			field_three.has_focus = false
@@ -94,7 +89,7 @@ func _choose_Display_field(field):
 		3:
 			current_section = field_three
 			current_field_index = 3
-			current_section_label = field_three_label
+			current_section_label = field_three.get_node("Label")
 			field_one.has_focus = false
 			field_two.has_focus = false
 			current_section.has_focus = true
@@ -105,7 +100,7 @@ func _choose_Display_field(field):
 		4:
 			current_section = field_four
 			current_field_index = 4
-			current_section_label = field_four_label
+			current_section_label = field_four.get_node("Label")
 			field_one.has_focus = false
 			field_two.has_focus = false
 			field_three.has_focus = false
@@ -115,43 +110,45 @@ func _choose_Display_field(field):
 			update()
 
 func _on_NextBoxPriority_pressed():
-	for buttons in button_array:
+	for buttons in number_button_array:
 		buttons.disabled = false
 	ip_octet = ""
 	current_field_index += 1
-	_choose_Display_field(current_field_index)
+	_choose_display_field(current_field_index)
 
 func _on_PreviousBoxPriority_pressed():
 	ip_array.pop_back()
 	current_section_label.text = ""
 	current_field_index -= 1
-	_choose_Display_field(current_field_index)
+	_choose_display_field(current_field_index)
 	ip_array.pop_back()
 	current_section_label.text = ""
-	if button_array[2].disabled == true:
-		for buttons in button_array:
+	if number_button_array[2].disabled == true:
+		for buttons in number_button_array:
 				buttons.disabled = false
 	print(ip_array)
 
 func _on_ClearBox_pressed():
 	ip_array.clear()
-	field_one_label.text = ""
-	field_two_label.text = ""
-	field_three_label.text = ""
-	field_four_label.text = ""
+	field_one.get_node("Label").text = ""
+	field_two.get_node("Label").text = ""
+	field_three.get_node("Label").text = ""
+	field_four.get_node("Label").text = ""
 	ip_octet = ""
 	current_field_index = 1
 	
-	for buttons in button_array:
+	for buttons in number_button_array:
 		buttons.disabled = false
 	nextButton.disabled = false
-	_choose_Display_field(current_field_index)
+	_choose_display_field(current_field_index)
 
 func _on_enterButton_pressed():
 	ip_array.append(ip_octet)
 	ip_octet = ""
-	if ip_array.size() == 4:
-		finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
+	if ip_array.size() == 4 or (ip_array.size() == 5 and ip_array[4] == ""):
+		var output = finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
+		print(output)
+		assert(false, "IP is complete: "+ output)
 	else:
 		assert(false, "IP is not complete")
 	#close scene and use ip
