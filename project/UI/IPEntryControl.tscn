@@ -165,7 +165,7 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 1 )
 text = "0"
 
-[node name="enterButton" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
+[node name="EnterButton" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer"]
 margin_left = 1184.0
 margin_right = 1280.0
 margin_bottom = 67.0
@@ -175,4 +175,4 @@ text = "Enter"
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/PreviousBoxPriority" to="." method="_on_PreviousBoxPriority_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/ClearBox" to="." method="_on_ClearBox_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/NextBoxPriority" to="." method="_on_NextBoxPriority_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/enterButton" to="." method="_on_enterButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/EnterButton" to="." method="_on_EnterButton_pressed"]

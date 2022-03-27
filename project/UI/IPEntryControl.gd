@@ -6,7 +6,7 @@ var octet_1_entry : String
 var octet_2_entry : String
 var octet_3_entry : String
 
-var current_section 
+var current_section
 var current_section_label
 var current_field_index := 1
 var ip_octet : String
@@ -17,9 +17,9 @@ onready var field_two = $VBoxContainer/OctetDisplay/OctetField2
 onready var field_three = $VBoxContainer/OctetDisplay/OctetField3
 onready var field_four = $VBoxContainer/OctetDisplay/OctetField4
 
-onready var OctetDisplay = $VBoxContainer/OctetDisplay
-onready var backButton = $VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/PreviousBoxPriority
-onready var nextButton = $VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/NextBoxPriority
+onready var back_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/PreviousBoxPriority
+onready var next_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/userBoxPosition/NextBoxPriority
+onready var enter_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/EnterButton
 onready var number_button_array = get_tree().get_nodes_in_group("number_buttons")
 
 func _ready():
@@ -52,9 +52,11 @@ func on_number_Button_pressed(num:int):
 		if validate_octet(ip_octet) == true:
 			ip_array.append(ip_octet)
 			ip_octet = ""
-			update()
 			for buttons in number_button_array:
 				buttons.disabled = true
+			if current_section == field_four:
+				enter_button.disabled = false
+			update()
 		else:
 			ip_octet = ""
 			current_section_label.text = ""
@@ -73,7 +75,8 @@ func _choose_display_field(field):
 			field_two.has_focus = false
 			field_three.has_focus = false
 			field_four.has_focus = false 
-			backButton.disabled = true
+			back_button.disabled = true
+			enter_button.disabled = true
 			update()
 		2:
 			current_section = field_two
@@ -83,8 +86,8 @@ func _choose_display_field(field):
 			current_section.has_focus = true
 			field_three.has_focus = false
 			field_four.has_focus = false
-			backButton.disabled = false
-			nextButton.disabled = false
+			back_button.disabled = false
+			next_button.disabled = false
 			update()
 		3:
 			current_section = field_three
@@ -94,8 +97,8 @@ func _choose_display_field(field):
 			field_two.has_focus = false
 			current_section.has_focus = true
 			field_four.has_focus = false
-			backButton.disabled = false
-			nextButton.disabled = false
+			back_button.disabled = false
+			next_button.disabled = false
 			update()
 		4:
 			current_section = field_four
@@ -105,8 +108,8 @@ func _choose_display_field(field):
 			field_two.has_focus = false
 			field_three.has_focus = false
 			current_section.has_focus = true
-			backButton.disabled = false
-			nextButton.disabled = true
+			back_button.disabled = false
+			next_button.disabled = true
 			update()
 
 func _on_NextBoxPriority_pressed():
@@ -139,16 +142,16 @@ func _on_ClearBox_pressed():
 	
 	for buttons in number_button_array:
 		buttons.disabled = false
-	nextButton.disabled = false
+	next_button.disabled = false
 	_choose_display_field(current_field_index)
 
-func _on_enterButton_pressed():
+func _on_EnterButton_pressed():
 	ip_array.append(ip_octet)
 	ip_octet = ""
 	if ip_array.size() == 4 or (ip_array.size() == 5 and ip_array[4] == ""):
 		var output = finialize_address(ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front(), ip_array.pop_front())
 		print(output)
-		assert(false, "IP is complete: "+ output)
+		assert(false, "IP is complete: " + output)
 	else:
 		assert(false, "IP is not complete")
 	#close scene and use ip
