@@ -77,5 +77,11 @@ func on_number_Button_pressed(num):
 		else:
 			toggle_number_buttons_disabled(true)
 	else:
-		ip_octet = ""
-		_on_NextBoxPriority_pressed()
+		if validate_octet(ip_octet):
+			ip_octet = ""
+			ip_octet += str(num)
+			_on_NextBoxPriority_pressed()
+			_update_field_label(ip_octet)
+		else:
+			ip_octet = ""
+			_on_NextBoxPriority_pressed()
