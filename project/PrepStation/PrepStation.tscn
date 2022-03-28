@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://PrepStation/StationArea/CompostBowl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PrepStation/StationArea/DoneBowl.tscn" type="PackedScene" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://PrepStation/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PrepStation/marble_counter.png" type="Texture" id=8]
 [ext_resource path="res://PrepStation/basket.png" type="Texture" id=9]
+[ext_resource path="res://PrepStation/carrot_pickup.wav" type="AudioStream" id=10]
+[ext_resource path="res://PrepStation/carrot_on_board.wav" type="AudioStream" id=11]
+[ext_resource path="res://PrepStation/chunk_bowl_drop.wav" type="AudioStream" id=12]
+[ext_resource path="res://PrepStation/carrot_on_boad_loud.wav" type="AudioStream" id=13]
 
 [node name="PrepStation" type="Node2D"]
 script = ExtResource( 4 )
@@ -46,6 +50,18 @@ position = Vector2( 616, 1027 )
 position = Vector2( 635, 143 )
 
 [node name="HUD" parent="." instance=ExtResource( 7 )]
+
+[node name="ChunkDropSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="CarrotDropSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+
+[node name="CarrotPickupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="ChunkReturnSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
 
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]

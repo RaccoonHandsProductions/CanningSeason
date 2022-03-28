@@ -4,6 +4,11 @@ onready var _cutting_board_polygon_2d := $CuttingBoard/Polygon2D
 onready var _frond = null
 onready var _cutting_board := $CuttingBoard
 
+onready var _chunk_drop_sound := $ChunkDropSound
+onready var _carrot_drop_sound := $CarrotDropSound
+onready var _carrot_pickup_sound := $CarrotPickupSound
+onready var _chunk_return_sound := $ChunkReturnSound
+
 onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
 onready var _done_bowl := $DoneBowl
 var done_bowl_count := 0
@@ -80,6 +85,7 @@ func _input(event):
 				var above_board := Geometry.is_point_in_polygon(
 					_carrot.position, _new_cutting_board_polygon)
 				if above_board:
+					_carrot_drop_sound.play()
 					_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
 					_carrot.done = true
 					_set_state(_State.AWAITING_KNIFE_CHOP)
@@ -110,6 +116,7 @@ func _input(event):
 			
 				if current_carrot_piece.is_frond:
 					if above_compost_bowl:
+						_chunk_drop_sound.play()
 						current_carrot_piece.done = true
 						compost_bowl_count += 1
 						print("Compost Bowl Count: " + str(compost_bowl_count))
@@ -136,6 +143,7 @@ func _input(event):
 					
 				if not current_carrot_piece.is_frond:
 					if above_done_bowl:
+						_chunk_drop_sound.play()
 						done_bowl_count += 1
 						if (done_bowl_count % 4 == 0 and done_bowl_count != 0):
 							$HUD.update_score(1)
@@ -218,12 +226,14 @@ func _set_state(new_state)->void:
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
 func _set_state_to_awaiting_carrot_touch(_a, _b)->void:
+	_carrot_pickup_sound.play()
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 	
 
 func _on_Carrot_touched()->void:
 	match _state:
 		_State.AWAITING_CARROT_TOUCH:
+			_carrot_pickup_sound.play()
 			_set_state(_State.DRAGGING_CARROT)
 
 
@@ -265,10 +275,11 @@ func _on_CarrotPiece_tween_completed(_a, _b)->void:
 		_set_state(_State.AWAITING_FROND_TOUCH)
 	else:
 		_set_state(_State.AWAITING_PIECE_TOUCH)
-
-
-
-
+		_chunk_return_sound.play()
+		
+		
+		
+		
 func _on_Knife_chopped()->void:
 	_carrot.split()
 
