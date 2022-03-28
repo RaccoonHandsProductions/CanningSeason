@@ -57,7 +57,7 @@ margin_left = 428.0
 margin_right = 852.0
 margin_bottom = 55.0
 size_flags_horizontal = 3
-text = "Clear All"
+text = "Clear"
 
 [node name="NextBoxPriority" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
 margin_left = 856.0

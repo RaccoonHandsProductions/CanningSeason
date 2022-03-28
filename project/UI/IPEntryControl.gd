@@ -1,10 +1,6 @@
 extends Control
 
-var entered_address : String
-var octet_0_entry : String
-var octet_1_entry : String
-var octet_2_entry : String
-var octet_3_entry : String
+var ip_address : String
 
 var current_label_value : String
 var current_field_index := 0
@@ -38,33 +34,49 @@ func toggle_number_buttons_disabled(disabled : bool):
 	for buttons in number_button_array:
 			buttons.disabled = disabled
 
-func finialize_address(octet_0 : String, octet_1 : String, 
-	octet_2 : String, octet_3 : String):
-			return(octet_0 +"."+ octet_1 +"."+ octet_2 +"."+ octet_3)
+func finialize_address():
+			return(_fields[0].get_label_text() +"."+ _fields[1].get_label_text() +"."+ _fields[2].get_label_text() +"."+ _fields[3].get_label_text())
 			
-func _update_field_selected(ip_input : String):
-	pass
+func _update_field_label(ip_input : String):
+	priority_field.set_label(ip_input)
 	
 func _change_field_selected(num : int):
-	priority_field = _fields[num]
-	priority_field.has_focus = true
+	if num >= 0 and num <=3:
+		priority_field = _fields[num]
+		priority_field.has_focus = true
 	
 func _on_PreviousBoxPriority_pressed():
-	current_field_index -= 1
-	_change_field_selected(current_field_index)
+	ip_octet = ""
+	_update_field_label(ip_octet)
+	if current_field_index > 0:
+		current_field_index -= 1
+		priority_field.has_focus = false
+		_change_field_selected(current_field_index)
+		toggle_number_buttons_disabled(false)
 
 func _on_ClearBox_pressed():
-	pass
+	priority_field.set_label("")
+	ip_octet = ""
 
 func _on_NextBoxPriority_pressed():
-	priority_field.set_label(current_label_value)
-	_update_field_selected(ip_octet)
-	current_field_index += 1
-	_change_field_selected(current_field_index)
+	if current_field_index < 3:
+		_update_field_label(ip_octet)
+		ip_octet = ""
+		current_field_index += 1
+		priority_field.has_focus = false
+		_change_field_selected(current_field_index)
+		toggle_number_buttons_disabled(false)
 
 func _on_EnterButton_pressed():
-	pass # Replace with function body.
+	ip_address = finialize_address()
+	print(ip_address)
 	
 func on_number_Button_pressed(num):
-	if str(num).length() <= 2:
+	if ip_octet.length() <= 2:
 		ip_octet += str(num)
+		if validate_octet(ip_octet):
+			_update_field_label(ip_octet)
+		else:
+			toggle_number_buttons_disabled(true)
+	else:
+		_on_NextBoxPriority_pressed()
