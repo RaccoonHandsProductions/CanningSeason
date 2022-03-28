@@ -6,7 +6,6 @@ onready var _cutting_board := $CuttingBoard
 
 onready var _chunk_drop_sound := $ChunkDropSound
 onready var _carrot_drop_sound := $CarrotDropSound
-onready var _carrot_pickup_sound := $CarrotPickupSound
 onready var _chunk_return_sound := $ChunkReturnSound
 
 onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
@@ -226,14 +225,12 @@ func _set_state(new_state)->void:
 # Because this is bound to tween_completed, we have to have two arguments
 # that are ignored.
 func _set_state_to_awaiting_carrot_touch(_a, _b)->void:
-	_carrot_pickup_sound.play()
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 	
 
 func _on_Carrot_touched()->void:
 	match _state:
 		_State.AWAITING_CARROT_TOUCH:
-			_carrot_pickup_sound.play()
 			_set_state(_State.DRAGGING_CARROT)
 
 
