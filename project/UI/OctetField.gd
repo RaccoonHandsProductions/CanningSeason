@@ -16,6 +16,8 @@ func _set_has_focus(value:bool)->void:
 	has_focus = value
 	_update_background()
 	
+func set_label(val)->void:
+	$Label.text = val
 	
 func _update_background()->void:
 	_style.set_bg_color(_focused_background if has_focus else _unfocused_background)
