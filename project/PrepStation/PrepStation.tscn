@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://PrepStation/StationArea/CompostBowl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PrepStation/StationArea/DoneBowl.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://PrepStation/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PrepStation/wood_counter.png" type="Texture" id=8]
 [ext_resource path="res://PrepStation/basket.png" type="Texture" id=9]
+[ext_resource path="res://PrepStation/blue_prep_cloth.png" type="Texture" id=10]
 [ext_resource path="res://PrepStation/chunk_on_board.wav" type="AudioStream" id=11]
 [ext_resource path="res://PrepStation/chunk_bowl_drop.wav" type="AudioStream" id=12]
 [ext_resource path="res://PrepStation/carrot_on_board.wav" type="AudioStream" id=13]
@@ -21,6 +22,10 @@ knife_offscreen_animation_duration = 0.2
 [node name="CounterBackground" type="Sprite" parent="."]
 texture = ExtResource( 8 )
 centered = false
+
+[node name="BluePrepCloth" type="Sprite" parent="."]
+position = Vector2( 640, 400 )
+texture = ExtResource( 10 )
 
 [node name="CarrotBasket" type="Sprite" parent="."]
 position = Vector2( 640, 143 )
