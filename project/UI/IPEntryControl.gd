@@ -46,8 +46,6 @@ func _change_field_selected(num : int):
 		priority_field.has_focus = true
 	
 func _on_PreviousBoxPriority_pressed():
-	ip_octet = ""
-	_update_field_label(ip_octet)
 	if current_field_index > 0:
 		current_field_index -= 1
 		priority_field.has_focus = false
@@ -60,8 +58,6 @@ func _on_ClearBox_pressed():
 
 func _on_NextBoxPriority_pressed():
 	if current_field_index < 3:
-		_update_field_label(ip_octet)
-		ip_octet = ""
 		current_field_index += 1
 		priority_field.has_focus = false
 		_change_field_selected(current_field_index)
@@ -79,4 +75,5 @@ func on_number_Button_pressed(num):
 		else:
 			toggle_number_buttons_disabled(true)
 	else:
+		ip_octet = ""
 		_on_NextBoxPriority_pressed()
