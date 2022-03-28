@@ -22,6 +22,8 @@ func _ready():
 		button.connect("pressed", self, "on_number_Button_pressed", 
 			[ int( button.name.substr(5) ) ])
 	back_button.disabled = false
+	for panel in _fields:
+		panel.set_label("0")
 	_change_field_selected(current_field_index)
 
 func validate_octet(oct : String):
