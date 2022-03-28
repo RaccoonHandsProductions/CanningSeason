@@ -71,9 +71,10 @@ script = ExtResource( 1 )
 
 [node name="GlowingArea" parent="." instance=ExtResource( 4 )]
 visible = false
-modulate = Color( 0, 1, 0, 1 )
-margin_top = -264.0
-margin_bottom = 263.0
+margin_left = -50.0
+margin_top = -255.0
+margin_right = 50.0
+margin_bottom = 255.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
