@@ -14,7 +14,6 @@ $VBoxContainer/OctetDisplay/OctetField4]
 
 onready var back_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/PreviousBoxPriority
 onready var next_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/NextBoxPriority
-onready var enter_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/EnterButton
 onready var number_button_array = get_tree().get_nodes_in_group("number_buttons")
 
 func _ready():
@@ -37,7 +36,8 @@ func toggle_number_buttons_disabled(disabled : bool):
 			buttons.disabled = disabled
 
 func finialize_address():
-			return(_fields[0].get_label_text() +"."+ _fields[1].get_label_text() +"."+ _fields[2].get_label_text() +"."+ _fields[3].get_label_text())
+			return(_fields[0].get_label_text() +"."+ _fields[1].get_label_text() +"."+ 
+			_fields[2].get_label_text() +"."+ _fields[3].get_label_text())
 			
 func _update_field_label(ip_input : String):
 	priority_field.set_label(ip_input)
@@ -75,13 +75,12 @@ func on_number_Button_pressed(num):
 		if validate_octet(ip_octet):
 			_update_field_label(ip_octet)
 		else:
-			toggle_number_buttons_disabled(true)
-	else:
-		if validate_octet(ip_octet):
 			ip_octet = ""
 			ip_octet += str(num)
 			_on_NextBoxPriority_pressed()
 			_update_field_label(ip_octet)
-		else:
-			ip_octet = ""
-			_on_NextBoxPriority_pressed()
+	else:
+		ip_octet = ""
+		ip_octet += str(num)
+		_on_NextBoxPriority_pressed()
+		_update_field_label(ip_octet)
