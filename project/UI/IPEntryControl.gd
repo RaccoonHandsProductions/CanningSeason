@@ -57,6 +57,7 @@ func _on_PreviousBoxPriority_pressed():
 func _on_ClearBox_pressed():
 	priority_field.set_label("")
 	ip_octet = ""
+	toggle_number_buttons_disabled(false)
 
 func _on_NextBoxPriority_pressed():
 	if current_field_index < 3:
@@ -72,6 +73,12 @@ func _on_EnterButton_pressed():
 func on_number_Button_pressed(num):
 	if ip_octet.length() <= 2:
 		ip_octet += str(num)
+		if ip_octet.length() == 2 and int(ip_octet) <= 25:
+			for i in range(5, 9):
+				number_button_array[i].disabled = true
+		elif ip_octet.length() == 3 or int(ip_octet) > 25:
+			toggle_number_buttons_disabled(true)
+			
 		if validate_octet(ip_octet):
 			_update_field_label(ip_octet)
 		else:
@@ -82,5 +89,3 @@ func on_number_Button_pressed(num):
 	else:
 		ip_octet = ""
 		ip_octet += str(num)
-		_on_NextBoxPriority_pressed()
-		_update_field_label(ip_octet)
