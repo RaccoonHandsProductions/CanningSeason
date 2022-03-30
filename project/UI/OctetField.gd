@@ -1,5 +1,12 @@
 extends Panel
 
+
+enum NumbersAllowed {
+	ALL = 9,
+	ZERO_TO_FIVE = 5,
+	NONE = 0
+}
+
 const _unfocused_background := Color.black
 const _focused_background := Color.orange
 
@@ -12,12 +19,23 @@ func _ready():
 	_update_background()
 
 
+func get_numbers_allowed(buttonMax : int):
+	if buttonMax == 9:
+		pass
+	elif buttonMax == 5:
+		pass
+	else:
+		pass
+		
 func _set_has_focus(value:bool)->void:
 	has_focus = value
 	_update_background()
 	
 func get_label_text()->String:
 	return $Label.text
+	
+func mutate_label(val)->void:
+	$Label.text += val
 
 func set_label(val)->void:
 	$Label.text = val

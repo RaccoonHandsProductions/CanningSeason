@@ -45,21 +45,21 @@ margin_bottom = 55.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="PreviousBoxPriority" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
 margin_right = 424.0
 margin_bottom = 55.0
 size_flags_horizontal = 3
 disabled = true
 text = "Back"
 
-[node name="ClearBox" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
+[node name="ClearButton" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
 margin_left = 428.0
 margin_right = 852.0
 margin_bottom = 55.0
 size_flags_horizontal = 3
 text = "Clear"
 
-[node name="NextBoxPriority" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
+[node name="NextButton" type="Button" parent="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition"]
 margin_left = 856.0
 margin_right = 1280.0
 margin_bottom = 55.0
@@ -165,6 +165,6 @@ size_flags_horizontal = 3
 custom_fonts/font = SubResource( 1 )
 text = "0"
 
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/PreviousBoxPriority" to="." method="_on_PreviousBoxPriority_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/ClearBox" to="." method="_on_ClearBox_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/NextBoxPriority" to="." method="_on_NextBoxPriority_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/ClearButton" to="." method="_on_ClearButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/NextButton" to="." method="_on_NextButton_pressed"]
