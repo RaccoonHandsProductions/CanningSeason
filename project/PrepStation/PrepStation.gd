@@ -74,6 +74,7 @@ func _process(_delta):
 		get_tree().paused = true
 		$HUD/TimeLabel.text = "GAME OVER"
 
+
 func _input(event):
 	match _state:
 		_State.DRAGGING_CARROT:
@@ -103,12 +104,13 @@ func _input(event):
 					Tween.TRANS_QUAD, Tween.EASE_IN)
 					# warning-ignore:return_value_discarded
 					tween.start()
-		
-
-		_State.DRAGGING_FROND:
+			
+		_State.DRAGGING_PIECE:
+			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
 				current_carrot_piece.position += event.relative
 			elif event is InputEventMouseButton and not event.is_pressed():
+				
 				var above_compost_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position + _carrot.position,
 					_new_compost_bowl_polygon)
@@ -120,22 +122,16 @@ func _input(event):
 						compost_bowl_count += 1
 						print("Compost Bowl Count: " + str(compost_bowl_count))
 
-						if (compost_bowl_count%compost_bowl_limit) == 0:
-							_set_state(_State.AWAITING_PIECE_TOUCH)
+						if _check_bowls():
+							_spawn_carrot()
 						else:
-							_set_state(_State.AWAITING_FROND_TOUCH)
+							_set_state(_State.AWAITING_PIECE_TOUCH)
 							
 					else:
 						_set_state(_State.PIECE_FLOATING_HOME) # -------------------------- THIS IS NOT A 'REAL' STATE
 						_animate_CarrotPiece_to_home(piece_float_animation_duration)
-						_set_state(_State.AWAITING_FROND_TOUCH)
-						
-		
-		_State.DRAGGING_PIECE:
-			#if statement for if piece is in the bowl to avoid taking it out?
-			if event is InputEventMouseMotion:
-				current_carrot_piece.position += event.relative
-			elif event is InputEventMouseButton and not event.is_pressed():
+						_set_state(_State.AWAITING_PIECE_TOUCH)
+								
 				var above_done_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position+_carrot.position,
 					_new_bowl_polygon)
@@ -144,24 +140,10 @@ func _input(event):
 					if above_done_bowl:
 						_chunk_drop_sound.play()
 						done_bowl_count += 1
-						if (done_bowl_count % 4 == 0 and done_bowl_count != 0):
-							$HUD.update_score(1)
 						print("Bowl Count: " + str(done_bowl_count))
 						current_carrot_piece.done = true
-						if (done_bowl_count%done_bowl_limit) == 0:
-							
-							#reset carrot
-							_carrot.done = false
-							# warning-ignore:return_value_discarded
-							_carrot.disconnect("touched", self, "_on_Carrot_touched")
-							# warning-ignore:return_value_discarded
-							_carrot.disconnect("piece_made", self, "_on_Carrot_piece_made")
-							_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
-							add_child(_carrot)
-							
-							#float there
-							_carrot.position = $CarrotHomePoint.position
-							_set_state(_State.AWAITING_CARROT_TOUCH)
+						if _check_bowls():
+							_spawn_carrot()
 						else:
 							_set_state(_State.AWAITING_PIECE_TOUCH)
 							# warning-ignore:return_value_discarded
@@ -179,14 +161,14 @@ func _set_state(new_state)->void:
 			_carrot.is_glowing = false
 		_State.DRAGGING_CARROT:
 			_cutting_board.is_glowing = false
-		_State.DRAGGING_FROND:
-			_compost_bowl.is_glowing = false
 		_State.DRAGGING_PIECE:
 			_done_bowl.is_glowing = false
+			_compost_bowl.is_glowing = false
 			
 	# Update variable
 	_state = new_state
 	
+	print(new_state)
 	#entering state
 	match new_state:
 		_State.AWAITING_CARROT_TOUCH:
@@ -199,27 +181,27 @@ func _set_state(new_state)->void:
 				_carrot.connect("touched", self, "_on_Carrot_touched")
 				# warning-ignore:return_value_discarded
 				_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
+				
+				var error := _carrot.connect("piece_slid", self, "_on_Carrot_piece_slid")
+				assert(error==OK, "Connection failed with error " + str(error))
 			
 		_State.AWAITING_PIECE_TOUCH:
+			
+			print("processing %d pieces" % _pieces.size())
+			
 			for piece in _pieces:
 				if not piece.done:
 					piece.is_glowing = true
 				piece.is_draggable = true
+				
 		_State.DRAGGING_PIECE:
-			_done_bowl.is_glowing = true
+			if current_carrot_piece.is_frond:
+				_compost_bowl.is_glowing = true
+			else:
+				_done_bowl.is_glowing = true
 			for piece in _pieces:
 				piece.is_draggable = false
 				piece.is_glowing = false
-		_State.AWAITING_FROND_TOUCH:
-			for piece in _pieces:
-				if piece.is_frond:
-					piece.is_glowing = true
-					piece.is_draggable = true
-		_State.DRAGGING_FROND:
-			_compost_bowl.is_glowing = true
-			current_carrot_piece.is_glowing = false
-			for piece in _pieces:
-				piece.is_draggable = false
 
 
 # Because this is bound to tween_completed, we have to have two arguments
@@ -238,7 +220,12 @@ func _on_Carrot_piece_made(piece:Node2D)->void:
 	piece_home_pos = piece.position
 	var error := piece.connect("touched", self, "_on_CarrotPiece_touched", [piece])
 	assert(error==OK, "Connection failed with error " + str(error))
-	_pieces[piece] = piece.position
+	_pieces[piece] = null
+
+
+func _on_Carrot_piece_slid(new_home_pos:Vector2, piece:Node2D)->void:
+	_pieces[piece] = new_home_pos
+	print(_pieces[piece])
 
 
 func _on_CarrotPiece_touched(piece:Node2D)->void:
@@ -247,10 +234,6 @@ func _on_CarrotPiece_touched(piece:Node2D)->void:
 			if piece.is_draggable:
 				current_carrot_piece = piece
 				_set_state(_State.DRAGGING_PIECE)
-		_State.AWAITING_FROND_TOUCH:
-			if piece.is_draggable:
-				current_carrot_piece = piece
-				_set_state(_State.DRAGGING_FROND)
 
 
 func _animate_CarrotPiece_to_home(duration:float)->void:
@@ -268,17 +251,13 @@ func _animate_CarrotPiece_to_home(duration:float)->void:
 
 
 func _on_CarrotPiece_tween_completed(_a, _b)->void:
-	if current_carrot_piece.is_frond:
-		_set_state(_State.AWAITING_FROND_TOUCH)
-	else:
-		_set_state(_State.AWAITING_PIECE_TOUCH)
-		_chunk_return_sound.play()
-		
-		
+	_set_state(_State.AWAITING_PIECE_TOUCH)
+	_chunk_return_sound.play()
 		
 		
 func _on_Knife_chopped()->void:
 	_carrot.split()
+
 
 func _on_Knife_chop_animation_complete()->void:
 	_knife.tappable = false
@@ -288,7 +267,7 @@ func _on_Knife_chop_animation_complete()->void:
 		_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
 	else:
 		_animate_Knife_to_home()
-		_set_state(_State.AWAITING_FROND_TOUCH)
+		_set_state(_State.AWAITING_PIECE_TOUCH)
 
 
 func _animate_Knife_to_home()->void:	
@@ -304,7 +283,6 @@ func _animate_Knife_to_home()->void:
 		Tween.TRANS_QUAD, Tween.EASE_IN)
 	# warning-ignore:return_value_discarded
 	tween.start()
-
 
 
 func _animate_Knife_to_next_chop_point(duration:float)->void:
@@ -327,8 +305,6 @@ func _on_Knife_tween_completed(_a, _b)->void:
 	_knife.is_glowing = true
 
 
-
-
 # warning-ignore:function_conflicts_variable
 func _game_over()->void:
 	_game_over = true
@@ -336,7 +312,32 @@ func _game_over()->void:
 
 func _on_HUD_Times_Up()->void:
 	_game_over = true
+	
 
+func _spawn_carrot():
+	compost_bowl_count = 0
+	done_bowl_count = 0
+	$HUD.update_score(1)
+	#reset carrot
+	_carrot.done = false
+	# warning-ignore:return_value_discarded
+	_carrot.disconnect("touched", self, "_on_Carrot_touched")
+	# warning-ignore:return_value_discarded
+	_carrot.disconnect("piece_made", self, "_on_Carrot_piece_made")
+	# warning-ignore:return_value_discarded
+	_carrot.disconnect("piece_slid", self, "_on_Carrot_piece_slid")
+	
+	_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
+	add_child(_carrot)
+	
+	#float there
+	_carrot.position = $CarrotHomePoint.position
+	_set_state(_State.AWAITING_CARROT_TOUCH)
+
+
+func _check_bowls():
+	if (done_bowl_count == done_bowl_limit and compost_bowl_count == compost_bowl_limit):
+		return true
 
 
 

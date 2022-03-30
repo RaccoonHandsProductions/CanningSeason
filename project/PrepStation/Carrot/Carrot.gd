@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 
 signal piece_made(piece)
+signal piece_slid(new_home_pos, piece)
 signal touched
 
 # If there is a next chop point, this is its position in my coordinate space.
@@ -27,25 +28,32 @@ func move_chunk_x(chunk, amount):
 
 func split() -> void:
 	_split_count += 1
+	var current_piece = null
+	var gap_size = 0
 	match (_split_count): 
 		1:
-			move_chunk_x($CarrotPiece0, -52)
-			$CarrotPiece0.split()
-			$CarrotPiece0.is_frond = true
+			current_piece = $CarrotPiece0
+			gap_size = -52
+			current_piece.is_frond = true
 		2:
-			move_chunk_x($CarrotPiece1, -38)
-			$CarrotPiece1.split()
+			current_piece = $CarrotPiece1
+			gap_size = -38
 		3:
-			move_chunk_x($CarrotPiece2, -24)
-			$CarrotPiece2.split()
+			current_piece = $CarrotPiece2
+			gap_size = -24
 		4:
-			move_chunk_x($CarrotPiece3, -10)
-			$CarrotPiece3.split()
-			#CarrotPiece4 does not move, so tween does not complete
-			$CarrotPiece4.split()
-			#_on_Tween_tween_completed is hard coded to emit the last piece to PrepStatio
+			current_piece = $CarrotPiece3
+			gap_size = -10
+			move_chunk_x(current_piece, gap_size)
+			current_piece.split()
+			emit_signal("piece_made", current_piece)
+			current_piece = $CarrotPiece4
+			gap_size = 0
 		5: 
 			assert(false, "Split was invoked more times than possible")
+	move_chunk_x(current_piece, gap_size)
+	current_piece.split()
+	emit_signal("piece_made", current_piece)
 	# warning-ignore:return_value_discarded
 	get_next_Chop_Point_pos()
 
@@ -65,6 +73,7 @@ func get_next_Chop_Point_pos()->Vector2:
 			
 	return(current_chop_point_pos)
 
+
 func _on_Carrot_input_event(_viewport, event, _shape_idx):
 	if not done:
 		if event is InputEventMouseButton and event.pressed:
@@ -72,9 +81,10 @@ func _on_Carrot_input_event(_viewport, event, _shape_idx):
 
 
 func _on_Tween_tween_completed(object, _key):
-	emit_signal("piece_made", object)
+	emit_signal("piece_slid", object.position, object)
 	if object == $CarrotPiece3:
-		emit_signal("piece_made", $CarrotPiece4)
+		emit_signal("piece_slid", $CarrotPiece4.position, $CarrotPiece4)
+
 
 func _set_glowing(value:bool)->void:
 	is_glowing = value
