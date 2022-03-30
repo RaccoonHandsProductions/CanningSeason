@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://PrepStation/StationArea/CompostBowl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PrepStation/StationArea/DoneBowl.tscn" type="PackedScene" id=2]
 [ext_resource path="res://PrepStation/StationArea/CuttingBoard.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PrepStation/PrepStation.gd" type="Script" id=4]
 [ext_resource path="res://PrepStation/Knife/Knife.tscn" type="PackedScene" id=5]
-[ext_resource path="res://PrepStation/Carrot/Carrot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://PrepStation/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PrepStation/wood_counter.png" type="Texture" id=8]
 [ext_resource path="res://PrepStation/basket.png" type="Texture" id=9]
@@ -40,8 +39,7 @@ position = Vector2( 145, 525 )
 [node name="DoneBowl" parent="." instance=ExtResource( 2 )]
 position = Vector2( 1135, 525 )
 
-[node name="Carrot" parent="." instance=ExtResource( 6 )]
-position = Vector2( 635, 143 )
+[node name="Carrots" type="Node2D" parent="."]
 
 [node name="Knife" parent="." instance=ExtResource( 5 )]
 position = Vector2( 614, 1032 )
@@ -63,7 +61,6 @@ stream = ExtResource( 13 )
 
 [node name="ChunkReturnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]
 [connection signal="Times_Up" from="HUD" to="." method="_on_HUD_Times_Up"]

@@ -20,7 +20,7 @@ var compost_bowl_count := 0
 var compost_bowl_limit := 1
 var compost_bowl_full := false
 
-onready var _carrot := $Carrot
+var _carrot : Node2D
 export var carrot_float_animation_duration := 0.5
 export var carrot_animation_duration := 0.5
 
@@ -44,11 +44,8 @@ enum _State {
 	CARROT_FLOATING_HOME,
 	AWAITING_KNIFE_CHOP,
 	AWAITING_PIECE_TOUCH,
-	AWAITING_FROND_TOUCH,
 	DRAGGING_PIECE,
-	DRAGGING_FROND,
 	PIECE_FLOATING_HOME,
-	ALL_PIECES_PLACED
 }
 var _game_over := false
 
@@ -56,6 +53,11 @@ var _game_over := false
 var _new_bowl_polygon : PoolVector2Array
 var _new_compost_bowl_polygon : PoolVector2Array
 var _new_cutting_board_polygon : PoolVector2Array
+
+var _carrot_spawn_positions := [Vector2(617,88), Vector2(597, 155), Vector2(640, 209), Vector2(666, 105), Vector2(666, 172), Vector2(685, 132)]
+var _carrots
+var _carrot_count := 1
+var _current_carrot_pos : Vector2
 
 func _ready():
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
@@ -65,6 +67,9 @@ func _ready():
 		_new_compost_bowl_polygon.append(point + _compost_bowl_polygon_2d.global_position)
 	for point in _cutting_board_polygon_2d.polygon:
 		_new_cutting_board_polygon.append(point + _cutting_board_polygon_2d.global_position)
+		
+	for pos in _carrot_spawn_positions:
+		_carrot = _spawn_carrot(pos)
 	
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 
@@ -78,32 +83,36 @@ func _process(_delta):
 func _input(event):
 	match _state:
 		_State.DRAGGING_CARROT:
+			
 			_cutting_board.is_glowing = true
-			if event is InputEventMouseMotion:
-				_carrot.position += event.relative
-			elif event is InputEventMouseButton and not event.is_pressed():
-				var above_board := Geometry.is_point_in_polygon(
-					_carrot.position, _new_cutting_board_polygon)
-				if above_board:
-					_carrot_drop_sound.play()
-					_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
-					_carrot.done = true
-					_set_state(_State.AWAITING_KNIFE_CHOP)
-					
-				else:
-					_set_state(_State.CARROT_FLOATING_HOME)
-					var tween := Tween.new()
-					add_child(tween)
-					# warning-ignore:return_value_discarded
-					tween.connect("tween_completed", self, "_set_state_to_awaiting_carrot_touch")
-					# warning-ignore:return_value_discarded
-					tween.interpolate_property(
-						_carrot, "position", 
-						_carrot.position, $CarrotHomePoint.position, 
-						carrot_float_animation_duration,
-					Tween.TRANS_QUAD, Tween.EASE_IN)
-					# warning-ignore:return_value_discarded
-					tween.start()
+			if _carrot.is_draggable:
+				if event is InputEventMouseMotion:
+					_carrot.position += event.relative
+				elif event is InputEventMouseButton and not event.is_pressed():
+					var above_board := Geometry.is_point_in_polygon(
+						_carrot.position, _new_cutting_board_polygon)
+					if above_board:
+						_carrot_count += 1
+						_carrot_drop_sound.play()
+						$Carrots.move_child(_carrot, _carrots.size() - 1)
+						_animate_Knife_to_next_chop_point(knife_offscreen_animation_duration)
+						_carrot.done = true
+						_set_state(_State.AWAITING_KNIFE_CHOP)
+						
+					else:
+						_set_state(_State.CARROT_FLOATING_HOME)
+						var tween := Tween.new()
+						add_child(tween)
+						# warning-ignore:return_value_discarded
+						tween.connect("tween_completed", self, "_set_state_to_awaiting_carrot_touch")
+						# warning-ignore:return_value_discarded
+						tween.interpolate_property(
+							_carrot, "position", 
+							_carrot.position, $CarrotHomePoint.position, 
+							carrot_float_animation_duration,
+						Tween.TRANS_QUAD, Tween.EASE_IN)
+						# warning-ignore:return_value_discarded
+						tween.start()
 			
 		_State.DRAGGING_PIECE:
 			#if statement for if piece is in the bowl to avoid taking it out?
@@ -118,12 +127,13 @@ func _input(event):
 				if current_carrot_piece.is_frond:
 					if above_compost_bowl:
 						_chunk_drop_sound.play()
+						current_carrot_piece.rotation = rand_range(0,360)
 						current_carrot_piece.done = true
 						compost_bowl_count += 1
 						print("Compost Bowl Count: " + str(compost_bowl_count))
 
 						if _check_bowls():
-							_spawn_carrot()
+							_set_state(_State.AWAITING_CARROT_TOUCH)
 						else:
 							_set_state(_State.AWAITING_PIECE_TOUCH)
 							
@@ -139,11 +149,13 @@ func _input(event):
 				if not current_carrot_piece.is_frond:
 					if above_done_bowl:
 						_chunk_drop_sound.play()
+						current_carrot_piece.rotation = rand_range(0,360)
+						current_carrot_piece.get_parent().move_child(current_carrot_piece, current_carrot_piece.get_parent().get_child_count() - 1)
 						done_bowl_count += 1
 						print("Bowl Count: " + str(done_bowl_count))
 						current_carrot_piece.done = true
 						if _check_bowls():
-							_spawn_carrot()
+							_set_state(_State.AWAITING_CARROT_TOUCH)
 						else:
 							_set_state(_State.AWAITING_PIECE_TOUCH)
 							# warning-ignore:return_value_discarded
@@ -168,27 +180,29 @@ func _set_state(new_state)->void:
 	# Update variable
 	_state = new_state
 	
-	print(new_state)
 	#entering state
 	match new_state:
 		_State.AWAITING_CARROT_TOUCH:
-			_carrot.is_glowing = true
-			_pieces.clear()
+			_carrots = $Carrots.get_children()
+			_carrot = _carrots[_carrots.size() - _carrot_count]
+			_carrot.is_draggable = true
 			
-			_carrot.done = false
-			if not _carrot.is_connected("touched", self, "_on_Carrot_touched"): # or not _carrot.is_connected("piece_made", self, "_on_Carrot_piece_made"):
-				# warning-ignore:return_value_discarded
-				_carrot.connect("touched", self, "_on_Carrot_touched")
-				# warning-ignore:return_value_discarded
-				_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
+			if _carrot.is_draggable:
+				_carrot.is_glowing = true
+				_pieces.clear()
+				_current_carrot_pos = _carrot.position
 				
-				var error := _carrot.connect("piece_slid", self, "_on_Carrot_piece_slid")
-				assert(error==OK, "Connection failed with error " + str(error))
+				_carrot.done = false
+				if not _carrot.is_connected("touched", self, "_on_Carrot_touched"): # or not _carrot.is_connected("piece_made", self, "_on_Carrot_piece_made"):
+					# warning-ignore:return_value_discarded
+					_carrot.connect("touched", self, "_on_Carrot_touched")
+					# warning-ignore:return_value_discarded
+					_carrot.connect("piece_made", self, "_on_Carrot_piece_made")
+					
+					var error := _carrot.connect("piece_slid", self, "_on_Carrot_piece_slid")
+					assert(error==OK, "Connection failed with error " + str(error))
 			
 		_State.AWAITING_PIECE_TOUCH:
-			
-			print("processing %d pieces" % _pieces.size())
-			
 			for piece in _pieces:
 				if not piece.done:
 					piece.is_glowing = true
@@ -225,7 +239,6 @@ func _on_Carrot_piece_made(piece:Node2D)->void:
 
 func _on_Carrot_piece_slid(new_home_pos:Vector2, piece:Node2D)->void:
 	_pieces[piece] = new_home_pos
-	print(_pieces[piece])
 
 
 func _on_CarrotPiece_touched(piece:Node2D)->void:
@@ -267,6 +280,14 @@ func _on_Knife_chop_animation_complete()->void:
 		_animate_Knife_to_next_chop_point(knife_chop_transition_animation_duration)
 	else:
 		_animate_Knife_to_home()
+		#reset carrot
+		_carrot.done = false
+		# warning-ignore:return_value_discarded
+		_carrot.disconnect("touched", self, "_on_Carrot_touched")
+		# warning-ignore:return_value_discarded
+		_carrot.disconnect("piece_made", self, "_on_Carrot_piece_made")
+		# warning-ignore:return_value_discarded
+		_carrot.disconnect("piece_slid", self, "_on_Carrot_piece_slid")
 		_set_state(_State.AWAITING_PIECE_TOUCH)
 
 
@@ -314,29 +335,23 @@ func _on_HUD_Times_Up()->void:
 	_game_over = true
 	
 
-func _spawn_carrot():
+func _spawn_carrot(pos) -> Node2D:
 	compost_bowl_count = 0
 	done_bowl_count = 0
-	$HUD.update_score(1)
-	#reset carrot
-	_carrot.done = false
-	# warning-ignore:return_value_discarded
-	_carrot.disconnect("touched", self, "_on_Carrot_touched")
-	# warning-ignore:return_value_discarded
-	_carrot.disconnect("piece_made", self, "_on_Carrot_piece_made")
-	# warning-ignore:return_value_discarded
-	_carrot.disconnect("piece_slid", self, "_on_Carrot_piece_slid")
-	
+
 	_carrot = preload("res://PrepStation/Carrot/Carrot.tscn").instance()
-	add_child(_carrot)
+	$Carrots.add_child(_carrot)
 	
 	#float there
-	_carrot.position = $CarrotHomePoint.position
-	_set_state(_State.AWAITING_CARROT_TOUCH)
-
+	_carrot.position = pos
+	
+	return _carrot
 
 func _check_bowls():
 	if (done_bowl_count == done_bowl_limit and compost_bowl_count == compost_bowl_limit):
+		var new_carrot = _spawn_carrot(_current_carrot_pos)
+		$Carrots.move_child(new_carrot, 0)
+		$HUD.update_score(1)
 		return true
 
 
