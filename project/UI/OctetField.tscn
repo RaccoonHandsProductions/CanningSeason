@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/OctetField.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Balsamiq_Sans/BalsamiqSans-Regular.ttf"
@@ -12,7 +15,11 @@ font_data = SubResource( 1 )
 [node name="OctetField" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0

@@ -28,13 +28,13 @@ anchor_bottom = 1.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 315.0
-margin_bottom = 102.0
+margin_bottom = 101.0
 alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 106.0
+margin_top = 105.0
 margin_right = 315.0
-margin_bottom = 402.0
+margin_bottom = 401.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
