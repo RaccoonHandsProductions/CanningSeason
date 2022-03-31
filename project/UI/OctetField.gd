@@ -41,4 +41,8 @@ func get_allowable_digits():
 
 func clear():
 	_value = 0
-	$Label.text = "0"
+	$Label.text = "0"	
+
+
+func get_value()->int:
+	return _value

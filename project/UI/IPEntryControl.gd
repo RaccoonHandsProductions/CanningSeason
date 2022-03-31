@@ -2,12 +2,12 @@ extends Control
 
 const NumbersAllowed = preload("res://UI/NumbersAllowed.gd")
 
-var ip_address : String
-
 var _current_label_value : String
 var _current_field_index := 0
 var ip_octet : String
 var _focused_field
+
+var ip_address := "" setget , _get_ip_address
 
 onready var _fields = [$VBoxContainer/OctetDisplay/OctetField, 
 $VBoxContainer/OctetDisplay/OctetField2, 
@@ -35,11 +35,6 @@ func validate_octet(oct : String):
 		return false
 
 
-func finialize_address():
-			return(_fields[0].get_label_text() +"."+ _fields[1].get_label_text() +"."+ 
-			_fields[2].get_label_text() +"."+ _fields[3].get_label_text())
-			
-			
 func _update_field_label(ip_input : String):
 	_focused_field.mutate_label(ip_input)
 	
@@ -101,4 +96,11 @@ func _update_allowed_numbers()->void:
 			number_button_array[i].disabled = i > 4
 		else:
 			number_button_array[i].disabled = false
-		
+
+func _get_ip_address()->String:
+	var result = ""
+	for i in _fields.size():
+		result += str(_fields[i].get_value())
+		if i < _fields.size()-1:
+			result += "."
+	return result
