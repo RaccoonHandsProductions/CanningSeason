@@ -1,5 +1,7 @@
 extends Control
 
+signal button_clicked
+
 const _NumbersAllowed = preload("res://UI/NumbersAllowed.gd")
 
 ## This is the current IP address entered in this widget.
@@ -69,6 +71,7 @@ func _on_NextButton_pressed()->void:
 
 
 func on_number_Button_pressed(num:int)->void:
+	emit_signal("button_clicked")
 	_focused_field.enter_value(num)
 	_update_allowed_numbers()
 
@@ -79,7 +82,7 @@ func _update_allowed_numbers()->void:
 		if allowable == _NumbersAllowed.NONE:
 			_number_buttons[i].disabled = true
 		elif allowable == _NumbersAllowed.ZERO_TO_FIVE:
-			_number_buttons[i].disabled = i > 4
+			_number_buttons[i].disabled = i > 5
 		else:
 			_number_buttons[i].disabled = false
 

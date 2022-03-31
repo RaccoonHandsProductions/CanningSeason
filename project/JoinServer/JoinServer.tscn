@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://JoinServer/JoinServer.gd" type="Script" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://JoinServer/LoadingJar_02.png" type="Texture" id=4]
 [ext_resource path="res://JoinServer/LoadingJar_01.png" type="Texture" id=5]
 [ext_resource path="res://JoinServer/LoadingJar_04.png" type="Texture" id=6]
+[ext_resource path="res://UI/IPEntryControl.tscn" type="PackedScene" id=7]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -18,41 +19,30 @@ animations = [ {
 [node name="JoinServer" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 2.0
+margin_right = 2.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="HostIpLabel" type="Label" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -318.5
-margin_top = 100.0
-margin_right = 318.5
-margin_bottom = 139.0
+margin_left = -331.0
+margin_top = 111.0
+margin_right = 306.0
+margin_bottom = 150.0
 text = "Please enter an IP found on the host device"
-
-[node name="IpAdressEdit" type="LineEdit" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -150.0
-margin_top = -210.0
-margin_right = 150.0
-margin_bottom = -161.0
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="JoinButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -38.0
-margin_top = -127.5
-margin_right = 38.0
-margin_bottom = -72.5
+margin_left = -52.0
+margin_top = 156.0
+margin_right = 11.0
+margin_bottom = 202.0
 text = "Join"
 
 [node name="HelpButton" type="Button" parent="."]
@@ -134,14 +124,14 @@ margin_bottom = 27.5
 text = "Okay"
 
 [node name="GoBackButton" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -70.0
-margin_top = -50.0
-margin_right = 70.0
-margin_bottom = 5.0
+anchor_left = 0.533
+anchor_top = 0.656
+anchor_right = 0.533
+anchor_bottom = 0.656
+margin_left = -116.24
+margin_top = 106.2
+margin_right = -7.24005
+margin_bottom = 152.2
 text = "Go Back"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -149,8 +139,9 @@ __meta__ = {
 
 [node name="ConnectingAnimation" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 640, 520 )
+position = Vector2( 620, 395 )
 frames = SubResource( 1 )
+frame = 2
 playing = true
 
 [node name="ConnectingLabel" type="Label" parent="."]
@@ -159,15 +150,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -92.0
-margin_top = 210.0
-margin_right = 92.0
-margin_bottom = 249.0
+margin_left = -110.0
+margin_top = 105.0
+margin_right = 74.0
+margin_bottom = 144.0
 text = "Connecting..."
+align = 1
 
-[connection signal="text_changed" from="IpAdressEdit" to="." method="_on_IpAdressEdit_text_changed"]
+[node name="IPEntryControl" parent="." instance=ExtResource( 7 )]
+anchor_right = 0.212
+anchor_bottom = 0.38
+margin_left = 488.0
+margin_top = 183.0
+margin_right = 482.88
+margin_bottom = 184.6
+
 [connection signal="pressed" from="JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="HelpPopup/HideHelpButton" to="." method="_on_HideHelpButton_pressed"]
 [connection signal="pressed" from="CannnotConnectPopup/HideErrorButton" to="." method="_on_HideErrorButton_pressed"]
 [connection signal="pressed" from="GoBackButton" to="." method="_on_GoBackButton_pressed"]
+[connection signal="button_clicked" from="IPEntryControl" to="." method="_on_IPEntryControl_button_clicked"]

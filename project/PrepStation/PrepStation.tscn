@@ -61,6 +61,7 @@ stream = ExtResource( 13 )
 
 [node name="ChunkReturnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]
 [connection signal="Times_Up" from="HUD" to="." method="_on_HUD_Times_Up"]
