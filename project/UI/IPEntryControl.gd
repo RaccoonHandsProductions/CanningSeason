@@ -20,7 +20,7 @@ onready var _fields = [
 ]
 onready var _back_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/BackButton
 onready var _next_button = $VBoxContainer/HBoxContainer2/VBoxContainer2/UserBoxPosition/NextButton
-onready var _numpad = $VBoxContainer/HBoxContainer2/VBoxContainer2/numPad
+onready var _numpad = $VBoxContainer/HBoxContainer2/VBoxContainer2/NumPad
 onready var _button0 = $VBoxContainer/HBoxContainer2/VBoxContainer2/HBoxContainer/Button0
 
 
