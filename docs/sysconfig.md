@@ -24,6 +24,11 @@ communicate with the device.
 
 ## Godot Configuration
 
+Make sure you have downloaded the export templates. You can check this by going to
+Project&rightarrow;Export and selecting the Android target. If you don't have the
+templates, you'll get a message at the bottom of the dialog box, which you can
+click through to download them.
+
 In the Godot Project, under Editor&rightarrow;Export&rightarrow;Android:
 
   - Set the debug keystore is to `../platform/debug.keystore`
