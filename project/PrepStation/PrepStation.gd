@@ -338,6 +338,7 @@ func _game_over()->void:
 
 func _on_HUD_Times_Up()->void:
 	_game_over = true
+	$ReplayButton.visible = true
 	
 
 func _spawn_carrot(pos) -> Node2D:
@@ -352,6 +353,7 @@ func _spawn_carrot(pos) -> Node2D:
 	
 	return _carrot
 
+
 func _check_bowls():
 	if (done_bowl_count == done_bowl_limit and compost_bowl_count == compost_bowl_limit):
 		var new_carrot = _spawn_carrot(_current_carrot_pos)
@@ -360,4 +362,6 @@ func _check_bowls():
 		return true
 
 
-
+func _on_ReplayButton_pressed():
+	get_tree().paused = false
+	get_tree().change_scene("res://PrepStation/PrepStation.tscn")
