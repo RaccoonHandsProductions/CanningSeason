@@ -59,6 +59,8 @@ var _carrots
 var _carrot_count := 1
 var _current_carrot_pos : Vector2
 
+var piece_node_location
+
 func _ready():
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
 	for point in _done_bowl_polygon_2d.polygon:
@@ -118,13 +120,14 @@ func _input(event):
 			#if statement for if piece is in the bowl to avoid taking it out?
 			if event is InputEventMouseMotion:
 				current_carrot_piece.position += event.relative
+				_carrot.move_child(current_carrot_piece, _carrot.get_child_count() - 1)
 			elif event is InputEventMouseButton and not event.is_pressed():
-				
 				var above_compost_bowl := Geometry.is_point_in_polygon(
 					current_carrot_piece.position + _carrot.position,
 					_new_compost_bowl_polygon)
 			
 				if current_carrot_piece.is_frond:
+					print(piece_node_location)
 					if above_compost_bowl:
 						_chunk_drop_sound.play()
 						current_carrot_piece.rotation = rand_range(0,360)
@@ -139,6 +142,7 @@ func _input(event):
 							
 					else:
 						_set_state(_State.PIECE_FLOATING_HOME) # -------------------------- THIS IS NOT A 'REAL' STATE
+						_carrot.move_child(current_carrot_piece, piece_node_location)
 						_animate_CarrotPiece_to_home(piece_float_animation_duration)
 						_set_state(_State.AWAITING_PIECE_TOUCH)
 								
@@ -150,7 +154,6 @@ func _input(event):
 					if above_done_bowl:
 						_chunk_drop_sound.play()
 						current_carrot_piece.rotation = rand_range(0,360)
-						current_carrot_piece.get_parent().move_child(current_carrot_piece, current_carrot_piece.get_parent().get_child_count() - 1)
 						done_bowl_count += 1
 						print("Bowl Count: " + str(done_bowl_count))
 						current_carrot_piece.done = true
@@ -162,6 +165,7 @@ func _input(event):
 							_pieces.erase(current_carrot_piece)
 					else:
 						if not current_carrot_piece.done:
+							_carrot.move_child(current_carrot_piece, piece_node_location)
 							_set_state(_State.PIECE_FLOATING_HOME)
 							_animate_CarrotPiece_to_home(piece_float_animation_duration)
 					
@@ -209,6 +213,7 @@ func _set_state(new_state)->void:
 				piece.is_draggable = true
 				
 		_State.DRAGGING_PIECE:
+			piece_node_location = current_carrot_piece.get_index()
 			if current_carrot_piece.is_frond:
 				_compost_bowl.is_glowing = true
 			else:
