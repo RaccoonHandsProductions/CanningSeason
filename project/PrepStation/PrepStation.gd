@@ -108,7 +108,7 @@ func _input(event: InputEvent) -> void:
 						# warning-ignore:return_value_discarded
 						_tween.interpolate_property(
 							_carrot, "position", 
-							_carrot.position, $CarrotHomePoint.position, 
+							_carrot.position, _current_carrot_pos, 
 							carrot_float_animation_duration,
 						Tween.TRANS_QUAD, Tween.EASE_IN)
 						# warning-ignore:return_value_discarded
