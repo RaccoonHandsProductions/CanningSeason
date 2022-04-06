@@ -10,6 +10,7 @@ var is_glowing := false setget _set_glowing
 onready var is_draggable := false
 onready var done := false
 
+
 func _ready():
 	_rect_size = $CollisionShape2D.shape.extents
 

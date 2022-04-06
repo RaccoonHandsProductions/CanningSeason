@@ -11,14 +11,15 @@ var current_chop_point_pos
 var done := false
 var is_draggable : bool
 var is_glowing := false setget _set_glowing
-
 var _split_count := 0
 
 onready var tween := $Tween
 
+
 func _ready():
 	is_draggable = false
 	current_chop_point_pos = $ChopPoint0.position
+
 
 func move_chunk_x(chunk, amount):
 		tween.interpolate_property(chunk, "position:x",
@@ -26,10 +27,12 @@ func move_chunk_x(chunk, amount):
 			Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
 
+
 func split() -> void:
 	_split_count += 1
 	var current_piece = null
 	var gap_size = 0
+	
 	match (_split_count): 
 		1:
 			current_piece = $CarrotPiece0
@@ -51,14 +54,15 @@ func split() -> void:
 			gap_size = 0
 		5: 
 			assert(false, "Split was invoked more times than possible")
+			
 	move_chunk_x(current_piece, gap_size)
 	current_piece.split()
 	emit_signal("piece_made", current_piece)
 	# warning-ignore:return_value_discarded
-	get_next_Chop_Point_pos()
+	_get_next_Chop_Point_pos()
 
 
-func get_next_Chop_Point_pos()->Vector2:
+func _get_next_Chop_Point_pos()->Vector2:
 	match (_split_count):
 		1:
 			current_chop_point_pos = $ChopPoint1.position
@@ -70,7 +74,6 @@ func get_next_Chop_Point_pos()->Vector2:
 			current_chop_point_pos = null
 		_:
 			assert(false, "Should never get here")
-			
 	return(current_chop_point_pos)
 
 

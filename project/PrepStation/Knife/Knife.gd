@@ -1,5 +1,6 @@
 extends Node2D
 
+
 # This signal is emitted when the knife strikes the table.
 # This is not the end of the animation, but it is the point at which
 # it has "cut through" whatever is under it.
@@ -16,9 +17,9 @@ var is_glowing := false setget _set_glowing
 onready var _animation_player := $AnimationPlayer
 onready var _chop_sound := $ChopSound
 
+
 func _set_tappable(value:bool)->void:
 	tappable = value
-
 
 
 func _emit_chopped_signal():
@@ -39,6 +40,7 @@ func _is_playing_chop_animation()->bool:
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Chop":
 		emit_signal("chop_animation_complete")
+
 
 func _set_glowing(value:bool)->void:
 	is_glowing = value
