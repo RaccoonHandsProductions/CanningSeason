@@ -12,4 +12,4 @@ Design Log: https://docs.google.com/document/d/1X4oaPSvJNi8kN1W8c7bLmjUJdNyN9Qlp
 
 ## Licensing
 
--[GNU GPLv3](https://www.gnu.org/licenses/gpl-howto.html)
+- [GNU GPLv3](https://www.gnu.org/licenses/gpl-howto.html)
