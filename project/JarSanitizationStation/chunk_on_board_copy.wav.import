@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chunk_on_board_copy.wav-b070865b5788352f482985b7745bcb19.sample"
+
+[deps]
+
+source_file="res://JarSanitizationStation/chunk_on_board_copy.wav"
+dest_files=[ "res://.import/chunk_on_board_copy.wav-b070865b5788352f482985b7745bcb19.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

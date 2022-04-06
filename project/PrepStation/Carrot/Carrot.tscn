@@ -94,6 +94,7 @@ position = Vector2( 1, 0 )
 [node name="Tween" type="Tween" parent="."]
 
 [connection signal="input_event" from="." to="." method="_on_Carrot_input_event"]
+[connection signal="touched" from="." to="." method="_on_Carrot_touched"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 
 [editable path="CarrotPiece4"]
