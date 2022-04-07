@@ -6,4 +6,9 @@ var is_draggable : bool
 var done := false
 
 func _ready():
-	pass # Replace with function body.
+	is_draggable = false
+	
+func _on_Jar_input_event(_viewport, event, _shape_idx):
+	if not done:
+		if event is InputEventMouseButton and event.pressed:
+			emit_signal("touched")
