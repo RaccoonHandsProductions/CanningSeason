@@ -6,7 +6,7 @@ var is_draggable : bool
 var done := false
 
 func _ready():
-	is_draggable = false
+	is_draggable = true
 	
 func _on_Jar_input_event(_viewport, event, _shape_idx):
 	if not done:
