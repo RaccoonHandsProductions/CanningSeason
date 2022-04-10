@@ -12,6 +12,7 @@ var _state = null
 
 var _new_stovetop_polygon : PoolVector2Array
 var _new_done_area_polygon : PoolVector2Array
+var seconds_count := 0
 
 onready var _stovetop = $StoveTop
 onready var _done_area = $DoneArea
@@ -26,6 +27,7 @@ func _ready():
 	_set_up_polygons()
 	_jar = _spawn_jar(_jar_holder.position)
 	_set_state(_State.AWATING_JAR_TOUCH)
+	_checkmark.visible = false
 
 
 func _set_up_polygons()->void:
@@ -80,6 +82,8 @@ func _set_state(new_state)->void:
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
 			_jar.set_sprite("TopDownView") #SideView
+			_heat_timer.start()
+			
 			
 			
 
@@ -90,8 +94,14 @@ func _spawn_jar(pos:Vector2)->Node2D:
 	_jar_spawner.add_child(_jar)
 	_jar.position = pos
 	return _jar
+
+
+func _on_HeatTimer_timeout():
+	seconds_count += 1
+	_progress_bar.value += 1
 	
-
-
-func _on_Timer_timeout():
-	pass # Replace with function body.
+	if seconds_count == 4:
+		_checkmark.visible = true
+		seconds_count = 0
+		_heat_timer.stop()
+	

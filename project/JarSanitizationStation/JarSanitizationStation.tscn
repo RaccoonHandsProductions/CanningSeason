@@ -21,6 +21,7 @@ margin_right = 201.0
 margin_bottom = 249.0
 mouse_filter = 2
 input_pass_on_modal_close_click = false
+max_value = 4.0
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,3 +39,5 @@ position = Vector2( 651, 118 )
 texture = ExtResource( 4 )
 
 [node name="JarSpawner" type="Node2D" parent="."]
+
+[connection signal="timeout" from="StoveTop/HeatTimer" to="." method="_on_HeatTimer_timeout"]
