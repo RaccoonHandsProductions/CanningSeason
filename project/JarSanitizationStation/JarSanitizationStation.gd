@@ -18,6 +18,10 @@ onready var _done_area = $DoneArea
 onready var _jar_spawner = $JarSpawner
 onready var _jar_holder = $JarHolder
 
+onready var _heat_timer = $StoveTop/HeatTimer
+onready var _progress_bar = $StoveTop/ProgressBar
+onready var _checkmark = $StoveTop/Checkmark
+
 func _ready():
 	_set_up_polygons()
 	_jar = _spawn_jar(_jar_holder.position)
@@ -48,8 +52,6 @@ func _input(event: InputEvent) -> void:
 						_jar.position, _new_stovetop_polygon)
 					if _above_stovetop:
 						print ("on stovetop")
-						_jar.disconnect("touched", self, "_on_Jar_touched")
-						_jar.done = true
 						_set_state(_State.JAR_HEATING)
 					else:
 						print ("anywhere else")
@@ -74,6 +76,12 @@ func _set_state(new_state)->void:
 				if not _jar.is_connected("touched", self, "_on_Jar_touched"):
 					# warning-ignore:return_value_discarded
 					_jar.connect("touched", self, "_on_Jar_touched")
+		_State.JAR_HEATING:
+			_jar.disconnect("touched", self, "_on_Jar_touched")
+			_jar.done = true
+			_jar.set_sprite("TopDownView") #SideView
+			
+			
 
 
 func _spawn_jar(pos:Vector2)->Node2D:
