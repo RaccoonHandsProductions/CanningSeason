@@ -5,16 +5,18 @@ enum _State {
 	DRAGGING_JAR,
 	JAR_FLOATING_HOME,
 	JAR_HEATING,
-	JAR_SANITIZED,
-	
+	JAR_SANITIZED
 }
+
+export var float_animation_duration := 0.5
 
 var _jar : Node2D
 var _state = null
-
 var _new_stovetop_polygon : PoolVector2Array
 var _new_done_area_polygon : PoolVector2Array
-var seconds_count := 0
+var _seconds_count := 0
+
+var _jar_home_pos : Vector2
 
 onready var _stovetop = $StoveTop
 onready var _done_area = $DoneArea
@@ -59,10 +61,11 @@ func _input(event: InputEvent) -> void:
 					
 					if _above_stovetop and not _jar.is_sanitized:
 						print ("on stovetop stuck")
+						_jar_home_pos = _jar.global_position
 						_set_state(_State.JAR_HEATING)
 					elif _above_done_area and _jar.is_sanitized:
 						print("on done area")
-						_jar.set_sprite("SideView") # TopDownView
+						_jar.set_sprite("SideView")
 						_jar.disconnect("touched", self, "_on_Jar_touched")
 						
 						_progress_bar.value = 0
@@ -72,17 +75,12 @@ func _input(event: InputEvent) -> void:
 						_set_state(_State.AWATING_JAR_TOUCH)
 					else:
 						print ("anywhere else")
-						_set_state(_State.AWATING_JAR_TOUCH)
-			
+						_set_state(_State.JAR_FLOATING_HOME)
 
 
 func _set_state(new_state)->void:
 	# Handle logic when leaving state
 	match _state:
-		_State.AWATING_JAR_TOUCH:
-			pass
-		_State.DRAGGING_JAR:
-			pass
 		_State.JAR_HEATING:
 			_jar.done = false
 			_jar.is_sanitized = true
@@ -101,11 +99,22 @@ func _set_state(new_state)->void:
 		_State.JAR_HEATING:
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
-			_jar.set_sprite("TopDownView") #SideView
+			_jar.set_sprite("TopDownView")
 			_heat_timer.start()
 			
-			
-			
+		_State.JAR_FLOATING_HOME:
+			var _tween := Tween.new()
+			add_child(_tween)
+			# warning-ignore:return_value_discarded
+			_tween.connect("tween_completed", self, "_set_state_to_awaiting_jar_touch")
+			# warning-ignore:return_value_discarded
+			_tween.interpolate_property(
+				_jar, "position", 
+				_jar.position, _jar_home_pos, 
+				float_animation_duration,
+			Tween.TRANS_QUAD, Tween.EASE_IN)
+			# warning-ignore:return_value_discarded
+			_tween.start()
 
 
 func _spawn_jar(pos:Vector2)->Node2D:
@@ -113,16 +122,19 @@ func _spawn_jar(pos:Vector2)->Node2D:
 	_jar = preload("res://JarSanitizationStation/Jar/Jar.tscn").instance()
 	_jar_spawner.add_child(_jar)
 	_jar.position = pos
+	_jar_home_pos = _jar.global_position
 	return _jar
 
 
 func _on_HeatTimer_timeout():
-	seconds_count += 1
+	_seconds_count += 1
 	_progress_bar.value += 1
-	if seconds_count == 4:
+	if _seconds_count == 4:
 		_checkmark.visible = true
-		seconds_count = 0
+		_seconds_count = 0
 		_set_state(_State.AWATING_JAR_TOUCH)
 		_heat_timer.stop()
-		
-	
+
+
+func _set_state_to_awaiting_jar_touch(_obj, _key):
+	_set_state(_State.AWATING_JAR_TOUCH)
