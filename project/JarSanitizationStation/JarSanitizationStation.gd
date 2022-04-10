@@ -4,7 +4,9 @@ enum _State {
 	AWATING_JAR_TOUCH,
 	DRAGGING_JAR,
 	JAR_FLOATING_HOME,
-	JAR_HEATING
+	JAR_HEATING,
+	JAR_SANITIZED,
+	
 }
 
 var _jar : Node2D
@@ -52,12 +54,26 @@ func _input(event: InputEvent) -> void:
 				elif event is InputEventMouseButton and not event.is_pressed():
 					var _above_stovetop := Geometry.is_point_in_polygon(
 						_jar.position, _new_stovetop_polygon)
-					if _above_stovetop:
-						print ("on stovetop")
+					var _above_done_area := Geometry.is_point_in_polygon(
+						_jar.position, _new_done_area_polygon)
+					
+					if _above_stovetop and not _jar.is_sanitized:
+						print ("on stovetop stuck")
 						_set_state(_State.JAR_HEATING)
+					elif _above_done_area and _jar.is_sanitized:
+						print("on done area")
+						_jar.set_sprite("SideView") # TopDownView
+						_jar.disconnect("touched", self, "_on_Jar_touched")
+						
+						_progress_bar.value = 0
+						_checkmark.visible = false
+						
+						_jar = _spawn_jar(_jar_holder.position)
+						_set_state(_State.AWATING_JAR_TOUCH)
 					else:
 						print ("anywhere else")
 						_set_state(_State.AWATING_JAR_TOUCH)
+			
 
 
 func _set_state(new_state)->void:
@@ -67,6 +83,9 @@ func _set_state(new_state)->void:
 			pass
 		_State.DRAGGING_JAR:
 			pass
+		_State.JAR_HEATING:
+			_jar.done = false
+			_jar.is_sanitized = true
 	
 	# Update variable
 	_state = new_state
@@ -78,6 +97,7 @@ func _set_state(new_state)->void:
 				if not _jar.is_connected("touched", self, "_on_Jar_touched"):
 					# warning-ignore:return_value_discarded
 					_jar.connect("touched", self, "_on_Jar_touched")
+				
 		_State.JAR_HEATING:
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
@@ -99,9 +119,10 @@ func _spawn_jar(pos:Vector2)->Node2D:
 func _on_HeatTimer_timeout():
 	seconds_count += 1
 	_progress_bar.value += 1
-	
 	if seconds_count == 4:
 		_checkmark.visible = true
 		seconds_count = 0
+		_set_state(_State.AWATING_JAR_TOUCH)
 		_heat_timer.stop()
+		
 	

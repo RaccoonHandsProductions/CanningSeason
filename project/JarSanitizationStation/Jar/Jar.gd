@@ -4,7 +4,7 @@ signal touched
 
 var is_draggable : bool
 var done := false
-var sanitized := false 
+var is_sanitized := false 
 
 func _ready():
 	is_draggable = true
