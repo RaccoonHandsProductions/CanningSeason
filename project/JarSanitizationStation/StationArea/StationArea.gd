@@ -9,7 +9,6 @@ var done_area_width := 156
 var stovetop_length := 205
 var stovetop_width := 255
 
-
 var _polygon_points := PoolVector2Array()
 var _polygon_color := Color.white
 
@@ -19,6 +18,7 @@ func _ready():
 			set_rect_polygon(Vector2.ZERO, done_area_width, done_area_length)
 		"StoveTop":
 			set_rect_polygon(Vector2.ZERO, stovetop_width, stovetop_length)
+			
 	$Polygon2D.set_color(_polygon_color)
 
 
@@ -33,7 +33,6 @@ func set_rect_polygon(center:Vector2, length:int, width:int):
 
 func get_polygon()->Node:
 	return $Polygon2D
-	
 
 
 func get_polygon_points()->Array:

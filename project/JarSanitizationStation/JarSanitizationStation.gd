@@ -15,10 +15,12 @@ var _new_done_area_polygon : PoolVector2Array
 
 onready var _stovetop = $StoveTop
 onready var _done_area = $DoneArea
+onready var _jar_spawner = $JarSpawner
+onready var _jar_holder = $JarHolder
 
 func _ready():
 	_set_up_polygons()
-	_jar = _spawn_jar($JarSpawnArea.position)
+	_jar = _spawn_jar(_jar_holder.position)
 	_set_state(_State.AWATING_JAR_TOUCH)
 
 
@@ -74,10 +76,14 @@ func _set_state(new_state)->void:
 					_jar.connect("touched", self, "_on_Jar_touched")
 
 
-# warning-ignore:unused_argument
 func _spawn_jar(pos:Vector2)->Node2D:
 	#_jar signals disconnected where _jar is done
 	_jar = preload("res://JarSanitizationStation/Jar/Jar.tscn").instance()
-	$JarSpawnArea.add_child(_jar)
+	_jar_spawner.add_child(_jar)
+	_jar.position = pos
 	return _jar
 	
+
+
+func _on_Timer_timeout():
+	pass # Replace with function body.

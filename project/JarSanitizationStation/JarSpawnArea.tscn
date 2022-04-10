@@ -1,7 +1,0 @@
-[gd_scene format=2]
-
-[node name="JarSpawnArea" type="Node2D"]
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2( -250, -75 )
-polygon = PoolVector2Array( 0, 0, 0, 150, 500, 150, 500, 0 )
