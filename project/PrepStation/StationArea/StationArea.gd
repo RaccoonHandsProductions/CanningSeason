@@ -1,9 +1,9 @@
 extends Node2D
 
-
-export var polygon_circle_radius := 80
-export var polygon_rect_length := 180
-export var polygon_rect_width := 200
+#Sizes of areas an object can be dropped in
+var polygon_circle_radius := 80
+var polygon_rect_length := 180
+var polygon_rect_width := 200
 
 var _polygon_points := PoolVector2Array()
 var _polygon_color := Color.white
