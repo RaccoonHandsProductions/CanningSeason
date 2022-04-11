@@ -1,23 +1,22 @@
 extends Node2D
 
+var is_glowing := false setget _set_glowing
 
 #Sizes of objects in JarSanitizationStation
-var done_area_length := 200
-var done_area_width := 156
-
+var _done_area_length := 200
+var _done_area_width := 156
 #set to inner rect
-var stovetop_length := 205
-var stovetop_width := 255
-
+var _stovetop_length := 205
+var _stovetop_width := 255
 var _polygon_points := PoolVector2Array()
 var _polygon_color := Color.white
 
 func _ready():
 	match self.name:
 		"DoneArea":
-			set_rect_polygon(Vector2.ZERO, done_area_width, done_area_length)
+			set_rect_polygon(Vector2.ZERO, _done_area_width, _done_area_length)
 		"StoveTop":
-			set_rect_polygon(Vector2.ZERO, stovetop_width, stovetop_length)
+			set_rect_polygon(Vector2.ZERO, _stovetop_width, _stovetop_length)
 	$Polygon2D.set_color(_polygon_color)
 
 
@@ -37,3 +36,7 @@ func get_polygon()->Node:
 func get_polygon_points()->Array:
 	return $Polygon2D.polygon
 
+
+func _set_glowing(value:bool)->void:
+	is_glowing = value
+	$GlowingArea.visible = is_glowing

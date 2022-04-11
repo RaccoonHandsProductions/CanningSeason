@@ -95,14 +95,27 @@ func _set_state(new_state)->void:
 				if not _jar.is_connected("touched", self, "_on_Jar_touched"):
 					# warning-ignore:return_value_discarded
 					_jar.connect("touched", self, "_on_Jar_touched")
-				
+				_jar.is_glowing = true
+			_done_area.is_glowing = false
+			
+		_State.DRAGGING_JAR:
+			_jar.is_glowing = false
+			
+			if _jar.is_sanitized:
+				_done_area.is_glowing = true
+			else:
+				_stovetop.is_glowing = true
+			
 		_State.JAR_HEATING:
+			_stovetop.is_glowing = false
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
 			_jar.set_sprite("TopDownView")
 			_heat_timer.start()
 			
 		_State.JAR_FLOATING_HOME:
+			_stovetop.is_glowing = false
+			_done_area.is_glowing = false
 			var _tween := Tween.new()
 			add_child(_tween)
 			# warning-ignore:return_value_discarded
