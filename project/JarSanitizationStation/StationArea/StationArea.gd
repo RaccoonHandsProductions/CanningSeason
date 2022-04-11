@@ -9,7 +9,7 @@ var _done_area_width := 156
 var _stovetop_length := 205
 var _stovetop_width := 255
 var _polygon_points := PoolVector2Array()
-var _polygon_color := Color.white
+var _polygon_color := Color.red
 
 func _ready():
 	match self.name:

@@ -99,9 +99,12 @@ func _set_state(new_state)->void:
 				_jar.is_glowing = true
 			_done_area.is_glowing = false
 			
+			if _jar.is_sanitized:
+				move_child(_jar_spawner, 4)
+			
 		_State.DRAGGING_JAR:
 			_jar.is_glowing = false
-			
+			move_child(_jar_spawner, 5)
 			if _jar.is_sanitized:
 				_done_area.is_glowing = true
 			else:
@@ -109,6 +112,7 @@ func _set_state(new_state)->void:
 			
 		_State.JAR_HEATING:
 			_stovetop.is_glowing = false
+			move_child(_jar_spawner, 4)
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
 			_jar.set_sprite("TopDownView")

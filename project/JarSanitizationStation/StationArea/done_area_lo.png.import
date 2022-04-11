@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jar_top_down.png-090c1793ef3be94491b18fe832ad291b.stex"
+path="res://.import/done_area_lo.png-f6f2fdc2c383cbe0e465f916c652162a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/Jar/jar_top_down.png"
-dest_files=[ "res://.import/jar_top_down.png-090c1793ef3be94491b18fe832ad291b.stex" ]
+source_file="res://JarSanitizationStation/StationArea/done_area_lo.png"
+dest_files=[ "res://.import/done_area_lo.png-f6f2fdc2c383cbe0e465f916c652162a.stex" ]
 
 [params]
 
