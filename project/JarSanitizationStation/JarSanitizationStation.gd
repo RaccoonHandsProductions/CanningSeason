@@ -12,13 +12,13 @@ export var float_animation_duration := 0.5
 
 var _jar : Node2D
 var _state = null
-var _new_stovetop_polygon : PoolVector2Array
+var _new_pot_polygon : PoolVector2Array
 var _new_done_area_polygon : PoolVector2Array
 var _seconds_count := 0
 
 var _jar_home_pos : Vector2
 
-onready var _stovetop = $StoveTop
+onready var _pot = $Pot
 onready var _done_area = $DoneArea
 onready var _jar_spawner = $JarSpawner
 onready var _jar_holder = $JarHolder
@@ -36,8 +36,8 @@ func _ready():
 
 
 func _set_up_polygons()->void:
-	for point in _stovetop.get_polygon_points():
-		_new_stovetop_polygon.append(point + _stovetop.get_polygon().global_position)
+	for point in _pot.get_polygon_points():
+		_new_pot_polygon.append(point + _pot.get_polygon().global_position)
 	for point in _done_area.get_polygon_points():
 		_new_done_area_polygon.append(point + _done_area.get_polygon().global_position)
 
@@ -55,12 +55,12 @@ func _input(event: InputEvent) -> void:
 				if event is InputEventMouseMotion:
 					_jar.position += event.relative
 				elif event is InputEventMouseButton and not event.is_pressed():
-					var _above_stovetop := Geometry.is_point_in_polygon(
-						_jar.position, _new_stovetop_polygon)
+					var _above_pot := Geometry.is_point_in_polygon(
+						_jar.position, _new_pot_polygon)
 					var _above_done_area := Geometry.is_point_in_polygon(
 						_jar.position, _new_done_area_polygon)
 					
-					if _above_stovetop and not _jar.is_sanitized:
+					if _above_pot and not _jar.is_sanitized:
 						print ("on stovetop stuck")
 						_jar_home_pos = _jar.global_position
 						_set_state(_State.JAR_HEATING)
@@ -108,10 +108,10 @@ func _set_state(new_state)->void:
 			if _jar.is_sanitized:
 				_done_area.is_glowing = true
 			else:
-				_stovetop.is_glowing = true
+				_pot.is_glowing = true
 			
 		_State.JAR_HEATING:
-			_stovetop.is_glowing = false
+			_pot.is_glowing = false
 			move_child(_jar_spawner, 4)
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
@@ -119,7 +119,7 @@ func _set_state(new_state)->void:
 			_heat_timer.start()
 			
 		_State.JAR_FLOATING_HOME:
-			_stovetop.is_glowing = false
+			_pot.is_glowing = false
 			_done_area.is_glowing = false
 			var _tween := Tween.new()
 			add_child(_tween)
