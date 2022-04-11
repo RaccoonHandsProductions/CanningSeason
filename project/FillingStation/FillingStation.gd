@@ -30,6 +30,8 @@ onready var _done_area = $DoneArea
 onready var _jar_holder = $JarHolder
 onready var _chunk_bowl = $ChunkBowl
 onready var _raycast := $RayCast2D
+onready var _jar_spawner := $JarSpawner
+onready var _chunk_spawner := $ChunksSpawner
 
 
 func _ready():
@@ -96,10 +98,12 @@ func _set_state(new_state)->void:
 	match _state:
 		_State.AWAITING_JAR_TOUCH:
 			_jar.is_glowing = false
+			move_child(_jar_spawner, 5)
 		_State.DRAGGING_JAR:
 			_filling_area.is_glowing = false
 		_State.AWAITING_CHUNKS_TOUCH:
 			_chunks.is_glowing = false
+			move_child(_chunk_spawner, 5)
 		_State.DRAGGING_CHUNKS:
 			_jar.is_glowing = false
 		_State.AWAITING_FILLED_JAR_TOUCH:
@@ -115,7 +119,6 @@ func _set_state(new_state)->void:
 		_State.AWAITING_JAR_TOUCH:
 			_jar.is_draggable = true
 			_jar.is_glowing = true
-			
 			if _jar.is_draggable:
 				_jar.done = false
 				
