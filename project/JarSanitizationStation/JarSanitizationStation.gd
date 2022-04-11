@@ -26,6 +26,7 @@ onready var _jar_holder = $JarHolder
 onready var _heat_timer = $StoveTop/HeatTimer
 onready var _progress_bar = $StoveTop/ProgressBar
 onready var _checkmark = $StoveTop/Checkmark
+onready var _checkmark_sound = $CheckmarkSound
 
 func _ready():
 	_set_up_polygons()
@@ -143,6 +144,7 @@ func _on_HeatTimer_timeout():
 	_seconds_count += 1
 	_progress_bar.value += 1
 	if _seconds_count == 4:
+		_checkmark_sound.play()
 		_checkmark.visible = true
 		_seconds_count = 0
 		_set_state(_State.AWATING_JAR_TOUCH)

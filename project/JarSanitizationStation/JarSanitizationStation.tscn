@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://JarSanitizationStation/StationArea/DoneArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://JarSanitizationStation/jar_holder.png" type="Texture" id=4]
 [ext_resource path="res://JarSanitizationStation/StationArea/check_mark.png" type="Texture" id=5]
+[ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]
 
 [node name="JarSanitizationStation" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,5 +40,8 @@ position = Vector2( 651, 118 )
 texture = ExtResource( 4 )
 
 [node name="JarSpawner" type="Node2D" parent="."]
+
+[node name="CheckmarkSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="timeout" from="StoveTop/HeatTimer" to="." method="_on_HeatTimer_timeout"]
