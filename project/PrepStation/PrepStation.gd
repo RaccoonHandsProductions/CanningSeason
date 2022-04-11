@@ -353,7 +353,7 @@ func _check_bowls():
 	if (_done_bowl_count == _done_bowl_limit and _compost_bowl_count == _compost_bowl_limit):
 		var _new_carrot = _spawn_carrot(_current_carrot_pos)
 		$Carrots.move_child(_new_carrot, 0)
-		$HUD.update_score(1)
+		$HUD.update_Carrot_count(1)
 		return true
 
 

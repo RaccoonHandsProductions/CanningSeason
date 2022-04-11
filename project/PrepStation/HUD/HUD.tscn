@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://PrepStation/HUD/HUD.gd" type="Script" id=2]
 [ext_resource path="res://PrepStation/HUD/carrot_counter_icon.png" type="Texture" id=3]
 [ext_resource path="res://PrepStation/HUD/stopwatch_static.png" type="Texture" id=4]
+[ext_resource path="res://MenuStyle.tres" type="Theme" id=5]
+[ext_resource path="res://PrepStation/HUD/jar.png" type="Texture" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -33,6 +35,9 @@ custom_fonts/font = SubResource( 1 )
 text = "100"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScoreSprite" type="Sprite" parent="ScoreLabel"]
 position = Vector2( 307, 61 )
@@ -74,6 +79,40 @@ wait_time = 2.0
 wait_time = 60.0
 one_shot = true
 autostart = true
+
+[node name="CleanJarLabel" type="Label" parent="."]
+margin_left = 980.0
+margin_top = 207.0
+margin_right = 1204.0
+margin_bottom = 246.0
+theme = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jar" type="Sprite" parent="CleanJarLabel"]
+position = Vector2( 245, 19 )
+scale = Vector2( 0.342262, 0.301339 )
+texture = ExtResource( 6 )
+
+[node name="FullJarLabel" type="Label" parent="."]
+margin_left = 123.0
+margin_top = 190.0
+margin_right = 203.0
+margin_bottom = 241.0
+theme = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jar" type="Sprite" parent="FullJarLabel"]
+position = Vector2( -61, 15 )
+scale = Vector2( 0.372024, 0.305804 )
+texture = ExtResource( 6 )
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
