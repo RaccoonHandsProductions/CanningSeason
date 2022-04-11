@@ -7,7 +7,7 @@ export var polygon_rect_width := 200
 
 var _polygon_points := PoolVector2Array()
 var _polygon_color := Color.white
-
+var is_glowing := false setget _set_glowing
 
 
 func _ready():
@@ -30,3 +30,7 @@ func get_polygon()->Node:
 
 func get_polygon_points()->Array:
 	return $Polygon2D.polygon
+
+func _set_glowing(value:bool)->void:
+	is_glowing = value
+	$GlowingArea.visible = is_glowing

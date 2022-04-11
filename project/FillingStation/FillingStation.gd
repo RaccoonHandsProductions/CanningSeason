@@ -51,6 +51,7 @@ func _input(event: InputEvent) -> void:
 			if _jar.is_draggable:
 				if event is InputEventMouseMotion:
 					_jar.position += event.relative
+					_filling_area.is_glowing = true
 				elif event is InputEventMouseButton and not event.is_pressed():
 					var _above_filling_area := Geometry.is_point_in_polygon(
 						_jar.position, _new_filling_area_polygon)
@@ -63,6 +64,7 @@ func _input(event: InputEvent) -> void:
 			if _chunks.is_draggable:
 				if event is InputEventMouseMotion:
 					_chunks.position += event.relative
+					_jar.is_glowing = true
 				elif event is InputEventMouseButton and not event.is_pressed():
 					_raycast.position = event.position
 					_raycast.force_raycast_update()
@@ -78,6 +80,7 @@ func _input(event: InputEvent) -> void:
 			if _jar.is_draggable:
 				if event is InputEventMouseMotion:
 					_jar.position += event.relative
+					_done_area.is_glowing = true
 				elif event is InputEventMouseButton and not event.is_pressed():
 					var _above_done_area := Geometry.is_point_in_polygon(
 						_jar.position, _new_done_area_polygon)
@@ -92,13 +95,17 @@ func _set_state(new_state)->void:
 	# Handle logic when leaving state
 	match _state:
 		_State.AWAITING_JAR_TOUCH:
-			pass
+			_jar.is_glowing = false
 		_State.DRAGGING_JAR:
-			pass
+			_filling_area.is_glowing = false
 		_State.AWAITING_CHUNKS_TOUCH:
-			pass
+			_chunks.is_glowing = false
 		_State.DRAGGING_CHUNKS:
-			pass
+			_jar.is_glowing = false
+		_State.AWAITING_FILLED_JAR_TOUCH:
+			_jar.is_glowing = false
+		_State.DRAGGING_FILLED_JAR:
+			_done_area.is_glowing = false
 
 	# Update variable
 	_state = new_state
@@ -107,6 +114,7 @@ func _set_state(new_state)->void:
 	match new_state:
 		_State.AWAITING_JAR_TOUCH:
 			_jar.is_draggable = true
+			_jar.is_glowing = true
 			
 			if _jar.is_draggable:
 				_jar.done = false
@@ -131,7 +139,7 @@ func _set_state(new_state)->void:
 
 		_State.AWAITING_CHUNKS_TOUCH:
 			_chunks.is_draggable = true
-			
+			_chunks.is_glowing = true
 			if _chunks.is_draggable:
 				_chunks.done = false
 				
@@ -155,6 +163,7 @@ func _set_state(new_state)->void:
 		
 		_State.AWAITING_FILLED_JAR_TOUCH:
 			_jar.done = false
+			_jar.is_glowing = true
 			_filled_jar_start_pos = _jar.position
 		
 		_State.FILLED_JAR_FLOATING_HOME:

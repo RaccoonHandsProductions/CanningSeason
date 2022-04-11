@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://FillingStation/StationArea/done_area.png" type="Texture" id=1]
 [ext_resource path="res://FillingStation/StationArea/StationArea.gd" type="Script" id=2]
+[ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=3]
 
 [node name="DoneArea" type="Node2D"]
 script = ExtResource( 2 )
+
+[node name="GlowingArea" parent="." instance=ExtResource( 3 )]
+visible = false
+margin_left = -250.0
+margin_top = -290.0
+margin_right = 250.0
+margin_bottom = 290.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false

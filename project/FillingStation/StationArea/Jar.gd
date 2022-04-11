@@ -5,6 +5,7 @@ signal touched
 
 var done := false
 var is_draggable : bool
+var is_glowing := false setget _set_glowing
 
 
 func _ready():
@@ -19,3 +20,7 @@ func _on_Jar_input_event(_viewport, event, _shape_idx):
 
 func fill_jar():
 	$AnimatedSprite.animation = "Filled"
+
+func _set_glowing(value:bool)->void:
+	is_glowing = value
+	$GlowingArea.visible = is_glowing
