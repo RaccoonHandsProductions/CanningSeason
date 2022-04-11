@@ -4,7 +4,7 @@ signal Times_Up
 
 var _carrotCount = -1
 var _cleanCount = -1
-var _fullCount = -1
+var _fullCount = -10
 # Displays time left on timer as a string from an integer from the timer, in the TimeLabel
 func _process(_delta):
 	increment_Carrot_count()
@@ -29,7 +29,7 @@ func increment_Clean_Jar_count():
 	$CleanJarLabel.text = ( "Clean Jars: " + str(_cleanCount) )
 	
 func increment_Full_Jar_count():
-	_fullCount += 1
+	_fullCount += 10
 	$CleanJarLabel.text = ( "Clean Jars: " + str(_fullCount) )
 
 func decrement_Carrot_count():
