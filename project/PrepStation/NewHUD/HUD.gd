@@ -2,14 +2,11 @@ extends CanvasLayer
 
 signal Times_Up
 
-var _carrotCount = -1
-var _cleanCount = -1
-var _fullCount = -1
 # Displays time left on timer as a string from an integer from the timer, in the TimeLabel
 func _process(_delta):
-	increment_Carrot_count()
-	increment_Clean_Jar_count()
-	increment_Full_Jar_count()
+	update_Carrot_count(0)
+	update_Clean_Jar_count(0)
+	update_Full_Jar_count(0)
 	$TimeLabel.set_text( "Time: " + str( int( $GameTimer.get_time_left() ) ) )
 
 # sets the Message label to a text value input for contexual HUD messages / testing states
@@ -19,26 +16,29 @@ func show_message(text):
 	#$MessageTimer.start()	# This removes state messages after a short period
 
 # sets the ScoreLabel based on a variable input
-
-func increment_Carrot_count():
-	_carrotCount += 1
-	$ScoreLabel.text = ( "Score: " + str(_carrotCount) )
+var count = 0
+func update_Carrot_count(carrotPiece):
+	if (carrotPiece != 100):
+		count += carrotPiece
+	else:
+		count = 0;
+	$ScoreLabel.text = ( "Score: " + str(count) )
 	
-func increment_Clean_Jar_count():
-	_cleanCount += 1
-	$CleanJarLabel.text = ( "Clean Jars: " + str(_cleanCount) )
+var cleanCount = 0
+func update_Clean_Jar_count(cleanJar):
+	if (cleanJar != 100):
+		cleanCount += cleanJar
+	else:
+		cleanCount = 0;
+	$CleanJarLabel.text = ( "Clean Jars: " + str(cleanCount) )
 	
-func increment_Full_Jar_count():
-	_fullCount += 1
-	$CleanJarLabel.text = ( "Clean Jars: " + str(_fullCount) )
-
-func decrement_Carrot_count():
-	_carrotCount -= 1
-	$ScoreLabel.text = ( "Score: " + str(_carrotCount) )
-	
-func decrement_Clean_Jar_count():
-	_cleanCount -= 1
-	$CleanJarLabel.text = ( "Clean Jars: " + str(_cleanCount) )
+var fullCount = 0
+func update_Full_Jar_count(fullJar):
+	if (fullJar != 100):
+		fullCount += fullJar
+	else:
+		fullCount = 0;
+	$FullJarLabel.text = ( "Full Jars: " + str(fullCount) )
 	
 # Hides message on MesageTimer timeout
 func _on_MessageTimer_timeout():
