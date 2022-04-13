@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jar_lo.png-2094897f55a1f41db84fbd8bc512b0f6.stex"
+path="res://.import/checkmark.png-4a70376ff573bd3ace2dbaceffd6b5c1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/Jar/jar_lo.png"
-dest_files=[ "res://.import/jar_lo.png-2094897f55a1f41db84fbd8bc512b0f6.stex" ]
+source_file="res://JarSanitizationStation/checkmark.png"
+dest_files=[ "res://.import/checkmark.png-4a70376ff573bd3ace2dbaceffd6b5c1.stex" ]
 
 [params]
 

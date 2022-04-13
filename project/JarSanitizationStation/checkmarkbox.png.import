@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/checkmark.png-12515b2dc06e9cb3e8454dd90b62e572.stex"
+path="res://.import/checkmarkbox.png-195be8d2e0da42900c728eb8f954961b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/StationArea/checkmark.png"
-dest_files=[ "res://.import/checkmark.png-12515b2dc06e9cb3e8454dd90b62e572.stex" ]
+source_file="res://JarSanitizationStation/checkmarkbox.png"
+dest_files=[ "res://.import/checkmarkbox.png-195be8d2e0da42900c728eb8f954961b.stex" ]
 
 [params]
 

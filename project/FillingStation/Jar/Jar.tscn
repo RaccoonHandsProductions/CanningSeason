@@ -11,14 +11,14 @@ load_path = "res://.import/empty_jar.png-26a9a0d5b9202cac4c35c08370757774.stex"
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "Empty",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "Filled",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "Empty",
 "speed": 5.0
 } ]
 
