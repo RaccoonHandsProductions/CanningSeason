@@ -22,6 +22,11 @@ This project was created by [Raccoon Hands Productions](https://github.com/Racco
 - Mercedes Thompson
 - Dawson Vaal
 
+## License
+
+_Canning Season_ is distributed under the terms of the [GNU General Public License v3](LICENSE).
+Art assets are distributed as [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
 ## Third-Party Assets
 
 - [Dropping bag of veggies onto floor repeatedly](https://freesound.org/people/DSCreative/sounds/436495/) by DSCreative, licensed under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
