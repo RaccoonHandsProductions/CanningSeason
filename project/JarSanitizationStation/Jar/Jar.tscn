@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://JarSanitizationStation/Jar/Jar.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/Jar/jar_side.png" type="Texture" id=2]
-[ext_resource path="res://JarSanitizationStation/Jar/jar_lo.png" type="Texture" id=3]
+[ext_resource path="res://FillingStation/Jar/empty_jar.png" type="Texture" id=3]
 [ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://JarSanitizationStation/Jar/water.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 100, 100 )
@@ -39,5 +40,10 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "SideView"
+
+[node name="Water" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.436, 0.443 )
+texture = ExtResource( 5 )
 
 [connection signal="input_event" from="." to="." method="_on_Jar_input_event"]

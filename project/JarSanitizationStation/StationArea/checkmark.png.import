@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jar_holder.png-6f46e32378c3eef79b8b66e221499e73.stex"
+path="res://.import/checkmark.png-12515b2dc06e9cb3e8454dd90b62e572.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FillingStation/StationArea/jar_holder.png"
-dest_files=[ "res://.import/jar_holder.png-6f46e32378c3eef79b8b66e221499e73.stex" ]
+source_file="res://JarSanitizationStation/StationArea/checkmark.png"
+dest_files=[ "res://.import/checkmark.png-12515b2dc06e9cb3e8454dd90b62e572.stex" ]
 
 [params]
 

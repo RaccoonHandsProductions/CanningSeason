@@ -6,6 +6,7 @@ signal touched
 var done := false
 var is_draggable : bool
 var is_glowing := false setget _set_glowing
+var is_water_visible := false setget _set_water_visible
 
 
 func _ready():
@@ -19,8 +20,15 @@ func _on_Jar_input_event(_viewport, event, _shape_idx):
 
 
 func fill_jar():
+	$Water.visible = false
 	$AnimatedSprite.animation = "Filled"
 
 func _set_glowing(value:bool)->void:
 	is_glowing = value
 	$GlowingArea.visible = is_glowing
+
+func _set_water_visible(value:bool)->void:
+	is_water_visible = value
+	$Water.visible = is_water_visible
+	
+

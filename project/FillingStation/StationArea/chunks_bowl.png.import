@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/done_area_lo.png-f6f2fdc2c383cbe0e465f916c652162a.stex"
+path="res://.import/chunks_bowl.png-60c0673d0561039e696fd7e8549708fe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/StationArea/done_area_lo.png"
-dest_files=[ "res://.import/done_area_lo.png-f6f2fdc2c383cbe0e465f916c652162a.stex" ]
+source_file="res://FillingStation/StationArea/chunks_bowl.png"
+dest_files=[ "res://.import/chunks_bowl.png-60c0673d0561039e696fd7e8549708fe.stex" ]
 
 [params]
 

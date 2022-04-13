@@ -18,15 +18,17 @@ var _seconds_count := 0
 
 var _jar_home_pos : Vector2
 
-
 onready var _done_area = $DoneArea
 onready var _jar_spawner = $JarSpawner
 onready var _jar_holder = $JarHolder
 onready var _pot = $Pot
 onready var _heat_timer = $StoveTop/HeatTimer
 onready var _progress_bar = $StoveTop/ProgressBar
-onready var _checkmark = $StoveTop/Checkmark
+onready var _checkmark = $StoveTop/CheckmarkBox/Checkmark
 onready var _checkmark_sound = $CheckmarkSound
+
+onready var _top_layer := get_child_count()
+onready var _initial_jar_layer = _jar_spawner.get_index()
 
 func _ready():
 	_set_up_polygons()
@@ -67,6 +69,7 @@ func _input(event: InputEvent) -> void:
 					elif _above_done_area and _jar.is_sanitized:
 						print("on done area")
 						_jar.set_sprite("SideView")
+						_jar.is_water_visible = false
 						_jar.disconnect("touched", self, "_on_Jar_touched")
 						
 						_progress_bar.value = 0
@@ -98,21 +101,23 @@ func _set_state(new_state)->void:
 					_jar.connect("touched", self, "_on_Jar_touched")
 				_jar.is_glowing = true
 			_done_area.is_glowing = false
+			_jar.is_water_visible = false
 			
 			if _jar.is_sanitized:
-				move_child(_jar_spawner, 4)
+				move_child(_jar_spawner, _initial_jar_layer)
 			
 		_State.DRAGGING_JAR:
 			_jar.is_glowing = false
-			move_child(_jar_spawner, 5)
+			move_child(_jar_spawner, _top_layer)
 			if _jar.is_sanitized:
 				_done_area.is_glowing = true
+				_jar.is_water_visible = true
 			else:
 				_pot.is_glowing = true
 			
 		_State.JAR_HEATING:
 			_pot.is_glowing = false
-			move_child(_jar_spawner, 4)
+			move_child(_jar_spawner, _initial_jar_layer)
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
 			_jar.set_sprite("TopDownView")

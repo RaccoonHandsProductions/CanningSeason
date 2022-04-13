@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stovetop.png-0dc5749fc3a1ef55218259dd54bb75ae.stex"
+path="res://.import/filled_jar.png-9c253be6ba67962138d93e1bedbefac3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/StationArea/stovetop.png"
-dest_files=[ "res://.import/stovetop.png-0dc5749fc3a1ef55218259dd54bb75ae.stex" ]
+source_file="res://FillingStation/Jar/filled_jar.png"
+dest_files=[ "res://.import/filled_jar.png-9c253be6ba67962138d93e1bedbefac3.stex" ]
 
 [params]
 

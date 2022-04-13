@@ -3,8 +3,8 @@ extends Node2D
 var is_glowing := false setget _set_glowing
 
 #Sizes of objects in JarSanitizationStation
-var _done_area_length := 200
-var _done_area_width := 156
+var _done_area_length := 100
+var _done_area_width := 90
 #set to inner circ of pot
 var _pot_radius := 100
 var _polygon_points := PoolVector2Array()
@@ -13,7 +13,7 @@ var _polygon_color := Color.red
 func _ready():
 	match self.name:
 		"DoneArea":
-			set_rect_polygon(Vector2.ZERO, _done_area_width, _done_area_length)
+			set_rect_polygon(Vector2(14, 0), _done_area_width, _done_area_length)
 		"Pot":
 			set_circle_polygon(Vector2.ZERO, _pot_radius)
 	$Polygon2D.set_color(_polygon_color)

@@ -33,6 +33,8 @@ onready var _raycast := $RayCast2D
 onready var _jar_spawner := $JarSpawner
 onready var _chunk_spawner := $ChunksSpawner
 
+onready var _top_layer := get_child_count()
+
 
 func _ready():
 	for point in _filling_area.get_polygon_points():
@@ -98,12 +100,12 @@ func _set_state(new_state)->void:
 	match _state:
 		_State.AWAITING_JAR_TOUCH:
 			_jar.is_glowing = false
-			move_child(_jar_spawner, 5)
+			move_child(_jar_spawner, _top_layer)
 		_State.DRAGGING_JAR:
 			_filling_area.is_glowing = false
 		_State.AWAITING_CHUNKS_TOUCH:
 			_chunks.is_glowing = false
-			move_child(_chunk_spawner, 5)
+			move_child(_chunk_spawner, _top_layer)
 		_State.DRAGGING_CHUNKS:
 			_jar.is_glowing = false
 		_State.AWAITING_FILLED_JAR_TOUCH:
@@ -225,7 +227,7 @@ func _spawn_chunks(pos:Vector2) -> Node2D:
 	return _chunks
 
 func _spawn_jar(pos:Vector2) -> Node2D:
-	_jar = preload("res://FillingStation/StationArea/Jar.tscn").instance()
+	_jar = preload("res://FillingStation/Jar/Jar.tscn").instance()
 	$JarSpawner.add_child(_jar)
 	_jar.position = pos
 	return _jar

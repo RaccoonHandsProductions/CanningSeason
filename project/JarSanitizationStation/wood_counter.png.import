@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/check_mark.png-f8603636bca73e5f20b3384fecf8cb99.stex"
+path="res://.import/wood_counter.png-8951af0140cce53d26099733629f7fea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/StationArea/check_mark.png"
-dest_files=[ "res://.import/check_mark.png-f8603636bca73e5f20b3384fecf8cb99.stex" ]
+source_file="res://JarSanitizationStation/wood_counter.png"
+dest_files=[ "res://.import/wood_counter.png-8951af0140cce53d26099733629f7fea.stex" ]
 
 [params]
 

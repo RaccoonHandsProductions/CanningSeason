@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://JarSanitizationStation/StationArea/DoneArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://JarSanitizationStation/jar_holder.png" type="Texture" id=4]
-[ext_resource path="res://JarSanitizationStation/StationArea/check_mark.png" type="Texture" id=5]
+[ext_resource path="res://JarSanitizationStation/StationArea/checkmarkbox.png" type="Texture" id=5]
 [ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]
 [ext_resource path="res://JarSanitizationStation/StationArea/Pot.tscn" type="PackedScene" id=7]
 [ext_resource path="res://JarSanitizationStation/StationArea/water.png" type="Texture" id=8]
+[ext_resource path="res://JarSanitizationStation/wood_counter.png" type="Texture" id=9]
+[ext_resource path="res://JarSanitizationStation/StationArea/checkmark.png" type="Texture" id=10]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -19,6 +21,10 @@ animations = [ {
 
 [node name="JarSanitizationStation" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="WoodCounter" type="Sprite" parent="."]
+position = Vector2( 640, 400 )
+texture = ExtResource( 9 )
 
 [node name="DoneArea" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1122, 572 )
@@ -43,17 +49,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Checkmark" type="Sprite" parent="StoveTop"]
-position = Vector2( 244, 211 )
+[node name="CheckmarkBox" type="Sprite" parent="StoveTop"]
+position = Vector2( 244, 219 )
 texture = ExtResource( 5 )
+
+[node name="Checkmark" type="Sprite" parent="StoveTop/CheckmarkBox"]
+position = Vector2( -2, 1 )
+texture = ExtResource( 10 )
+
+[node name="Pot" parent="." instance=ExtResource( 7 )]
+position = Vector2( 439, 486 )
 
 [node name="JarSpawner" type="Node2D" parent="."]
 
-[node name="Pot" parent="." instance=ExtResource( 7 )]
-position = Vector2( 439, 502 )
-
 [node name="Water" type="AnimatedSprite" parent="."]
-position = Vector2( 439, 502 )
+position = Vector2( 439, 486 )
 frames = SubResource( 1 )
 
 [node name="CheckmarkSound" type="AudioStreamPlayer" parent="."]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/done_area.png-cf27a40c5d08d2f3c89a4ff7ffe7c449.stex"
+path="res://.import/stove.png-7eb8c42c5c12fe58b41b5572269b84d7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FillingStation/StationArea/done_area.png"
-dest_files=[ "res://.import/done_area.png-cf27a40c5d08d2f3c89a4ff7ffe7c449.stex" ]
+source_file="res://JarSanitizationStation/StationArea/stove.png"
+dest_files=[ "res://.import/stove.png-7eb8c42c5c12fe58b41b5572269b84d7.stex" ]
 
 [params]
 

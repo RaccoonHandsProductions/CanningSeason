@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jar.png-404456727b5871293b0dd7daca2e60e6.stex"
+path="res://.import/done_area_potholder.png-7495a72a2e06f6efaf468fddf6680adb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FillingStation/StationArea/jar.png"
-dest_files=[ "res://.import/jar.png-404456727b5871293b0dd7daca2e60e6.stex" ]
+source_file="res://FillingStation/StationArea/done_area_potholder.png"
+dest_files=[ "res://.import/done_area_potholder.png-7495a72a2e06f6efaf468fddf6680adb.stex" ]
 
 [params]
 
