@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stopwatch_static.png-43a740332538d2e11f4ee7c3a4e0b6ce.stex"
+path="res://.import/stopwatch_static.png-a49da9ece96ab6ad20c476bdb614d551.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/NewHUD/stopwatch_static.png"
-dest_files=[ "res://.import/stopwatch_static.png-43a740332538d2e11f4ee7c3a4e0b6ce.stex" ]
+source_file="res://Common/HUD/stopwatch_static.png"
+dest_files=[ "res://.import/stopwatch_static.png-a49da9ece96ab6ad20c476bdb614d551.stex" ]
 
 [params]
 

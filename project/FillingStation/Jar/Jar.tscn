@@ -7,7 +7,6 @@
 
 [sub_resource type="StreamTexture" id=3]
 flags = 4
-load_path = "res://.import/empty_jar.png-26a9a0d5b9202cac4c35c08370757774.stex"
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {

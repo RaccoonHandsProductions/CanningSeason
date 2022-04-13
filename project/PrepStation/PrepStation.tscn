@@ -6,7 +6,7 @@
 [ext_resource path="res://PrepStation/PrepStation.gd" type="Script" id=4]
 [ext_resource path="res://PrepStation/Knife/Knife.tscn" type="PackedScene" id=5]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=6]
-[ext_resource path="res://PrepStation/HUD/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Common/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PrepStation/wood_counter.png" type="Texture" id=8]
 [ext_resource path="res://PrepStation/basket.png" type="Texture" id=9]
 [ext_resource path="res://PrepStation/blue_prep_cloth.png" type="Texture" id=10]
@@ -78,5 +78,4 @@ __meta__ = {
 
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]
-[connection signal="Times_Up" from="HUD" to="." method="_on_HUD_Times_Up"]
 [connection signal="pressed" from="ReplayButton" to="." method="_on_ReplayButton_pressed"]

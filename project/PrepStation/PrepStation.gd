@@ -56,6 +56,7 @@ onready var _compost_bowl := $CompostBowl
 
 onready var _knife = $Knife
 onready var _frond = null
+onready var _hud = $HUD
 
 
 func _ready() -> void:
@@ -73,12 +74,13 @@ func _ready() -> void:
 		_carrot = _spawn_carrot(pos)
 
 	_set_state(_State.AWAITING_CARROT_TOUCH)
+	
+	_hud.connect("time_out", self, "_on_HUD_Times_Out")
 
 
 func _process(_delta: float) -> void:
 	if _game_over:
 		get_tree().paused = true
-		$HUD/TimeLabel.text = "GAME OVER"
 
 
 func _input(event: InputEvent) -> void:
@@ -130,7 +132,6 @@ func _input(event: InputEvent) -> void:
 						_current_carrot_piece.rotation = rand_range(0,360)
 						_current_carrot_piece.done = true
 						_compost_bowl_count += 1
-						print("Compost Bowl Count: " + str(_compost_bowl_count))
 						if _check_bowls():
 							_set_state(_State.AWAITING_CARROT_TOUCH)
 						else:
@@ -150,7 +151,6 @@ func _input(event: InputEvent) -> void:
 						_chunk_drop_sound.play()
 						_current_carrot_piece.rotation = rand_range(0,360)
 						_done_bowl_count += 1
-						print("Bowl Count: " + str(_done_bowl_count))
 						_current_carrot_piece.done = true
 						if _check_bowls():
 							_set_state(_State.AWAITING_CARROT_TOUCH)
@@ -333,7 +333,7 @@ func _game_over()->void:
 	_game_over = true
 
 
-func _on_HUD_Times_Up()->void:
+func _on_HUD_Times_Out()->void:
 	_game_over = true
 	$ReplayButton.visible = true
 
@@ -353,8 +353,9 @@ func _check_bowls():
 	if (_done_bowl_count == _done_bowl_limit and _compost_bowl_count == _compost_bowl_limit):
 		var _new_carrot = _spawn_carrot(_current_carrot_pos)
 		$Carrots.move_child(_new_carrot, 0)
-		$HUD.update_Carrot_count(1)
+		Stock.add_carrot()
 		return true
+
 
 
 func _on_ReplayButton_pressed():
