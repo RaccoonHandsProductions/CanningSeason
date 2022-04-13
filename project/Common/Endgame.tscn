@@ -1,0 +1,160 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Common/Endgame.gd" type="Script" id=1]
+[ext_resource path="res://Backdrop.png" type="Texture" id=2]
+[ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Bold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 128
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 128
+font_data = ExtResource( 3 )
+
+[node name="Endgame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 641, 400 )
+texture = ExtResource( 2 )
+
+[node name="EndgameMessage" type="Label" parent="."]
+anchor_left = 0.141
+anchor_top = 0.092
+anchor_right = 0.859
+anchor_bottom = 0.147
+margin_left = -0.480011
+margin_top = 0.399994
+margin_right = 0.47998
+margin_bottom = 0.400002
+custom_fonts/font = SubResource( 1 )
+text = "The canning season has ended, here is how you scored:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarrotCount" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 813.0
+margin_top = 186.0
+margin_right = -423.0
+margin_bottom = -575.0
+custom_fonts/font = SubResource( 2 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarrotCountMessage" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 417.5
+margin_top = 180.0
+margin_right = -473.5
+margin_bottom = -576.0
+custom_fonts/font = SubResource( 3 )
+text = "Carrots Left Over:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SanatizedJarsCount" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 813.0
+margin_top = 271.0
+margin_right = -423.0
+margin_bottom = -490.0
+custom_fonts/font = SubResource( 2 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SanatizedJarsMessage" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 419.0
+margin_top = 268.0
+margin_right = -472.0
+margin_bottom = -488.0
+custom_fonts/font = SubResource( 3 )
+text = "Jars Left Over:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CannedCount" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 813.0
+margin_top = 353.0
+margin_right = -423.0
+margin_bottom = -408.0
+custom_fonts/font = SubResource( 2 )
+text = "00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CannedMessage" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 419.0
+margin_top = 351.0
+margin_right = -472.0
+margin_bottom = -405.0
+custom_fonts/font = SubResource( 3 )
+text = "Total Cans Canned:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalScore" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 877.0
+margin_top = 530.0
+margin_right = -163.0
+margin_bottom = -115.0
+custom_fonts/font = SubResource( 4 )
+text = "000"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalMessage" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 142.0
+margin_top = 519.0
+margin_right = -432.0
+margin_bottom = -126.0
+custom_fonts/font = SubResource( 5 )
+text = "Total Score:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
