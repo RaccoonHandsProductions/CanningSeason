@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/empty_jar.png-26a9a0d5b9202cac4c35c08370757774.stex"
+path="res://.import/Empty_Jar.png-79590c965e7ce11c71242aa23ed00f65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://FillingStation/Jar/empty_jar.png"
-dest_files=[ "res://.import/empty_jar.png-26a9a0d5b9202cac4c35c08370757774.stex" ]
+source_file="res://FillingStation/Jar/Empty_Jar.png"
+dest_files=[ "res://.import/Empty_Jar.png-79590c965e7ce11c71242aa23ed00f65.stex" ]
 
 [params]
 

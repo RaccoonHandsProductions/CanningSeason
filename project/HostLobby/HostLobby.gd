@@ -56,7 +56,7 @@ func _on_ContinueButton_pressed():
 
 
 func _on_StartGameButton_pressed():
-	Server._start_message_sender()
+	Server._start_prep_station()
 
 
 func _on_IpDidntWorkButton_pressed():

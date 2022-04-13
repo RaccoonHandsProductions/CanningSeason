@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/stopwatch_static.png-8e487f3a6548b025710f3f549d7761d6.stex"
+path="res://.import/filljarcounter_icon.png-2268c52882c2085997ea355de7a34891.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/HUD/stopwatch_static.png"
-dest_files=[ "res://.import/stopwatch_static.png-8e487f3a6548b025710f3f549d7761d6.stex" ]
+source_file="res://Common/HUD/filljarcounter_icon.png"
+dest_files=[ "res://.import/filljarcounter_icon.png-2268c52882c2085997ea355de7a34891.stex" ]
 
 [params]
 

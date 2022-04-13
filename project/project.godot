@@ -21,6 +21,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Server="*res://Server/Server.gd"
+Stock="*res://Stock/Stock.gd"
 
 [display]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jar.png-880dd07deb10c8185b0e54c9a07f8bd1.stex"
+path="res://.import/jar.png-d25786ae710ee9199c857da1e93f2ef2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/NewHUD/jar.png"
-dest_files=[ "res://.import/jar.png-880dd07deb10c8185b0e54c9a07f8bd1.stex" ]
+source_file="res://Common/HUD/jar.png"
+dest_files=[ "res://.import/jar.png-d25786ae710ee9199c857da1e93f2ef2.stex" ]
 
 [params]
 

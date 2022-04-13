@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/carrot_counter_icon.png-1ddb82afce4c40d29fa3abc858519dc4.stex"
+path="res://.import/santjarcounter_icon.png-d8d7012cafd2c03a49e1ffbdb535eac6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://PrepStation/HUD/carrot_counter_icon.png"
-dest_files=[ "res://.import/carrot_counter_icon.png-1ddb82afce4c40d29fa3abc858519dc4.stex" ]
+source_file="res://Common/HUD/santjarcounter_icon.png"
+dest_files=[ "res://.import/santjarcounter_icon.png-d8d7012cafd2c03a49e1ffbdb535eac6.stex" ]
 
 [params]
 

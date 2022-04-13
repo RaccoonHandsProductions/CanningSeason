@@ -157,6 +157,7 @@ __meta__ = {
 visible = false
 position = Vector2( 620, 395 )
 frames = SubResource( 1 )
+frame = 2
 playing = true
 
 [node name="ConnectingLabel" type="Label" parent="."]
