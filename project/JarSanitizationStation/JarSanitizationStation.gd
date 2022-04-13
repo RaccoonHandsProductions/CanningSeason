@@ -18,11 +18,11 @@ var _seconds_count := 0
 
 var _jar_home_pos : Vector2
 
-onready var _pot = $Pot
+
 onready var _done_area = $DoneArea
 onready var _jar_spawner = $JarSpawner
 onready var _jar_holder = $JarHolder
-
+onready var _pot = $Pot
 onready var _heat_timer = $StoveTop/HeatTimer
 onready var _progress_bar = $StoveTop/ProgressBar
 onready var _checkmark = $StoveTop/Checkmark
