@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://JarSanitizationStation/StationArea/SanitizeDoneArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MenuStyle.tres" type="Theme" id=4]
 [ext_resource path="res://JarSanitizationStation/checkmarkbox.png" type="Texture" id=5]
 [ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]
 [ext_resource path="res://JarSanitizationStation/StationArea/Pot.tscn" type="PackedScene" id=7]
@@ -39,9 +40,10 @@ position = Vector2( 439, 502 )
 
 [node name="ProgressBar" type="ProgressBar" parent="StoveTop"]
 margin_left = -273.0
-margin_top = 210.0
+margin_top = 214.0
 margin_right = 200.0
-margin_bottom = 244.0
+margin_bottom = 248.0
+theme = ExtResource( 4 )
 max_value = 4.0
 percent_visible = false
 __meta__ = {
@@ -49,7 +51,7 @@ __meta__ = {
 }
 
 [node name="CheckmarkBox" type="Sprite" parent="StoveTop"]
-position = Vector2( 244, 219 )
+position = Vector2( 243, 224 )
 texture = ExtResource( 5 )
 
 [node name="Checkmark" type="Sprite" parent="StoveTop/CheckmarkBox"]
