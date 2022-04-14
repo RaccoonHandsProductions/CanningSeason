@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=1]
 [ext_resource path="res://FillingStation/Chunks/Chunks.gd" type="Script" id=2]
-[ext_resource path="res://FillingStation/Chunks/chunks.png" type="Texture" id=3]
+[ext_resource path="res://FillingStation/chunks.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 111.072

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jar_side.png-aa1c50293b5120a3ae425043bdf0fdab.stex"
+path="res://.import/chunks.png-5c22cc654547dc1c34fd0015a2ed9a77.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://JarSanitizationStation/Jar/jar_side.png"
-dest_files=[ "res://.import/jar_side.png-aa1c50293b5120a3ae425043bdf0fdab.stex" ]
+source_file="res://FillingStation/chunks.png"
+dest_files=[ "res://.import/chunks.png-5c22cc654547dc1c34fd0015a2ed9a77.stex" ]
 
 [params]
 

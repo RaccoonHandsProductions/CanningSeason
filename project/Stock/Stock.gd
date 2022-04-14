@@ -33,6 +33,12 @@ remote func _emit_chunk_sets_changed(count:int) -> void:
 	emit_signal("chunk_sets_changed", count)
 
 
+
+
+
+
+
+
 remote func add_sanitized_jar() -> void:
 	if get_tree().is_network_server():
 		sanitized_jars += 1
@@ -56,6 +62,13 @@ remote func remove_sanitized_jar() -> void:
 remote func _emit_sanitized_jars_changed(count:int) -> void:
 	sanitized_jars = count
 	emit_signal("sanitized_jars_changed", count)
+
+
+
+
+
+
+
 
 
 remote func add_filled_jar() -> void:

@@ -3,13 +3,13 @@
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://JarSanitizationStation/StationArea/SanitizeDoneArea.tscn" type="PackedScene" id=3]
-[ext_resource path="res://JarSanitizationStation/jar_holder.png" type="Texture" id=4]
 [ext_resource path="res://JarSanitizationStation/checkmarkbox.png" type="Texture" id=5]
 [ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]
 [ext_resource path="res://JarSanitizationStation/StationArea/Pot.tscn" type="PackedScene" id=7]
 [ext_resource path="res://JarSanitizationStation/StationArea/water.png" type="Texture" id=8]
 [ext_resource path="res://JarSanitizationStation/wood_counter.png" type="Texture" id=9]
 [ext_resource path="res://JarSanitizationStation/checkmark.png" type="Texture" id=10]
+[ext_resource path="res://Common/HUD/HUD.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -29,9 +29,8 @@ texture = ExtResource( 9 )
 [node name="DoneArea" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1122, 572 )
 
-[node name="JarHolder" type="Sprite" parent="."]
+[node name="JarHolder" type="Position2D" parent="."]
 position = Vector2( 651, 118 )
-texture = ExtResource( 4 )
 
 [node name="StoveTop" parent="." instance=ExtResource( 2 )]
 position = Vector2( 439, 502 )
@@ -68,5 +67,7 @@ frames = SubResource( 1 )
 
 [node name="CheckmarkSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="HUD" parent="." instance=ExtResource( 11 )]
 
 [connection signal="timeout" from="StoveTop/HeatTimer" to="." method="_on_HeatTimer_timeout"]

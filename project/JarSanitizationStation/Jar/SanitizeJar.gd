@@ -12,10 +12,6 @@ func _ready():
 	is_draggable = true
 
 
-func set_sprite(view:String)->void:
-	$AnimatedSprite.play(view)
-
-
 func _on_Jar_input_event(_viewport, event, _shape_idx):
 	if not done:
 		if event is InputEventMouseButton and event.pressed:

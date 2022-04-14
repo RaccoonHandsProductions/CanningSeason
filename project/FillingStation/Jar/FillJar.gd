@@ -20,8 +20,13 @@ func _on_Jar_input_event(_viewport, event, _shape_idx):
 
 
 func fill_jar():
-	$Water.visible = false
-	$AnimatedSprite.animation = "Filled"
+	$Chunks.visible = true
+
+
+func place_lid():
+	$Lid.visible = true
+	#add spinning here
+
 
 func _set_glowing(value:bool)->void:
 	is_glowing = value

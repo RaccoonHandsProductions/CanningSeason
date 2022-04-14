@@ -63,13 +63,9 @@ func _input(event: InputEvent) -> void:
 						_jar.position, _new_done_area_polygon)
 					
 					if _above_pot and not _jar.is_sanitized:
-						print ("on stovetop stuck")
 						_jar_home_pos = _jar.global_position
 						_set_state(_State.JAR_HEATING)
 					elif _above_done_area and _jar.is_sanitized:
-						print("on done area")
-						_jar.set_sprite("SideView")
-						_jar.is_water_visible = false
 						_jar.disconnect("touched", self, "_on_Jar_touched")
 						
 						_progress_bar.value = 0
@@ -78,7 +74,6 @@ func _input(event: InputEvent) -> void:
 						_jar = _spawn_jar(_jar_holder.position)
 						_set_state(_State.AWATING_JAR_TOUCH)
 					else:
-						print ("anywhere else")
 						_set_state(_State.JAR_FLOATING_HOME)
 
 
@@ -120,7 +115,6 @@ func _set_state(new_state)->void:
 			move_child(_jar_spawner, _initial_jar_layer)
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
-			_jar.set_sprite("TopDownView")
 			_heat_timer.start()
 			
 		_State.JAR_FLOATING_HOME:

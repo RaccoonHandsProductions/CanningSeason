@@ -34,6 +34,7 @@ onready var _jar_spawner := $JarSpawner
 onready var _chunk_spawner := $ChunksSpawner
 
 onready var _top_layer := get_child_count()
+onready var _initial_chunks_layer = _chunk_spawner.get_index()
 
 
 func _ready():
@@ -89,6 +90,7 @@ func _input(event: InputEvent) -> void:
 					var _above_done_area := Geometry.is_point_in_polygon(
 						_jar.position, _new_done_area_polygon)
 					if _above_done_area:
+						_jar.place_lid()
 						_set_state(_State.SPAWN_NEW_ITEMS)
 					else:
 						_set_state(_State.FILLED_JAR_FLOATING_HOME)
