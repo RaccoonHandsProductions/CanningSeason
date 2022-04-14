@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://JarSanitizationStation/StationArea/StationArea.gd" type="Script" id=1]
+[ext_resource path="res://JarSanitizationStation/StationArea/SanitizeStationArea.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/stove.png" type="Texture" id=2]
 [ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=3]
 

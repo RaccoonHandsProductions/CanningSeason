@@ -2,7 +2,7 @@
 
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
-[ext_resource path="res://JarSanitizationStation/StationArea/DoneArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://JarSanitizationStation/StationArea/SanitizeDoneArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://JarSanitizationStation/jar_holder.png" type="Texture" id=4]
 [ext_resource path="res://JarSanitizationStation/checkmarkbox.png" type="Texture" id=5]
 [ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]

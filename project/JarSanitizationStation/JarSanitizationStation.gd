@@ -142,7 +142,7 @@ func _set_state(new_state)->void:
 
 func _spawn_jar(pos:Vector2)->Node2D:
 	#_jar signals disconnected where _jar is done
-	_jar = preload("res://JarSanitizationStation/Jar/Jar.tscn").instance()
+	_jar = preload("res://JarSanitizationStation/Jar/SanitizeJar.tscn").instance()
 	_jar_spawner.add_child(_jar)
 	_jar.position = pos
 	_jar_home_pos = _jar.global_position
