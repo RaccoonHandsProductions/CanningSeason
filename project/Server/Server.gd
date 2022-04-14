@@ -4,18 +4,19 @@ const DEFAULT_PORT := 3333
 var CARROT_CHUNKS := 0
 var SANITIZED_JARS := 0
 var FILLED_JARS := 0
+var i := 1
+
+var stations = ["_load_prep_station" , "_load_jar_sanitization_station", "_load_filling_station"]
 
 
 
-
-
-
-
-remote func _start_prep_station() -> void:
+remote func _start_game() -> void:
 	assert(get_tree().is_network_server(), "Should only be called on server.")
-	for peer_id in get_tree().get_network_connected_peers():
-		rpc_id(peer_id, "_load_prep_station")
 	_load_prep_station()
+	for peer_id in get_tree().get_network_connected_peers():
+		rpc_id(peer_id, stations[i%3])
+		i = i + 1
+
 
 
 remote func _load_prep_station() -> void:
@@ -51,7 +52,7 @@ remote func _start_jar_sanitization_station() -> void:
 
 remote func _load_jar_sanitization_station() -> void:
 	# warning-ignore:return_value_discarded
-	get_tree().change_scene("")
+	get_tree().change_scene("res://JarSanitizationStation/JarSanitizationStation.tscn")
 
 
 remote func _update_sanitized_jar_count() -> void:
