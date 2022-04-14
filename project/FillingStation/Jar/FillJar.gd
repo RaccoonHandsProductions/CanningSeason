@@ -21,6 +21,7 @@ func _on_Jar_input_event(_viewport, event, _shape_idx):
 
 func fill_jar():
 	$Chunks.visible = true
+	$Chunks.rotation = rand_range(0,360)
 
 
 func place_lid():
