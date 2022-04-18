@@ -67,7 +67,7 @@ margin_left = -89.5
 margin_top = 250.0
 margin_right = 89.5
 margin_bottom = 305.0
-text = "Disconnect"
+text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -108,7 +108,7 @@ __meta__ = {
 [node name="HelpText" type="RichTextLabel" parent="HelpPopup"]
 margin_right = 640.0
 margin_bottom = 332.0
-text = "Please use the given IP address to connect other devices to the server. To join on other devices, click \"join a server\", then enter the IP address on this screen, and finally click \"join\". If the original Ip given doesn't work when trying to connect other devices press \"Ip above didn't work?\" and try the other ips listed."
+text = "Please use the given IP address to connect other devices to the server. To join on other devices, press \"Join a Server\", then enter the IP address on this screen, and finally press \"Join\". If the original IP given doesn't work when trying to connect other devices press \"IP above didn't work?\" and try the other IPs listed."
 
 [node name="HideHelpButton" type="Button" parent="HelpPopup"]
 anchor_left = 0.5
@@ -205,7 +205,7 @@ margin_left = -152.5
 margin_top = -85.0
 margin_right = 152.5
 margin_bottom = -46.0
-text = "Ip above didn't work?"
+text = "IP above didn't work?"
 __meta__ = {
 "_edit_use_anchors_": false
 }

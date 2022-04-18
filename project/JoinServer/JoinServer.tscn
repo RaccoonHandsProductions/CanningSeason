@@ -35,14 +35,14 @@ __meta__ = {
 }
 
 [node name="HostIpLabel" type="Label" parent="."]
-anchor_left = 0.241
+anchor_left = 0.251
 anchor_top = 0.139
-anchor_right = 0.739
-anchor_bottom = 0.187
-margin_left = 0.519989
+anchor_right = 0.748
+anchor_bottom = 0.188
+margin_left = -0.279999
 margin_top = -0.200012
-margin_right = 0.0799561
-margin_bottom = 0.399994
+margin_right = 0.559937
+margin_bottom = -0.399994
 text = "Please enter an IP found on the host device"
 align = 1
 
@@ -155,9 +155,9 @@ __meta__ = {
 
 [node name="ConnectingAnimation" type="AnimatedSprite" parent="."]
 visible = false
-position = Vector2( 620, 395 )
+position = Vector2( 640, 395 )
 frames = SubResource( 1 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="ConnectingLabel" type="Label" parent="."]
@@ -166,9 +166,10 @@ anchor_left = 0.414
 anchor_top = 0.631
 anchor_right = 0.558
 anchor_bottom = 0.68
-margin_left = 0.0799561
-margin_top = 0.199951
-margin_right = -0.240051
+margin_left = 18.08
+margin_top = 0.200012
+margin_right = 17.76
+margin_bottom = 6.10352e-05
 text = "Connecting..."
 align = 1
 __meta__ = {

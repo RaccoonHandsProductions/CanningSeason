@@ -9,7 +9,7 @@ func _ready():
 		if ip.count(".") > 0:
 			filteredIps.append(ip)
 	$IpAddressLabel.text = filteredIps[0]
-	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices conencted."
+	$OtherDevicesLabel.text = "There are " + str(devicesConnected) + " devices connected."
 	# warning-ignore:return_value_discarded
 	get_tree().connect("network_peer_connected", self, "_add_device_connected")
 	# warning-ignore:return_value_discarded
@@ -63,6 +63,6 @@ func _on_StartGameButton_pressed():
 func _on_IpDidntWorkButton_pressed():
 	$IpDidntWorkButton.disabled = true
 	$IpDidntWorkButton.visible = false
-	$IpAddressLabel.text += "\nAdditional Ips:\n"
+	$IpAddressLabel.text += "\nAdditional IPs:\n"
 	for i in range(1, len(filteredIps)):
 		$IpAddressLabel.text += filteredIps[i] + "\n"

@@ -47,7 +47,7 @@ margin_left = -112.5
 margin_top = 191.5
 margin_right = 133.5
 margin_bottom = 246.5
-text = "Create a server"
+text = "Create a Server"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -61,21 +61,10 @@ margin_left = -94.5
 margin_top = 285.0
 margin_right = 115.5
 margin_bottom = 340.0
-text = "Join A Server"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PrepStationButton" type="Button" parent="."]
-margin_left = 1061.0
-margin_top = 728.0
-margin_right = 1256.0
-margin_bottom = 783.0
-text = "Prep Station"
+text = "Join a Server"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [connection signal="pressed" from="CreateServerButton" to="." method="_on_CreateServer_pressed"]
 [connection signal="pressed" from="JoinServerButton" to="." method="_on_JoinServer_pressed"]
-[connection signal="pressed" from="PrepStationButton" to="." method="_on_PrepStationButton_pressed"]
