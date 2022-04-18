@@ -11,9 +11,9 @@ var _full_jar_count := 0
 
 func _ready():
 	#set scores from other tablets here
-	_carrot_count = Stock.chunk_sets()
-	_clean_jar_count = Stock.sanitized_jars()
-	_full_jar_count = Stock.filled_jars()
+	_carrot_count = Stock.chunk_sets
+	_clean_jar_count = Stock.sanitized_jars
+	_full_jar_count = Stock.filled_jars
 	
 	_set_labels(_carrot_count, _clean_jar_count, _full_jar_count)
 
