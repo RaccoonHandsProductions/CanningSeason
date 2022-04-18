@@ -70,6 +70,7 @@ func _input(event: InputEvent) -> void:
 						
 						_progress_bar.value = 0
 						_checkmark.visible = false
+						Stock.add_sanitized_jar()
 						
 						_jar = _spawn_jar(_jar_holder.position)
 						_set_state(_State.AWATING_JAR_TOUCH)

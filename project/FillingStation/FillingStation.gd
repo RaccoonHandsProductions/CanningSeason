@@ -91,6 +91,7 @@ func _input(event: InputEvent) -> void:
 						_jar.position, _new_done_area_polygon)
 					if _above_done_area:
 						_jar.place_lid()
+						Stock.add_filled_jar()
 						_set_state(_State.SPAWN_NEW_ITEMS)
 					else:
 						_set_state(_State.FILLED_JAR_FLOATING_HOME)
@@ -223,12 +224,14 @@ func _on_jar_touched()->void:
 
 
 func _spawn_chunks(pos:Vector2) -> Node2D:
+	Stock.remove_carrot()
 	_chunks = preload("res://FillingStation/Chunks/Chunks.tscn").instance()
 	$ChunksSpawner.add_child(_chunks)
 	_chunks.position = pos
 	return _chunks
 
 func _spawn_jar(pos:Vector2) -> Node2D:
+	Stock.remove_sanitized_jar()
 	_jar = preload("res://FillingStation/Jar/FillJar.tscn").instance()
 	$JarSpawner.add_child(_jar)
 	_jar.position = pos
