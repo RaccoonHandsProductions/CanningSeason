@@ -4,8 +4,8 @@ signal chunk_sets_changed(new_count)
 signal sanitized_jars_changed(new_count)
 signal filled_jars_changed(new_count)
 
-var chunk_sets := 1
-var sanitized_jars := 1
+var chunk_sets := 0
+var sanitized_jars := 0
 var filled_jars := 0
 
 remote func add_carrot() -> void:

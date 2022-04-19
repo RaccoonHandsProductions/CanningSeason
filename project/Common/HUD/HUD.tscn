@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Common/HUD/HUD.gd" type="Script" id=2]
@@ -7,6 +7,28 @@
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=5]
 [ext_resource path="res://Common/HUD/santjarcounter_icon.png" type="Texture" id=6]
 [ext_resource path="res://Common/HUD/filljarcounter_icon.png" type="Texture" id=7]
+[ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Common/HUD/kitchen_beeping.wav" type="AudioStream" id=9]
+
+[sub_resource type="Shader" id=6]
+code = "shader_type canvas_item;
+
+uniform float pulse_depth = 0.5;
+uniform float pulse_speed = 1.0;
+
+
+void fragment() {
+	float v = mix(1.0-pulse_depth, 1.0+pulse_depth, abs(sin(TIME * pulse_speed)));
+	float d = distance(UV, vec2(0.5,0.5));
+	float strength = 1.0-d*2.0;
+	strength *= v;
+	COLOR = vec4(1.0, 1.0, 1.0, strength);
+}"
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = SubResource( 6 )
+shader_param/pulse_depth = 0.5
+shader_param/pulse_speed = 7.4
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -34,11 +56,35 @@ __meta__ = {
 "_edit_horizontal_guides_": [ -186.0 ]
 }
 
+[node name="CarrotGlowingArea" parent="." instance=ExtResource( 8 )]
+modulate = Color( 1, 0.2, 0, 1 )
+material = SubResource( 7 )
+margin_left = 1109.0
+margin_top = 15.0
+margin_right = 1287.0
+margin_bottom = 151.0
+
+[node name="JarGlowingArea" parent="." instance=ExtResource( 8 )]
+modulate = Color( 1, 0.2, 0, 1 )
+material = SubResource( 7 )
+margin_left = 1109.0
+margin_top = 131.0
+margin_right = 1287.0
+margin_bottom = 267.0
+
+[node name="CarrotAlertSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -20.0
+
+[node name="JarAlertSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -20.0
+
 [node name="CarrotCountLabel" type="Label" parent="."]
-margin_left = 1118.0
-margin_top = 53.0
-margin_right = 1193.0
-margin_bottom = 119.0
+margin_left = 1110.0
+margin_top = 54.0
+margin_right = 1179.0
+margin_bottom = 120.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "0"
@@ -84,15 +130,17 @@ valign = 2
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 
+[node name="Timer" type="Timer" parent="."]
+
 [node name="GameTimer" type="Timer" parent="."]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
 [node name="SanitizedJarLabel" type="Label" parent="."]
-margin_left = 1118.0
+margin_left = 1117.0
 margin_top = 172.0
-margin_right = 1180.0
+margin_right = 1179.0
 margin_bottom = 238.0
 theme = ExtResource( 5 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )

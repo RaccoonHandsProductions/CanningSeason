@@ -76,6 +76,7 @@ func _ready() -> void:
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 	
 	_hud.connect("time_out", self, "_on_HUD_Times_Out")
+	_hud.connect("carrot_resource_changed", self, "_on_HUD_resource_changed")
 
 
 func _process(_delta: float) -> void:
@@ -93,7 +94,7 @@ func _input(event: InputEvent) -> void:
 				elif event is InputEventMouseButton and not event.is_pressed():
 					var _above_board := Geometry.is_point_in_polygon(
 						_carrot.position, _new_cutting_board_polygon)
-
+						
 					if _above_board:
 						_carrot_count += 1
 						_carrot_drop_sound.play()
@@ -336,6 +337,10 @@ func _game_over()->void:
 func _on_HUD_Times_Out()->void:
 	_game_over = true
 	$ReplayButton.visible = true
+
+
+func _on_HUD_resource_changed(empty:bool)->void:
+	_hud.set_alert("carrots", empty)
 
 
 func _spawn_carrot(pos:Vector2) -> Node2D:

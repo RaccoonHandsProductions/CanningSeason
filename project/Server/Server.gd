@@ -4,18 +4,20 @@ const DEFAULT_PORT := 3333
 var CARROT_CHUNKS := 0
 var SANITIZED_JARS := 0
 var FILLED_JARS := 0
-var i := 1
+var index := 1
 
-var stations = ["_load_prep_station" , "_load_jar_sanitization_station", "_load_filling_station"]
+var stations = [
+	"_load_prep_station" , 
+	"_load_jar_sanitization_station", 
+	"_load_filling_station"
+	]
 
-
-
-remote func _start_game() -> void:
+remote func start_game() -> void:
 	assert(get_tree().is_network_server(), "Should only be called on server.")
 	_load_prep_station()
 	for peer_id in get_tree().get_network_connected_peers():
-		rpc_id(peer_id, stations[i%3])
-		i = i + 1
+		rpc_id(peer_id, stations[index%3])
+		index = index + 1
 
 
 

@@ -26,6 +26,7 @@ onready var _heat_timer = $StoveTop/HeatTimer
 onready var _progress_bar = $StoveTop/ProgressBar
 onready var _checkmark = $StoveTop/CheckmarkBox/Checkmark
 onready var _checkmark_sound = $CheckmarkSound
+onready var _hud = $HUD
 
 onready var _top_layer := get_child_count()
 onready var _initial_jar_layer = _jar_spawner.get_index()
@@ -35,6 +36,8 @@ func _ready():
 	_jar = _spawn_jar(_jar_holder.position)
 	_set_state(_State.AWATING_JAR_TOUCH)
 	_checkmark.visible = false
+	
+	_hud.connect("jar_resource_changed", self, "_on_HUD_resource_changed")
 
 
 func _set_up_polygons()->void:
@@ -157,3 +160,10 @@ func _on_HeatTimer_timeout():
 
 func _set_state_to_awaiting_jar_touch(_obj, _key):
 	_set_state(_State.AWATING_JAR_TOUCH)
+
+
+func _on_HUD_resource_changed(empty:bool)->void:
+	_hud.set_alert("jars", empty)
+
+
+
