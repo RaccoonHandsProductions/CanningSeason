@@ -84,3 +84,9 @@ remote func add_filled_jar() -> void:
 remote func _emit_filled_jars_changed(count:int) -> void:
 	filled_jars = count
 	emit_signal("filled_jars_changed", count)
+
+
+remote func clear_stock() -> void:
+	chunk_sets = 0
+	sanitized_jars = 0
+	filled_jars = 0

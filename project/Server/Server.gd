@@ -18,6 +18,7 @@ var stations = [
 ]
 
 remote func start_game() -> void:
+	Stock.clear_stock()
 	assert(get_tree().is_network_server(), "Should only be called on server.")
 	var number_of_stations : int = stations.size()
 	
