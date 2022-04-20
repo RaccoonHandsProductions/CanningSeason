@@ -24,3 +24,8 @@ func _set_labels(var carrots, var cleanJars, var fullJars):
 	_canned_label.text = str(fullJars)
 	
 	_total_label.text = str((carrots + cleanJars + fullJars * 4) * 5)
+
+
+func _on_ReplayButton_pressed():
+	get_tree().paused = false
+	Server.start_game()

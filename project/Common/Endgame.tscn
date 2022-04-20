@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Common/Endgame.gd" type="Script" id=1]
 [ext_resource path="res://Backdrop.png" type="Texture" id=2]
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://MenuStyle.tres" type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -158,3 +159,17 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ReplayButton" type="Button" parent="."]
+pause_mode = 2
+margin_left = 591.0
+margin_top = 680.0
+margin_right = 723.0
+margin_bottom = 735.0
+theme = ExtResource( 4 )
+text = "Replay?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="ReplayButton" to="." method="_on_ReplayButton_pressed"]

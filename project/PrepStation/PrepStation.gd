@@ -40,7 +40,7 @@ var _current_carrot_pos : Vector2
 
 var _piece_node_location
 var _state = null
-var _game_over := false
+
 
 onready var _cutting_board_polygon_2d := $CuttingBoard/Polygon2D
 onready var _cutting_board := $CuttingBoard
@@ -75,13 +75,11 @@ func _ready() -> void:
 
 	_set_state(_State.AWAITING_CARROT_TOUCH)
 	
-	_hud.connect("time_out", self, "_on_HUD_Times_Out")
 	_hud.connect("carrot_resource_changed", self, "_on_HUD_resource_changed")
 
 
 func _process(_delta: float) -> void:
-	if _game_over:
-		get_tree().paused = true
+	return
 
 
 func _input(event: InputEvent) -> void:
@@ -330,13 +328,7 @@ func _on_Knife_tween_completed(_a, _b)->void:
 
 
 # warning-ignore:function_conflicts_variable
-func _game_over()->void:
-	_game_over = true
 
-
-func _on_HUD_Times_Out()->void:
-	_game_over = true
-	$ReplayButton.visible = true
 
 
 func _on_HUD_resource_changed(empty:bool)->void:
@@ -360,9 +352,3 @@ func _check_bowls():
 		$Carrots.move_child(_new_carrot, 0)
 		Stock.add_carrot()
 		return true
-
-
-
-func _on_ReplayButton_pressed():
-	get_tree().paused = false
-	get_tree().change_scene("res://PrepStation/PrepStation.tscn")

@@ -8,6 +8,7 @@ signal jar_resource_changed(empty)
 onready var _carrot_count_label := find_node("CarrotCountLabel")
 onready var _sanitized_jar_label := find_node("SanitizedJarLabel")
 onready var _filled_jar_label := find_node("FilledJarLabel")
+var _game_over := false
 
 
 func _ready() -> void:
@@ -18,13 +19,21 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	Stock.connect("filled_jars_changed", self, "_on_filled_jars_changed")
 	
+	self.connect("time_out", self, "_on_HUD_Times_Out")
+	
 	$CarrotGlowingArea.visible = false
 	$JarGlowingArea.visible = false
 
 
 func _process(_delta):
 	$TimeLabel.set_text("Time: " + str(int($GameTimer.get_time_left())))
+	if _game_over:
+		get_tree().change_scene("res://Common/Endgame.tscn")
+		get_tree().paused = true
 
+
+func _game_over()->void:
+	_game_over = true
 
 func show_message(text):
 	$Message.text = text
@@ -78,3 +87,6 @@ func _on_MessageTimer_timeout():
 
 func _on_GameTimer_timeout():
 	emit_signal("time_out")
+
+func _on_HUD_Times_Out()->void:
+	_game_over = true
