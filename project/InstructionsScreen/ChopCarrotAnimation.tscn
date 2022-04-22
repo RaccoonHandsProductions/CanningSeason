@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://InstructionsScreen/carrot_icon_chunk_3.png" type="Texture" id=1]
 [ext_resource path="res://InstructionsScreen/carrot_icon_chunk_1.png" type="Texture" id=2]
 [ext_resource path="res://InstructionsScreen/carrot_icon_chunk_2.png" type="Texture" id=3]
 [ext_resource path="res://InstructionsScreen/knife_icon.png" type="Texture" id=4]
+[ext_resource path="res://InstructionsScreen/ChopCarrotAnimation.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Chop"
@@ -85,6 +86,7 @@ tracks/2/keys = {
 }
 
 [node name="ChopCarrotAnimation" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Carrot" type="Node2D" parent="."]
 position = Vector2( -82, -7.29306 )
