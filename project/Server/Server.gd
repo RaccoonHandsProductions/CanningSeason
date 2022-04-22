@@ -19,7 +19,6 @@ var stations = [
 
 remote func start_game() -> void:
 	Stock.clear_stock()
-	assert(get_tree().is_network_server(), "Should only be called on server.")
 	var number_of_stations : int = stations.size()
 	
 	for peer_id in get_tree().get_network_connected_peers():
@@ -27,6 +26,15 @@ remote func start_game() -> void:
 		index = index + 1
 		
 	call(stations[index % number_of_stations])
+
+remote func start_start_game_screen() -> void:
+	assert(get_tree().is_network_server(), "Should only be called on server.")
+	for peer_id in get_tree().get_network_connected_peers():
+		rpc_id(peer_id, "_load_start_game_screen")
+	_load_start_game_screen()
+
+remote func _load_start_game_screen() -> void:
+	get_tree().change_scene("res://Common/StartGameScreen.tscn")
 
 
 remote func _load_prep_station() -> void:

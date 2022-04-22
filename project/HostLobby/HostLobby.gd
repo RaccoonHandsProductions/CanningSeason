@@ -55,9 +55,8 @@ func _on_ContinueButton_pressed():
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
 
 
-func _on_StartGameButton_pressed():
-	Server.start_game()
-	
+func _on_AllDevicesConnectedButton_pressed():
+	Server.start_start_game_screen()
 
 
 func _on_IpDidntWorkButton_pressed():

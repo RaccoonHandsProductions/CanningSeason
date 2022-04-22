@@ -21,7 +21,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Sprite" parent="."]
-position = Vector2( 629, 275 )
+position = Vector2( 630, 275 )
 texture = ExtResource( 3 )
 
 [node name="Instructions" type="Label" parent="."]
