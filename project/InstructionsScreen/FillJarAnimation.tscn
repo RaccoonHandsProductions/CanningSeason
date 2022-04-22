@@ -7,7 +7,7 @@
 [ext_resource path="res://InstructionsScreen/FillJarAnimation.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=1]
-length = 0.001
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("SpriteFullJar:visible")
 tracks/0/interp = 1
@@ -121,7 +121,6 @@ anims/SpriteFullJar_animation = SubResource( 2 )
 
 [node name="SpriteEmptyJar" type="Sprite" parent="."]
 position = Vector2( 1, -28 )
-z_index = -1
 texture = ExtResource( 2 )
 
 [node name="SpriteFullJar" type="Sprite" parent="."]
