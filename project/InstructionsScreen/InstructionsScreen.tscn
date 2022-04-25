@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Backdrop.png" type="Texture" id=1]
 [ext_resource path="res://InstructionsScreen/SanitizeJarAnimation.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://InstructionsScreen/ChopCarrotAnimation.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Bold.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=6]
+[ext_resource path="res://InstructionsScreen/InstructionsScreen.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.780392, 0.831373, 0.792157, 1 )
@@ -64,6 +65,7 @@ tracks/2/keys = {
 [node name="InstructionsScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -191,3 +193,5 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Autoplay"
 anims/Autoplay = SubResource( 1 )
+
+[connection signal="pressed" from="ReadyButton" to="." method="_on_ReadyButton_pressed"]
