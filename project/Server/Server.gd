@@ -6,6 +6,7 @@ const _PrepStation := preload("res://PrepStation/PrepStation.tscn")
 const _JarSanitizationStation := preload("res://JarSanitizationStation/JarSanitizationStation.tscn")
 const _FillingStation := preload("res://FillingStation/FillingStation.tscn")
 
+var InstructionsScript = load("res://InstructionsScreen/InstructionsScreen.gd").new()
 var CARROT_CHUNKS := 0
 var SANITIZED_JARS := 0
 var FILLED_JARS := 0
@@ -27,11 +28,19 @@ remote func start_game() -> void:
 		
 	call(stations[index % number_of_stations])
 
+remote func start_instructions() -> void:
+	for peer_id in get_tree().get_network_connected_peers():
+		rpc_id(peer_id, "_load_instructions_screen")
+	_load_instructions_screen()
+
 remote func start_start_game_screen() -> void:
 	assert(get_tree().is_network_server(), "Should only be called on server.")
 	for peer_id in get_tree().get_network_connected_peers():
 		rpc_id(peer_id, "_load_start_game_screen")
 	_load_start_game_screen()
+
+remote func _load_instructions_screen() -> void:
+	get_tree().change_scene("res://InstructionsScreen/InstructionsScreen.tscn")
 
 remote func _load_start_game_screen() -> void:
 	get_tree().change_scene("res://Common/StartGameScreen.tscn")
