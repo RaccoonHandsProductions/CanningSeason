@@ -224,14 +224,12 @@ func _on_jar_touched()->void:
 
 
 func _spawn_chunks(pos:Vector2) -> Node2D:
-	Stock.remove_carrot()
 	_chunks = preload("res://FillingStation/Chunks/Chunks.tscn").instance()
 	$ChunksSpawner.add_child(_chunks)
 	_chunks.position = pos
 	return _chunks
 
 func _spawn_jar(pos:Vector2) -> Node2D:
-	Stock.remove_sanitized_jar()
 	_jar = preload("res://FillingStation/Jar/FillJar.tscn").instance()
 	$JarSpawner.add_child(_jar)
 	_jar.position = pos

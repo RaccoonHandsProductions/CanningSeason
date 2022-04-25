@@ -74,6 +74,8 @@ remote func _emit_sanitized_jars_changed(count:int) -> void:
 remote func add_filled_jar() -> void:
 	if get_tree().is_network_server():
 		filled_jars += 1
+		remove_carrot()
+		remove_sanitized_jar()
 		for peer_id in get_tree().get_network_connected_peers():
 			rpc_id(peer_id, "_emit_filled_jars_changed", filled_jars)
 		_emit_filled_jars_changed(filled_jars)
