@@ -18,7 +18,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ false ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("SpriteFrontJar:visible")
@@ -124,6 +124,7 @@ position = Vector2( 1, -28 )
 texture = ExtResource( 2 )
 
 [node name="SpriteFullJar" type="Sprite" parent="."]
+visible = false
 position = Vector2( 1, -28 )
 texture = ExtResource( 3 )
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Common/Endgame.gd" type="Script" id=1]
 [ext_resource path="res://Backdrop.png" type="Texture" id=2]
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Bold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=4]
+[ext_resource path="res://Common/sign.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 36
@@ -37,6 +38,11 @@ __meta__ = {
 position = Vector2( 641, 400 )
 texture = ExtResource( 2 )
 
+[node name="Sign" type="Sprite" parent="."]
+position = Vector2( 640, 314 )
+scale = Vector2( 0.552273, 0.552273 )
+texture = ExtResource( 5 )
+
 [node name="EndgameMessage" type="Label" parent="."]
 anchor_left = 0.141
 anchor_top = 0.092
@@ -47,7 +53,7 @@ margin_top = 0.399994
 margin_right = 0.47998
 margin_bottom = 0.400002
 custom_fonts/font = SubResource( 1 )
-text = "The canning season has ended, here is how you scored:"
+text = "The canning season has ended! Here is how you scored:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -56,9 +62,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 813.0
-margin_top = 186.0
+margin_top = 247.0
 margin_right = -423.0
-margin_bottom = -575.0
+margin_bottom = -514.0
 custom_fonts/font = SubResource( 2 )
 text = "00"
 __meta__ = {
@@ -69,9 +75,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 417.5
-margin_top = 180.0
+margin_top = 241.0
 margin_right = -473.5
-margin_bottom = -576.0
+margin_bottom = -515.0
 custom_fonts/font = SubResource( 3 )
 text = "Carrots Left Over:"
 align = 1
@@ -83,9 +89,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 813.0
-margin_top = 271.0
+margin_top = 332.0
 margin_right = -423.0
-margin_bottom = -490.0
+margin_bottom = -429.0
 custom_fonts/font = SubResource( 2 )
 text = "00"
 __meta__ = {
@@ -96,9 +102,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 419.0
-margin_top = 268.0
+margin_top = 329.0
 margin_right = -472.0
-margin_bottom = -488.0
+margin_bottom = -427.0
 custom_fonts/font = SubResource( 3 )
 text = "Jars Left Over:"
 align = 1
@@ -110,9 +116,9 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 813.0
-margin_top = 353.0
+margin_top = 414.0
 margin_right = -423.0
-margin_bottom = -408.0
+margin_bottom = -347.0
 custom_fonts/font = SubResource( 2 )
 text = "00"
 __meta__ = {
@@ -123,11 +129,11 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 419.0
-margin_top = 351.0
+margin_top = 412.0
 margin_right = -472.0
-margin_bottom = -405.0
+margin_bottom = -344.0
 custom_fonts/font = SubResource( 3 )
-text = "Total Cans Canned:"
+text = "Total Canned:"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
