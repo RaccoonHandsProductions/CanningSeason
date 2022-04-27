@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/boiling_water.wav-84000364c3ba016271341fa04fa012ae.sample"
+
+[deps]
+
+source_file="res://JarSanitizationStation/boiling_water.wav"
+dest_files=[ "res://.import/boiling_water.wav-84000364c3ba016271341fa04fa012ae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

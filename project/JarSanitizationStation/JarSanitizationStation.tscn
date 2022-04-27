@@ -7,7 +7,7 @@
 [ext_resource path="res://JarSanitizationStation/checkmarkbox.png" type="Texture" id=5]
 [ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]
 [ext_resource path="res://JarSanitizationStation/StationArea/Pot.tscn" type="PackedScene" id=7]
-[ext_resource path="res://JarSanitizationStation/StationArea/water.png" type="Texture" id=8]
+[ext_resource path="res://JarSanitizationStation/boiling_water.wav" type="AudioStream" id=8]
 [ext_resource path="res://JarSanitizationStation/wood_counter.png" type="Texture" id=9]
 [ext_resource path="res://JarSanitizationStation/checkmark.png" type="Texture" id=10]
 [ext_resource path="res://Common/HUD/HUD.tscn" type="PackedScene" id=11]
@@ -15,7 +15,7 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ null ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -76,5 +76,8 @@ frames = SubResource( 1 )
 stream = ExtResource( 6 )
 
 [node name="HUD" parent="." instance=ExtResource( 11 )]
+
+[node name="BoilingWaterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 
 [connection signal="timeout" from="StoveTop/HeatTimer" to="." method="_on_HeatTimer_timeout"]

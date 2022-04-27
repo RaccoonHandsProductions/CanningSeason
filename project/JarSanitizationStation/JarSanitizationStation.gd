@@ -87,6 +87,7 @@ func _set_state(new_state)->void:
 		_State.JAR_HEATING:
 			_jar.done = false
 			_jar.is_sanitized = true
+			$BoilingWaterSound.stop()
 	
 	# Update variable
 	_state = new_state
@@ -120,6 +121,7 @@ func _set_state(new_state)->void:
 			_jar.disconnect("touched", self, "_on_Jar_touched")
 			_jar.done = true
 			_heat_timer.start()
+			$BoilingWaterSound.play()
 			
 		_State.JAR_FLOATING_HOME:
 			_pot.is_glowing = false
