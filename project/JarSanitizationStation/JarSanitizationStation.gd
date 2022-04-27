@@ -32,6 +32,7 @@ onready var _top_layer := get_child_count()
 onready var _initial_jar_layer = _jar_spawner.get_index()
 
 func _ready():
+	Stock.clear_stock()
 	_set_up_polygons()
 	_jar = _spawn_jar(_jar_holder.position)
 	_set_state(_State.AWATING_JAR_TOUCH)

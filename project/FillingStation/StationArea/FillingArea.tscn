@@ -1,21 +1,23 @@
 [gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://FillingStation/StationArea/fill_station_cloth.png" type="Texture" id=1]
 [ext_resource path="res://FillingStation/StationArea/FillStationArea.gd" type="Script" id=2]
 [ext_resource path="res://Common/GlowingArea.tscn" type="PackedScene" id=3]
-[ext_resource path="res://FillingStation/StationArea/blue_fill_cloth.png" type="Texture" id=4]
 
 [node name="FillingArea" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="GlowingArea" parent="." instance=ExtResource( 3 )]
 visible = false
-margin_left = -620.0
-margin_top = -390.0
-margin_right = 620.0
-margin_bottom = 390.0
+margin_left = -654.0
+margin_top = -416.0
+margin_right = 654.0
+margin_bottom = 416.0
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 205 )
-texture = ExtResource( 4 )
+position = Vector2( 128, -114 )
+scale = Vector2( 0.98, 0.98 )
+texture = ExtResource( 1 )

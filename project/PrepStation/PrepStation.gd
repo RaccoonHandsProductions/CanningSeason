@@ -60,6 +60,7 @@ onready var _hud = $HUD
 
 
 func _ready() -> void:
+	Stock.clear_stock()
 	#adjusts the points of the Polygon2Ds to match any offset made in the PrepStation scene editor
 	for point in _done_bowl_polygon_2d.polygon:
 		_new_bowl_polygon.append(point + _done_bowl_polygon_2d.global_position)

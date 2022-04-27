@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
@@ -12,10 +12,11 @@
 [ext_resource path="res://JarSanitizationStation/checkmark.png" type="Texture" id=10]
 [ext_resource path="res://Common/HUD/HUD.tscn" type="PackedScene" id=11]
 [ext_resource path="res://JarSanitizationStation/sanitization_cloth.png" type="Texture" id=12]
+[ext_resource path="res://FillingStation/Jar/water.png" type="Texture" id=13]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ null ],
+"frames": [ ExtResource( 13 ), null ],
 "loop": true,
 "name": "default",
 "speed": 5.0

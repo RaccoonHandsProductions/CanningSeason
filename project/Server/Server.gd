@@ -19,7 +19,6 @@ var stations = [
 ]
 
 remote func start_game() -> void:
-	Stock.clear_stock()
 	var number_of_stations : int = stations.size()
 	
 	for peer_id in get_tree().get_network_connected_peers():

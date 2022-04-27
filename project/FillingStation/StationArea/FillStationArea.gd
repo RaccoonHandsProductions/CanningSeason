@@ -6,8 +6,8 @@ var polygon_circle_radius := 80
 var _done_area_length := 100
 var _done_area_width := 100
 
-var _filling_area_length := 320
-var _filling_area_width := 160
+var _filling_area_length := 380
+var _filling_area_width := 200
 
 var _polygon_points := PoolVector2Array()
 var _polygon_color := Color.white
@@ -20,7 +20,7 @@ func _ready():
 		"DoneArea":
 			set_rect_polygon(Vector2(14, 0), _done_area_length, _done_area_width)
 		"FillingArea":
-			set_rect_polygon(Vector2(0, 40), _filling_area_length, _filling_area_width)
+			set_rect_polygon(Vector2(-10, 30), _filling_area_length, _filling_area_width)
 	$Polygon2D.set_color(_polygon_color)
 
 

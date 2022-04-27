@@ -16,7 +16,7 @@ position = Vector2( 640, 400 )
 texture = ExtResource( 5 )
 
 [node name="FillingArea" parent="." instance=ExtResource( 2 )]
-position = Vector2( 476, 536 )
+position = Vector2( 490, 525 )
 
 [node name="ChunkBowl" parent="." instance=ExtResource( 3 )]
 position = Vector2( 460, 162 )

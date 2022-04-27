@@ -43,6 +43,7 @@ onready var _initial_chunks_layer = _chunk_spawner.get_index()
 
 
 func _ready():
+	Stock.clear_stock()
 	for point in _filling_area.get_polygon_points():
 		_new_filling_area_polygon.append(point + _filling_area.get_polygon().global_position)
 	for point in _done_area.get_polygon_points():
