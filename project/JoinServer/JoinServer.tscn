@@ -41,8 +41,11 @@ margin_left = -0.279999
 margin_top = -0.200012
 margin_right = 0.559937
 margin_bottom = -0.399994
-text = "Please enter an IP found on the host device"
+text = "Please enter an IP found on the host device."
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="JoinButton" type="Button" parent="."]
 anchor_left = 0.5

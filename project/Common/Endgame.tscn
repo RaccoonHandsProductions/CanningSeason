@@ -80,7 +80,6 @@ margin_right = -473.5
 margin_bottom = -515.0
 custom_fonts/font = SubResource( 3 )
 text = "Carrots Left Over:"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -107,7 +106,6 @@ margin_right = -472.0
 margin_bottom = -427.0
 custom_fonts/font = SubResource( 3 )
 text = "Jars Left Over:"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,7 +132,6 @@ margin_right = -472.0
 margin_bottom = -344.0
 custom_fonts/font = SubResource( 3 )
 text = "Total Canned:"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -168,10 +165,10 @@ __meta__ = {
 
 [node name="ReplayButton" type="Button" parent="."]
 pause_mode = 2
-margin_left = 591.0
-margin_top = 680.0
-margin_right = 723.0
-margin_bottom = 735.0
+margin_left = 540.0
+margin_top = 672.0
+margin_right = 739.0
+margin_bottom = 755.0
 theme = ExtResource( 4 )
 text = "Replay?"
 __meta__ = {

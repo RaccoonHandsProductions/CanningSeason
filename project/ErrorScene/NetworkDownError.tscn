@@ -19,8 +19,8 @@ margin_left = 218.0
 margin_top = 295.0
 margin_right = 1052.0
 margin_bottom = 376.0
-text = "There has been a hardware malfunction, 
-please contact a Minnetrista Staff Member for assistance"
+text = "There has been a hardware malfunction.
+Please contact a Minnetrista Staff Member for assistance."
 align = 1
 
 [node name="ExitButton" type="Button" parent="."]
