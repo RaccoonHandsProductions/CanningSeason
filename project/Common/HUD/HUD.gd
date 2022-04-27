@@ -43,14 +43,18 @@ func set_alert(type:String, empty:bool):
 	match type:
 		"carrots":
 			if empty:
-				$CarrotAlertSound.play()
+				#$CarrotAlertSound.play()
+				pass
 			else:
-				$CarrotAlertSound.stop()
+				#$CarrotAlertSound.stop()
+				pass
 		"jars":
 			if empty:
-				$JarAlertSound.play()
+				#$JarAlertSound.play()
+				pass
 			else:
-				$JarAlertSound.stop()
+				#$JarAlertSound.stop()
+				pass
 
 
 func _on_chunk_sets_changed(count):

@@ -74,11 +74,9 @@ margin_bottom = 267.0
 
 [node name="CarrotAlertSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -20.0
 
 [node name="JarAlertSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-volume_db = -20.0
 
 [node name="CarrotCountLabel" type="Label" parent="."]
 margin_left = 1110.0
