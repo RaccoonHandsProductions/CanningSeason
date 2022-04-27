@@ -29,7 +29,6 @@ func _process(_delta):
 	$TimeLabel.set_text("Time: " + str(int($GameTimer.get_time_left())))
 	if _game_over:
 		get_tree().change_scene("res://Common/Endgame.tscn")
-		get_tree().paused = true
 
 
 func _game_over()->void:

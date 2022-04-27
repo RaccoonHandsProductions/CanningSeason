@@ -27,5 +27,4 @@ func _set_labels(var carrots, var cleanJars, var fullJars):
 
 
 func _on_ReplayButton_pressed():
-	get_tree().paused = false
 	Server.start_game()
