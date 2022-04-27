@@ -11,7 +11,7 @@ enum _State{
 	AWAITING_FILLED_JAR_TOUCH,
 	DRAGGING_FILLED_JAR,
 	FILLED_JAR_FLOATING_HOME,
-	SPAWN_NEW_ITEMS,
+	WAITING_FOR_STOCK
 }
 
 export var float_animation_duration := 0.5
@@ -24,6 +24,11 @@ var _new_filling_area_polygon : PoolVector2Array
 var _new_done_area_polygon : PoolVector2Array
 
 var _filled_jar_start_pos : Vector2
+
+var _waiting_for_jar = true
+var _waiting_for_chunks = true
+var _initial_jar_spawning = true
+var _initial_chunks_spawning = true
 
 onready var _filling_area = $FillingArea
 onready var _done_area = $DoneArea
@@ -48,6 +53,11 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	_spawn_jar(_jar_holder.position)
 	_set_state(_State.AWAITING_JAR_TOUCH)
+
+# warning-ignore:return_value_discarded
+	Stock.connect("sanitized_jar_sent", self, "_on_sanitized_jar_sent")
+# warning-ignore:return_value_discarded
+	Stock.connect("chunks_sent", self, "_on_chunks_sent")
 
 
 func _input(event: InputEvent) -> void:
@@ -92,7 +102,7 @@ func _input(event: InputEvent) -> void:
 					if _above_done_area:
 						_jar.place_lid()
 						Stock.add_filled_jar()
-						_set_state(_State.SPAWN_NEW_ITEMS)
+						_set_state(_State.WAITING_FOR_STOCK)
 					else:
 						_set_state(_State.FILLED_JAR_FLOATING_HOME)
 		
@@ -122,6 +132,8 @@ func _set_state(new_state)->void:
 	#entering state
 	match new_state:
 		_State.AWAITING_JAR_TOUCH:
+			_waiting_for_jar = true
+			_waiting_for_chunks = true
 			_jar.is_draggable = true
 			_jar.is_glowing = true
 			if _jar.is_draggable:
@@ -188,14 +200,15 @@ func _set_state(new_state)->void:
 			# warning-ignore:return_value_discarded
 			_tween.start()
 		
-		_State.SPAWN_NEW_ITEMS:
-			_jar.disconnect("touched", self, "_on_jar_touched")
+		_State.WAITING_FOR_STOCK:
 			# warning-ignore:return_value_discarded
-			_spawn_chunks(_chunk_bowl.position)
-			# warning-ignore:return_value_discarded
-			_spawn_jar(_jar_holder.position)
-			_set_state(_State.AWAITING_JAR_TOUCH)
+			Stock.request_sanitize_jar()
+			Stock.request_chunks()
 
+
+func _check_waiting_state() -> void:
+	if not _waiting_for_jar and not _waiting_for_chunks:
+		_set_state(_State.AWAITING_JAR_TOUCH)
 
 func _set_state_to_awaiting_jar_touch(_obj, _key):
 	_set_state(_State.AWAITING_JAR_TOUCH)
@@ -227,10 +240,27 @@ func _spawn_chunks(pos:Vector2) -> Node2D:
 	_chunks = preload("res://FillingStation/Chunks/Chunks.tscn").instance()
 	$ChunksSpawner.add_child(_chunks)
 	_chunks.position = pos
+	_waiting_for_chunks = false
+	_check_waiting_state()
+	_initial_chunks_spawning = false
 	return _chunks
 
+
 func _spawn_jar(pos:Vector2) -> Node2D:
+	if not _initial_jar_spawning:
+		_jar.disconnect("touched", self, "_on_jar_touched")
 	_jar = preload("res://FillingStation/Jar/FillJar.tscn").instance()
 	$JarSpawner.add_child(_jar)
 	_jar.position = pos
+	_waiting_for_jar = false
+	_check_waiting_state()
+	_initial_jar_spawning = false
 	return _jar
+
+
+func _on_sanitized_jar_sent():
+	_spawn_jar(_jar_holder.position)
+
+
+func _on_chunks_sent():
+	_spawn_chunks(_chunk_bowl.position)

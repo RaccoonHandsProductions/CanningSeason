@@ -133,7 +133,7 @@ wait_time = 2.0
 [node name="Timer" type="Timer" parent="."]
 
 [node name="GameTimer" type="Timer" parent="."]
-wait_time = 15.0
+wait_time = 4096.0
 one_shot = true
 autostart = true
 
