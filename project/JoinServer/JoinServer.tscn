@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://JoinServer/JoinServer.gd" type="Script" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://JoinServer/LoadingJar_01.png" type="Texture" id=5]
 [ext_resource path="res://JoinServer/LoadingJar_04.png" type="Texture" id=6]
 [ext_resource path="res://UI/IPEntryControl.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Backdrop.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -25,12 +26,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BackgroundPanel" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Backdrop" type="Sprite" parent="."]
+position = Vector2( 640, 400 )
+texture = ExtResource( 8 )
 
 [node name="HostIpLabel" type="Label" parent="."]
 anchor_left = 0.251
