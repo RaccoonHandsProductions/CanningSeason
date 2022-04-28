@@ -5,6 +5,8 @@ onready var _sanatized_jars_label := get_node("SanatizedJarsCount")
 onready var _canned_label := get_node("CannedCount")
 onready var _total_label := get_node("TotalScore")
 
+onready var _timer := get_node("StartScreenTimer")
+
 var _carrot_count := 0
 var _clean_jar_count := 0
 var _full_jar_count := 0
@@ -14,6 +16,8 @@ func _ready():
 	_carrot_count = Stock.chunk_sets
 	_clean_jar_count = Stock.sanitized_jars
 	_full_jar_count = Stock.filled_jars
+	
+	_timer.start(30)
 	
 	_set_labels(_carrot_count, _clean_jar_count, _full_jar_count)
 
@@ -28,3 +32,7 @@ func _set_labels(var carrots, var cleanJars, var fullJars):
 
 func _on_ReplayButton_pressed():
 	Server.start_game()
+
+
+func _on_StartScreenTimer_timeout():
+	Server.start_start_game_screen()
