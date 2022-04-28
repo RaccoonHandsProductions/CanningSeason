@@ -22,10 +22,9 @@ remote func start_game() -> void:
 	var number_of_stations : int = stations.size()
 	
 	for peer_id in get_tree().get_network_connected_peers():
-		index = index + 1
 		rpc_id(peer_id, stations[index % number_of_stations])
-		
-	call(stations[0])
+		index = index + 1
+	call(stations[index % number_of_stations])
 
 remote func start_instructions() -> void:
 	for peer_id in get_tree().get_network_connected_peers():
