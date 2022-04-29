@@ -31,7 +31,7 @@ func _set_labels(var carrots, var cleanJars, var fullJars):
 
 
 func _on_ReplayButton_pressed():
-	Server.start_game()
+	Server.start_instructions()
 
 
 func _on_StartScreenTimer_timeout():

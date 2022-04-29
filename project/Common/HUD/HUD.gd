@@ -31,9 +31,6 @@ func _process(_delta):
 		get_tree().change_scene("res://Common/Endgame.tscn")
 
 
-func _game_over()->void:
-	_game_over = true
-
 func show_message(text):
 	$Message.text = text
 
