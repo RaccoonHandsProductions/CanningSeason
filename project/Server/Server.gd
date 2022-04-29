@@ -7,10 +7,7 @@ const _JarSanitizationStation := preload("res://JarSanitizationStation/JarSaniti
 const _FillingStation := preload("res://FillingStation/FillingStation.tscn")
 
 var InstructionsScript = load("res://InstructionsScreen/InstructionsScreen.gd").new()
-var CARROT_CHUNKS := 0
-var SANITIZED_JARS := 0
-var FILLED_JARS := 0
-var index := 0
+var _index := 0
 
 var stations = [
 	"_load_prep_station",
@@ -19,17 +16,24 @@ var stations = [
 ]
 
 remote func start_game() -> void:
+	_index = 0
 	var number_of_stations : int = stations.size()
-	
 	for peer_id in get_tree().get_network_connected_peers():
-		rpc_id(peer_id, stations[index % number_of_stations])
-		index = index + 1
-	call(stations[index % number_of_stations])
+		_index = _index + 1
+		rpc_id(peer_id, stations[_index % number_of_stations])
+	# Original host should never be a filling station
+	# call(stations[0]) makes the station that hits the replay button to be set 
+	# to prep_station
+	# Original host will always be the next in the list to get a station so 
+	# it'll be a sanitization station and never a filling station
+	call(stations[0])
+
 
 remote func start_instructions() -> void:
 	for peer_id in get_tree().get_network_connected_peers():
 		rpc_id(peer_id, "_load_instructions_screen")
 	_load_instructions_screen()
+
 
 remote func start_start_game_screen() -> void:
 	assert(get_tree().is_network_server(), "Should only be called on server.")
@@ -37,9 +41,11 @@ remote func start_start_game_screen() -> void:
 		rpc_id(peer_id, "_load_start_game_screen")
 	_load_start_game_screen()
 
+
 remote func _load_instructions_screen() -> void:
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://InstructionsScreen/InstructionsScreen.tscn")
+
 
 remote func _load_start_game_screen() -> void:
 	# warning-ignore:return_value_discarded
