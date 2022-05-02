@@ -1,17 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://HostLobby/HostLobby.gd" type="Script" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
 [ext_resource path="res://Backdrop.png" type="Texture" id=3]
+[ext_resource path="res://Common/click4.wav" type="AudioStream" id=4]
 
 [node name="HostLobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Backdrop" type="Sprite" parent="."]
 position = Vector2( 640, 400 )
@@ -207,6 +205,9 @@ text = "IP above didn't work?"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="pressed" from="StartGameButton" to="." method="_on_AllDevicesConnectedButton_pressed"]
 [connection signal="pressed" from="Disconnect" to="." method="_on_Disconnect_pressed"]

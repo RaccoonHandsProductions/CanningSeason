@@ -25,7 +25,10 @@ onready var _pot = $Pot
 onready var _heat_timer = $StoveTop/HeatTimer
 onready var _progress_bar = $StoveTop/ProgressBar
 onready var _checkmark = $StoveTop/CheckmarkBox/Checkmark
-onready var _checkmark_sound = $CheckmarkSound
+onready var _timer_finished = $TimerFinishedSound
+onready var _jar_sound = $JarSound
+onready var _plop_sound = $PlopSound
+onready var _ping_sound = $Ping
 onready var _hud = $HUD
 
 onready var _top_layer := get_child_count()
@@ -69,9 +72,13 @@ func _input(event: InputEvent) -> void:
 					if _above_pot and not _jar.is_sanitized:
 						_jar_home_pos = _jar.global_position
 						_set_state(_State.JAR_HEATING)
+						_jar_sound.play()
+						_plop_sound.play()
 					elif _above_done_area and _jar.is_sanitized:
 						_jar.disconnect("touched", self, "_on_Jar_touched")
 						
+						_ping_sound.play()
+						_jar_sound.play()
 						_progress_bar.value = 0
 						_checkmark.visible = false
 						Stock.add_sanitized_jar()
@@ -154,7 +161,7 @@ func _on_HeatTimer_timeout():
 	_seconds_count += 1
 	_progress_bar.value += 1
 	if _seconds_count == 4:
-		_checkmark_sound.play()
+		_timer_finished.play()
 		_checkmark.visible = true
 		_seconds_count = 0
 		_set_state(_State.AWATING_JAR_TOUCH)

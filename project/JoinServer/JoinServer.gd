@@ -9,18 +9,22 @@ func _ready():
 
 
 func _on_HelpButton_pressed():
+	$ButtonClick.play()
 	$HelpPopup.visible = true
 
 
 func _on_HideHelpButton_pressed():
+	$ButtonClick.play()
 	$HelpPopup.visible = false
 	
 	
 func _on_HideErrorButton_pressed():
+	$ButtonClick.play()
 	$CannnotConnectPopup.visible = false
 
 
 func _on_JoinButton_pressed():
+	$ButtonClick.play()
 	_show_connecting_animation()
 	$JoinButton.disabled = true
 	var client = NetworkedMultiplayerENet.new()
@@ -33,6 +37,7 @@ func _on_JoinButton_pressed():
 
 
 func _on_GoBackButton_pressed():
+	$ButtonClick.play()
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
 
@@ -60,4 +65,5 @@ func _hide_connecting_animation():
 	$ConnectingLabel.visible = false
 
 func _on_IPEntryControl_button_clicked():
+	$ButtonClick.play()
 	$JoinButton.disabled = false

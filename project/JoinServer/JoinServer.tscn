@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://JoinServer/JoinServer.gd" type="Script" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://JoinServer/LoadingJar_04.png" type="Texture" id=6]
 [ext_resource path="res://UI/IPEntryControl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Backdrop.png" type="Texture" id=8]
+[ext_resource path="res://Common/click4.wav" type="AudioStream" id=9]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -22,9 +23,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Backdrop" type="Sprite" parent="."]
 position = Vector2( 640, 400 )
@@ -184,6 +182,9 @@ margin_left = -186.5
 margin_top = -204.0
 margin_right = 186.5
 margin_bottom = 204.0
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
 
 [connection signal="pressed" from="JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]

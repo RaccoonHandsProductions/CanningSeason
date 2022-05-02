@@ -17,14 +17,17 @@ func _ready():
 
 	
 func _on_HelpButton_pressed():
+	$ButtonClick.play()
 	$HelpPopup.visible = true
 
 
 func _on_HideHelpButton_pressed():
+	$ButtonClick.play()
 	$HelpPopup.visible = false
 
 
 func _on_Disconnect_pressed():
+	$ButtonClick.play()
 	if get_tree().get_network_connected_peers().size() == 0:
 		get_tree().network_peer.close_connection()
 		# warning-ignore:return_value_discarded
@@ -46,20 +49,24 @@ func _remove_device(_id):
 
 
 func _on_GoBackButton_pressed():
+	$ButtonClick.play()
 	$DevicesConnectedAlert.visible = false
 
 
 func _on_ContinueButton_pressed():
+	$ButtonClick.play()
 	get_tree().network_peer.close_connection()
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
 
 
 func _on_AllDevicesConnectedButton_pressed():
+	$ButtonClick.play()
 	Server.start_start_game_screen()
 
 
 func _on_IpDidntWorkButton_pressed():
+	$ButtonClick.play()
 	$IpDidntWorkButton.disabled = true
 	$IpDidntWorkButton.visible = false
 	$IpAddressLabel.text += "\nAdditional IPs:\n"

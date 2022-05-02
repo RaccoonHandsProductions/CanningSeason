@@ -3,6 +3,7 @@ extends Control
 onready var _messageLabel = $ReceivedMessage
 
 func _on_Button_pressed():
+	$ButtonClick.play()
 	if get_tree().is_network_server():
 		_send_message($MessageInput.text)
 	else:

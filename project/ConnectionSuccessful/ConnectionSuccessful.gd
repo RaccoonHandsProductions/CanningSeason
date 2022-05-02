@@ -10,15 +10,18 @@ func _on_DisconnectButton_pressed():
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
 
 func _on_MainMenuButton_pressed():
+	$ButtonClick.play()
 	$ServerDisconnectedPopup.visible = false
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://MainMenu/MainMenu.tscn")
 
 
 func _on_JoinServerButton_pressed():
+	$ButtonClick.play()
 	$ServerDisconnectedPopup.visible = false
 	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://JoinServer/JoinServer.tscn")
 	
 func _on_server_disconnected():
+	$ButtonClick.play()
 	$ServerDisconnectedPopup.visible = true

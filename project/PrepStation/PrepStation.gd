@@ -45,9 +45,11 @@ var _state = null
 onready var _cutting_board_polygon_2d := $CuttingBoard/Polygon2D
 onready var _cutting_board := $CuttingBoard
 
+onready var _frond_drop_sound := $FrondDropSound
 onready var _chunk_drop_sound := $ChunkDropSound
 onready var _carrot_drop_sound := $CarrotDropSound
 onready var _chunk_return_sound := $ChunkReturnSound
+onready var _ping_sound := $Ping
 
 onready var _done_bowl_polygon_2d = $DoneBowl/Polygon2D
 onready var _done_bowl := $DoneBowl
@@ -128,7 +130,7 @@ func _input(event: InputEvent) -> void:
 					
 				if _current_carrot_piece.is_frond:
 					if _above_compost_bowl:
-						_chunk_drop_sound.play()
+						_frond_drop_sound.play()
 						_current_carrot_piece.rotation = rand_range(0,360)
 						_current_carrot_piece.done = true
 						_compost_bowl_count += 1
@@ -349,6 +351,7 @@ func _spawn_carrot(pos:Vector2) -> Node2D:
 
 func _check_bowls():
 	if (_done_bowl_count == _done_bowl_limit and _compost_bowl_count == _compost_bowl_limit):
+		_ping_sound.play()
 		var _new_carrot = _spawn_carrot(_current_carrot_pos)
 		$Carrots.move_child(_new_carrot, 0)
 		Stock.add_carrot()

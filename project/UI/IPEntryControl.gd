@@ -52,6 +52,7 @@ func _change_field_selected(num:int)->void:
 
 
 func _on_BackButton_pressed()->void:
+	$ButtonClick.play()
 	assert(_current_field_index > 0)
 	_current_field_index -= 1
 	_change_field_selected(_current_field_index)
@@ -59,11 +60,13 @@ func _on_BackButton_pressed()->void:
 
 
 func _on_ClearButton_pressed()->void:
+	$ButtonClick.play()
 	_focused_field.clear()
 	_update_allowed_numbers()
 
 
 func _on_NextButton_pressed()->void:
+	$ButtonClick.play()
 	assert(_current_field_index < 3)
 	_current_field_index += 1
 	_change_field_selected(_current_field_index)
@@ -71,6 +74,7 @@ func _on_NextButton_pressed()->void:
 
 
 func on_number_Button_pressed(num:int)->void:
+	$ButtonClick.play()
 	emit_signal("button_clicked")
 	_focused_field.enter_value(num)
 	_update_allowed_numbers()

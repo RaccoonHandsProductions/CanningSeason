@@ -72,6 +72,7 @@ func _input(event: InputEvent) -> void:
 					var _above_filling_area := Geometry.is_point_in_polygon(
 						_jar.position, _new_filling_area_polygon)
 					if _above_filling_area:
+						$JarSound.play()
 						_set_state(_State.AWAITING_CHUNKS_TOUCH)
 					else:
 						_set_state(_State.JAR_FLOATING_HOME)
@@ -86,6 +87,7 @@ func _input(event: InputEvent) -> void:
 					_raycast.force_raycast_update()
 					var collider = _raycast.get_collider()
 					if collider == _jar:
+						$ChunkSound.play()
 						_jar.fill_jar()
 						_chunks.queue_free()
 						_set_state(_State.AWAITING_FILLED_JAR_TOUCH)
@@ -101,12 +103,14 @@ func _input(event: InputEvent) -> void:
 					var _above_done_area := Geometry.is_point_in_polygon(
 						_jar.position, _new_done_area_polygon)
 					if _above_done_area:
+						$Ping.play()
+						$JarSound.play()
+						$LidSound.play()
 						_jar.place_lid()
 						Stock.add_filled_jar()
 						_set_state(_State.WAITING_FOR_STOCK)
 					else:
 						_set_state(_State.FILLED_JAR_FLOATING_HOME)
-		
 
 
 func _set_state(new_state)->void:
@@ -210,6 +214,7 @@ func _set_state(new_state)->void:
 func _check_waiting_state() -> void:
 	if not _waiting_for_jar and not _waiting_for_chunks:
 		_set_state(_State.AWAITING_JAR_TOUCH)
+
 
 func _set_state_to_awaiting_jar_touch(_obj, _key):
 	_set_state(_State.AWAITING_JAR_TOUCH)

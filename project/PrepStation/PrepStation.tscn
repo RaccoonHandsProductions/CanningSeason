@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://PrepStation/StationArea/CompostBowl.tscn" type="PackedScene" id=1]
 [ext_resource path="res://PrepStation/StationArea/DoneBowl.tscn" type="PackedScene" id=2]
 [ext_resource path="res://PrepStation/StationArea/CuttingBoard.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PrepStation/PrepStation.gd" type="Script" id=4]
 [ext_resource path="res://PrepStation/Knife/Knife.tscn" type="PackedScene" id=5]
+[ext_resource path="res://PrepStation/sounds_leafy_drop.wav" type="AudioStream" id=6]
 [ext_resource path="res://Common/HUD/HUD.tscn" type="PackedScene" id=7]
 [ext_resource path="res://PrepStation/wood_counter.png" type="Texture" id=8]
 [ext_resource path="res://PrepStation/basket.png" type="Texture" id=9]
@@ -12,6 +13,7 @@
 [ext_resource path="res://PrepStation/chunk_on_board.wav" type="AudioStream" id=11]
 [ext_resource path="res://PrepStation/chunk_bowl_drop.wav" type="AudioStream" id=12]
 [ext_resource path="res://PrepStation/carrot_on_board.wav" type="AudioStream" id=13]
+[ext_resource path="res://Common/ping.wav" type="AudioStream" id=14]
 
 [node name="PrepStation" type="Node2D"]
 script = ExtResource( 4 )
@@ -61,6 +63,13 @@ stream = ExtResource( 13 )
 
 [node name="ChunkReturnSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+
+[node name="FrondDropSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="Ping" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+volume_db = 5.0
 
 [connection signal="chop_animation_complete" from="Knife" to="." method="_on_Knife_chop_animation_complete"]
 [connection signal="chopped" from="Knife" to="." method="_on_Knife_chopped"]

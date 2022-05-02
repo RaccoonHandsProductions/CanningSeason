@@ -4,6 +4,7 @@ onready var _carrot_label := get_node("CarrotCount")
 onready var _sanatized_jars_label := get_node("SanatizedJarsCount")
 onready var _canned_label := get_node("CannedCount")
 onready var _total_label := get_node("TotalScore")
+onready var _egg_timer := $EggTimer
 
 onready var _timer := get_node("StartScreenTimer")
 
@@ -13,6 +14,7 @@ var _full_jar_count := 0
 
 func _ready():
 	#set scores from other tablets here
+	_egg_timer.play()
 	_carrot_count = Stock.chunk_sets
 	_clean_jar_count = Stock.sanitized_jars
 	_full_jar_count = Stock.filled_jars
@@ -31,6 +33,7 @@ func _set_labels(var carrots, var cleanJars, var fullJars):
 
 
 func _on_ReplayButton_pressed():
+	$ButtonClick.play()
 	Server.start_instructions()
 
 

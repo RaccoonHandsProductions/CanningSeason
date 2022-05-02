@@ -1,16 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Tools/Launcher.gd" type="Script" id=1]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=2]
+[ext_resource path="res://Common/click4.wav" type="AudioStream" id=3]
 
 [node name="Launcher" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
@@ -61,6 +59,9 @@ margin_right = 392.0
 margin_bottom = 210.0
 disabled = true
 text = "Kill All"
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="pressed" from="VBoxContainer/LaunchButton" to="." method="_on_LaunchButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/KillButton" to="." method="_on_KillButton_pressed"]

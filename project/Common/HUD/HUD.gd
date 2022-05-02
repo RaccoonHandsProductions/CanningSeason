@@ -57,6 +57,7 @@ func _on_chunk_sets_changed(count):
 	_carrot_count_label.text = (str(count))
 	var empty = null
 	if count == 0:
+		$CarrotAlertSound.play()
 		$CarrotGlowingArea.visible = true # set here so all HUDs glow
 		empty = true
 	else:
@@ -69,6 +70,7 @@ func _on_sanitized_jars_changed(count):
 	_sanitized_jar_label.text = (str(count))
 	var empty = null
 	if count == 0:
+		$JarAlertSound.play()
 		$JarGlowingArea.visible = true # set here so all HUDs glow
 		empty = true
 	else:

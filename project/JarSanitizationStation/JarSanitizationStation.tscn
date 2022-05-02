@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://JarSanitizationStation/JarSanitizationStation.gd" type="Script" id=1]
 [ext_resource path="res://JarSanitizationStation/StationArea/StoveTop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://JarSanitizationStation/StationArea/SanitizeDoneArea.tscn" type="PackedScene" id=3]
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=4]
 [ext_resource path="res://JarSanitizationStation/checkmarkbox.png" type="Texture" id=5]
-[ext_resource path="res://JarSanitizationStation/chunk_on_board_copy.wav" type="AudioStream" id=6]
+[ext_resource path="res://JarSanitizationStation/ringing-bell-happy.wav" type="AudioStream" id=6]
 [ext_resource path="res://JarSanitizationStation/StationArea/Pot.tscn" type="PackedScene" id=7]
 [ext_resource path="res://JarSanitizationStation/boiling_water.wav" type="AudioStream" id=8]
 [ext_resource path="res://JarSanitizationStation/wood_counter.png" type="Texture" id=9]
@@ -13,6 +13,9 @@
 [ext_resource path="res://Common/HUD/HUD.tscn" type="PackedScene" id=11]
 [ext_resource path="res://JarSanitizationStation/sanitization_cloth.png" type="Texture" id=12]
 [ext_resource path="res://FillingStation/Jar/water.png" type="Texture" id=13]
+[ext_resource path="res://JarSanitizationStation/glass_jar.wav" type="AudioStream" id=14]
+[ext_resource path="res://JarSanitizationStation/ploop-into-liquid.wav" type="AudioStream" id=15]
+[ext_resource path="res://Common/ping.wav" type="AudioStream" id=16]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -73,12 +76,22 @@ position = Vector2( 439, 486 )
 position = Vector2( 439, 486 )
 frames = SubResource( 1 )
 
-[node name="CheckmarkSound" type="AudioStreamPlayer" parent="."]
+[node name="TimerFinishedSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
 
 [node name="HUD" parent="." instance=ExtResource( 11 )]
 
 [node name="BoilingWaterSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+
+[node name="PlopSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[node name="JarSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="Ping" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 16 )
+volume_db = 5.0
 
 [connection signal="timeout" from="StoveTop/HeatTimer" to="." method="_on_HeatTimer_timeout"]

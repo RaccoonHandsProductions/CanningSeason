@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MenuStyle.tres" type="Theme" id=1]
 [ext_resource path="res://Backdrop.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Common/StartGameScreen.gd" type="Script" id=4]
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Balsamiq_Sans/BalsamiqSans-Bold.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Common/click4.wav" type="AudioStream" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 50
@@ -19,9 +20,6 @@ font_data = ExtResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Backdrop" type="Sprite" parent="."]
 position = Vector2( 640, 400 )
@@ -62,5 +60,8 @@ text = "See how many jars you can fill!"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
 
 [connection signal="pressed" from="StartGameButton" to="." method="_on_start_game_button_pressed"]

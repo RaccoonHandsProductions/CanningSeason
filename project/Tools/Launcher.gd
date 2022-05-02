@@ -7,6 +7,7 @@ onready var _kill_button := find_node("KillButton")
 
 
 func _on_LaunchButton_pressed():
+	$ButtonClick.play()
 	var number := _spinbox.value as int
 	assert(number > 0)
 	for i in number:
@@ -16,6 +17,7 @@ func _on_LaunchButton_pressed():
 
 
 func _on_KillButton_pressed():
+	$ButtonClick.play()
 	while not _pids.empty():
 		var pid : int = _pids.pop_front()
 		var error := OS.kill(pid)
